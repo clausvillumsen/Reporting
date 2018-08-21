@@ -1,0 +1,214 @@
+.custom-nav {
+    height: 80px;
+    background-color: white;
+}
+
+.custom-row div {
+    height: 80px;
+    background-color: #F8F9FB;
+}
+
+label {
+    font-size: 10px;
+    font-weight: 800;
+    color: #7F9D96;
+    text-transform: uppercase;
+    margin-bottom: -20px;
+    margin-top: 10px;
+}
+
+body {
+    font-size: 12px;
+    font-family: Roboto;
+    color: #00241B;
+}
+
+i {
+    margin-top: 22px;
+    margin-left: 20px;
+}
+
+p {
+    margin-top: 8px;
+}
+
+.simplebox {
+    outline: none;
+    border: none !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #E8E9EA
+}
+
+.datepicker-dropdown.datepicker-orient-bottom:before,
+.datepicker-dropdown.datepicker-orient-bottom:after {
+    opacity: 0;
+}
+
+.dropdown-menu {
+    font-size: 12px;
+    color: none;
+    background-color: #F8F9FB;
+    margin-top: 1.5rem;
+    border: 0px;
+}
+
+.select2-dropdown {
+    border: 0px;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background: #F8F9FB !important;
+    color: #00241B;
+    opacity: 0.8;
+}
+
+.select2-container--default .select2-results__option[aria-selected=true] {
+    background: #F8F9FB;
+    color: #00241B;
+    font-weight: bold;
+}
+
+.select2-container .select2-choice {
+    border: 0px solid #dce4ec;
+    height: 36px;
+    border-radius: 0px;
+    text-indent: 1px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    background-image: none;
+}
+
+.select2-container *:focus {
+    outline: 0px;
+}
+
+.select2-container--default .select2-selection--single {
+    border-radius: 0px;
+}
+
+.select2-container.select2-drop-above .select2-choice {
+    border-bottom-color: #dce4ec;
+    border-radius: 0px;
+}
+
+.select2-drop {
+    margin-top: -2px;
+    border: 0px solid;
+    border-radius: 0px !important;
+    -webkit-border-radius: 0 0 6px 6px;
+    -moz-border-radius: 0 0 6px 6px;
+    border-radius: 0 0 6px 6px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.select2-drop.select2-drop-above {
+    margin-top: 2px;
+    border-top: 0px solid #dce4ec;
+    border-bottom: 0;
+    -webkit-border-radius: 6px 6px 0 0;
+    -moz-border-radius: 6px 6px 0 0;
+    border-radius: 2px 2px 0 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.select2-container .select2-choice div {
+    border-left: 0px solid #dce4ec;
+    -webkit-border-radius: 0 4px 4px 0;
+    -moz-border-radius: 0 4px 4px 0;
+    border-radius: 0 4px 4px 0;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+}
+
+.select2-search {
+    margin-top: 3px;
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    border: 0px;
+}
+
+.select2-container--default .select2-results>.select2-results__options {
+    max-height: none;
+}
+
+.select2-search input {
+    height: 30px !important;
+    border: 0px solid #dce4ec;
+}
+
+.select2-container-active .select2-choice,
+.select2-container-active .select2-choices {
+    border: 0px solid #dce4ec;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.select2-dropdown-open .select2-choice {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    -webkit-border-bottom-left-radius: 0;
+    -moz-border-radius-bottomleft: 0;
+    border-bottom-left-radius: 0;
+    -webkit-border-bottom-right-radius: 0;
+    -moz-border-radius-bottomright: 0;
+    border-bottom-right-radius: 0;
+}
+
+.select2-dropdown-open .select2-choice div {
+    background: transparent;
+    border-left: none;
+    filter: none;
+}
+
+.select2-results .select2-highlighted {
+    background: #16a085;
+    color: #00241B;
+    border-radius: 0px;
+}
+
+.select2-results {
+    padding: 0 0 0 0px;
+    margin: 8px 8px 8px 8px;
+}
+
+.select2-container .select2-choice .select2-arrow {
+    border: 0px;
+    border-radius: 0px;
+    background: transparent;
+    background-image: none;
+}
+
+.select2-container--default .select2-selection--single {
+    background: #F8F9FB;
+    border: 0px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #00241B;
+    line-height: 34px;
+    padding-left: 0px;
+}
+
+.select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b {
+    border-color: transparent transparent #7F9D96 transparent;
+}
+
+.select2-container--open .select2-dropdown--below,
+.select2-container--open .select2-dropdown--above {
+    background: #F8F9FB;
+}
