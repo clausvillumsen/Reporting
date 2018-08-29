@@ -1,3 +1,5 @@
+import { array, object, instanceOf } from "prop-types";
+
 export default  class ObjectHelper {
     public static DeepCopyRecursive(obj: any): any {
         let copy: any;
@@ -31,7 +33,6 @@ export default  class ObjectHelper {
             }
             return copy;
         }
-    
         throw new Error("Unable to copy obj! Its type isn't supported.");
     }
 }

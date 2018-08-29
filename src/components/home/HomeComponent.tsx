@@ -1,25 +1,19 @@
 import { ComponentBase } from "../ComponentBase";
-import {StoreFactory} from "../../stores/StoreFactory"
-import { ReactNode } from "react";
 import * as React from "react";
-import * as ReactDOM from "react-dom";
-import { HomeStore } from "../../stores/HomeStore";
+import { HeaderSection } from "./HeaderSection";
+import { DropdownSection } from "./DropdownSection";
+import { GridSection } from "./GridSection";
+import { FooterSection } from "./FooterSection";
 
-interface Props {
+export class HomeComponent extends ComponentBase<any, any> {
 
-}
-
-class UiState {
-
-}
-export class HomeComponent extends ComponentBase<Props, UiState> {
-    constructor(props: any) {
-        super(props)
-        this.state = new UiState()
-        StoreFactory.GetStore(HomeStore).test();
+    render() {
+        return (<div className="HomePage">
+            <HeaderSection />
+            <DropdownSection />
+            <GridSection />
+            <FooterSection/>
+        </div>)
     }
 
-    render(): ReactNode {
-        return (<div >Hello It's Khoa</div>)
-    }
 }
