@@ -1,96 +1,150 @@
-.HomePage {
-    flex: 1;
-    flex-direction: column;
+/* GENERAL */
+body {
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #00241b;
+  margin: 0px;
 }
 
+.HomePage {
+  flex: 1;
+  flex-direction: column;
+}
+
+/* HEADER */
+
 .header {
-    flex: 1;
-    flex-direction: row;
-    height: 50px;
-    margin-left: 30px;
-    margin-right: 30px;
+  flex: 1;
+  flex-direction: row;
+  margin: 24px 32px 24px 32px;
+  overflow: hidden;
+  background-color: #ffffff;
 }
 
 .headerLeft {
-    float: left;
-    display: flex;
-    justify-content: flex-start;
+  float: left;
+  display: flex;
+  justify-content: flex-start;
+  font-size: 15px;
+  height: 32px;
 }
 
 .headerRight {
-    float: right;
-    display: flex;
-    justify-content: flex-end;
+  float: right;
+  display: flex;
+  justify-content: flex-end;
+  height: 32px;
 }
 
 .applicationLogo {
-    width: 40px;
-    height: 40px;
+  width: 32px;
+  height: 32px;
+  margin-right: 80px;
 }
 
 .Anvendelsesrapporter {
-    font-weight: 18pt;
-    padding: 15px;
+  padding: 6px 80px 6px 0px;
 }
 
 .Performancerapporter {
-    font-weight: 18pt;
-    padding: 15px;
+  padding: 6px 80px 6px 0px;
 }
 
-.userName {}
+.userName {
+  padding: 8px 0px 8px 0px;
+  font-size: 14px;
+}
 
 .avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-    border: solid 0.5px;
 }
 
-.systemSettings {}
-
-.dropdown {
-    max-width: 400px;
-    margin-right: 30px;
-    outline: none;
-    border: none;
-    flex: 1 1 auto; /* equals with: flex-grow: 1; flex-shrink: 1; flex-basis: auto; */
+.systemSettings {
 }
 
-.dropdown>:focus {
-    outline: none;
-}
+/* SERACH FORM */
 
 .DropdownSection {
-    display: flex;
-    flex-direction: row;
-    background-color: #ededed;
-    padding: 15px;
+  display: flex;
+  flex-direction: row;
+  background-color: #f8f9fb;
+  padding: 12px 32px 12px 32px;
+  height: 54px;
+  margin-bottom: 32px;
+}
+
+.dropdown {
+  width: 208px;
+  margin: 0px 32px 0px 0px;
+  outline: none;
+  border: none;
+  flex: 1 1 auto; /* equals with: flex-grow: 1; flex-shrink: 1; flex-basis: auto; */
+}
+
+.dropdown > :focus {
+  outline: none;
 }
 
 .DropdownSection .labelHeader {
-    color: #76968a;
+  font-size: 10px;
+  font-weight: 800;
+  color: #7f9d96;
+  text-transform: uppercase;
 }
 
 .part {
-    flex: 1 1 auto;
-    justify-content: center;
-    align-content: center;
+  flex: 1 1 auto;
+  justify-content: center;
+  align-content: center;
 }
+
+.react-select__indicator-separator {
+  width: 0px;
+}
+
+.DateInput_input {
+  font-size: 11px;
+  font-weight: 0;
+  color: #00241b;
+  line-height: 12px;
+  background-color: none;
+  padding: none;
+  margin: none;
+}
+
+input {
+  background-color: none;
+  padding: none;
+  font-size: 11px;
+  color: #00241b;
+}
+
+/* BUTTONS */
+
 .btnHeader {
-    height: 100%;
 }
+
 .btnCommon {
-    background-color: #76968a;
-    width: 50px;
-    min-width: 100px;
-    min-height: 40px;
-    text-align: center;
-    border-radius: 4px;
+  background-color: #7f9d96;
+  text-align: center;
+  border-radius: 2px;
+  margin-top: 10px;
+  width: 88px;
 }
 .btnCommon span {
-    display: inline-block;
-    vertical-align: middle;
-    line-height: normal;
-    color: white;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+  font-size: 14px;
+  color: white;
+  padding: 10px 8px 10px 8px;
+}
+
+/* TABLE*/
+
+.ReactTable {
+  border: 0px;
+}
+
+.ReactTable .rf-thead.-header {
+  box-shadow: 0px;
 }
