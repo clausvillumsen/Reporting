@@ -4,7 +4,7 @@ import { HeaderSection } from "./HeaderSection";
 import { DropdownSection } from "./DropdownSection";
 import { GridSection } from "./GridSection";
 import { FooterSection } from "./FooterSection";
-
+import './HomeStyles.css';
 export class HomeComponent extends ComponentBase<any, any> {
 
     render() {

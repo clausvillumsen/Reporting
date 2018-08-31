@@ -8,7 +8,7 @@ import { ComponentBase } from "../ComponentBase";
 import { ReportingStore } from "../../stores/ReportingStore";
 import { DateRangePicker, toMomentObject } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
-
+import './HomeStyles.css';
 
 interface Props {
 

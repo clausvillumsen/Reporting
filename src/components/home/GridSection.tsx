@@ -5,6 +5,7 @@ import { ReportingStore } from "../../stores/ReportingStore";
 import { ReportGridModel } from "../../models/ReportGridModel";
 import { GetDataAction } from "../../actions/GetDataAction";
 import 'react-table/react-table.css'
+import './HomeStyles.css';
 class GridState {
     datasource: ReportGridModel = null
     constructor(data: ReportGridModel) {
