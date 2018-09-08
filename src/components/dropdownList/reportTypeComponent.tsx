@@ -36,7 +36,6 @@ export class ReportTypeComponent extends ComponentBase<Props, State> {
           }));
     }
     handleOutsideClick = (e: any) => {
-        console.log('handleOutsideClick -  ReportTypeComponent')
         if (this.node.current.contains(e.target)) {
             return;
         }
@@ -48,8 +47,7 @@ export class ReportTypeComponent extends ComponentBase<Props, State> {
         return (
             <div className="dropdown part " ref={this.node} >
                 <div className="labelHeader">RAPPORTTYPE</div>
-                <div className="displayBox"
-                   onClick={() => this.registerClick() }>
+                <div className="displayBox" onClick={() => this.registerClick() }>
                     <p>{this.state.model && this.state.model.Name}</p>
                 </div>
                 {this.state.popupVisible && (

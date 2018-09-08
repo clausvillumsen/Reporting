@@ -17,7 +17,7 @@ enum GridProps {
 class GridState {
     datasource: ReportGridModel = null
     sorted: SortingRule[] = []
-    page: number = 1
+    page: number = 0
     pageSize: number = 100
     constructor(data: ReportGridModel) {
         this.datasource = data
@@ -91,7 +91,6 @@ export class GridSection extends ComponentBase<any, GridState> {
     }
 
     render() {
-        console.info(this.state)
         return (
             <div className="container-fluid">
                 <ReactTable

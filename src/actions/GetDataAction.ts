@@ -10,8 +10,6 @@ export class GetDataAction extends ActionBase {
     }
     public async Execute() {
         let schema: GridSchema = GetDataReducer.GetGridSchema();
-        console.log('schema')
-        console.info(schema)
         let data = await ApiHelper.simpleGet(ReportingConfiguration.GetData(schema.reportId,
             schema.fromDateTime,
             schema.toDateTime,

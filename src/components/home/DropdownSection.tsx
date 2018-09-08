@@ -8,11 +8,12 @@ import { ParentFilterComponent } from "../dropdownList/parentFilterComponent";
 import { ExportComponent } from "../dropdownList/exportComponent";
 import { ReportTypeModel } from "../../models/ReportTypeModel";
 import { FilterData } from "../../models/GetDataResponseModel";
-import { DropdownModel } from "../../models/DropdownModel";
+import { ExportModel } from "../../models/ExportModel";
 import { ToastContainer, toast, ToastType } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { GetDataAction } from "../../actions/GetDataAction";
 import { UpdateGridSchemaAction } from "../../actions/UpdateGridSchemaAction";
+import { ExportAction } from "../../actions/ExportAction";
 interface Props {
 
 }
@@ -24,7 +25,7 @@ class UiState {
     reportType: ReportTypeModel
     filterType: FilterData
     filterValue: string
-    exportType: DropdownModel
+    exportType: ExportModel
 }
 
 export class DropdownSection extends ComponentBase<Props, UiState> {
@@ -39,7 +40,7 @@ export class DropdownSection extends ComponentBase<Props, UiState> {
             <CalendarSelect startDate={this.state.startDate} endDate={this.state.endDate} onDateChange={(date: any) => this.handleDateChange(date)} />
             <ParentFilterComponent onFilterChange={(filter: FilterData, filterValue: string) => this.handleFilterTypeChanges(filter, filterValue)} />
             <div className="part"><div className="btn btn-default btnCommon btnHeader" onClick={() => this.handleSearchClick()}><span>Søg</span></div></div>
-            <ExportComponent onExportTypeChanges={(data: DropdownModel) => this.handleExportTypeChanges(data)} />
+            <ExportComponent onExportTypeChanges={(data: ExportModel) => this.handleExportTypeChanges(data)} />
             <div className="part"><div className="btn btn-default btnCommon btnHeader" onClick={() => this.handleExportClick()}><span>Export</span></div></div>
             <ToastContainer autoClose={5000} />
         </div>)
@@ -48,10 +49,8 @@ export class DropdownSection extends ComponentBase<Props, UiState> {
     handleDateChange = (data: any): any => { this.setState(prev => { return { ...prev, startDate: moment(data.startDate).toDate(), endDate: moment(data.endDate).toDate() } }) }
     handleReportTypeChanges = (data: ReportTypeModel) => { this.setState(prev => { return { ...prev, reportType: data } }) }
     handleFilterTypeChanges = (filter: FilterData, filterValue: string) => { this.setState(prev => { return { ...prev, filterType: filter, filterValue: filterValue } }) }
-    handleExportTypeChanges = (data: DropdownModel) => { this.setState(prev => { return { ...prev, exportType: data } }) }
+    handleExportTypeChanges = (data: ExportModel) => { this.setState(prev => { return { ...prev, exportType: data } }) }
     handleSearchClick = () => {
-        console.log(this.state.startDate)
-        console.log(this.state.endDate)
         if (this.state.startDate == null || this.state.startDate == undefined) {
             this.notify("Start Date must be not null")
             return
@@ -87,14 +86,23 @@ export class DropdownSection extends ComponentBase<Props, UiState> {
             });
     }
     handleExportClick = () => {
-        if (!this.state.exportType.value) {
+        console.log(this.state.exportType)
+        if (!(this.state.exportType && this.state.exportType.value)) {
             this.notify("Export must be not null")
             return
         }
+        if (this.state.exportType.value != 3) {
+            this.notify("Support CSV for now")
+            return
+        }
+        new ExportAction(this.state.exportType).start().then(res => {
+            if(!res) {
+                this.notify("Please pull data before export")
+            }
+        });
     }
 
     notify = (message: string) => {
-        console.log(message);
         toast(message, { type: ToastType.ERROR })
     }
 

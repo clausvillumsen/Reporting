@@ -12,6 +12,7 @@ export class ReportingStore extends StoreBase<GetReportReducer> {
     private static dataSource: ReportTypeModel[] = [];
     private static dataSourceGrid: ReportGridModel = null;
     private static gridSchema: GridSchema = null;
+    private static dataSourceResponseData: GetDataResponseModel = null;
     private static source: BehaviorSubject<ReportTypeModel[]> = new BehaviorSubject([])
     private static sourceGrid: BehaviorSubject<ReportGridModel> = new BehaviorSubject(null)
     private static gridSchemaBehavior: BehaviorSubject<GridSchema> = new BehaviorSubject(null)
@@ -29,6 +30,7 @@ export class ReportingStore extends StoreBase<GetReportReducer> {
     }
 
     public static UpdateGridList(data: GetDataResponseModel) {
+        this.dataSourceResponseData = data;
         this.dataSourceGrid = new ReportGridModel(data && data.TotalCount ? data.TotalCount : 0,
             data && data.PageCount ? data.PageCount : 0,
             data && data.NextPageDatePointer ? data.NextPageDatePointer : new Date().toUTCString(),
@@ -88,5 +90,10 @@ export class ReportingStore extends StoreBase<GetReportReducer> {
 
     public static GetGridSchema(): GridSchema {
         return ObjectHelper.DeepCopyRecursive(ReportingStore.gridSchema)
+    }
+
+
+    public static GetResponseData(): GetDataResponseModel {
+        return ObjectHelper.DeepCopyRecursive(this.dataSourceResponseData)
     }
 }

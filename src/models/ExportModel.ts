@@ -1,4 +1,4 @@
-export class DropdownModel {
+export class ExportModel {
     value: any;
     label: any;
     constructor(value: any, label: any) {

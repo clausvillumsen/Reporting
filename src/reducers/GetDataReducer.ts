@@ -15,4 +15,8 @@ export class GetDataReducer extends ReducerBase {
     public static GetGridSchema(): GridSchema {
         return ReportingStore.GetGridSchema()
     }
+
+    public static GetResponseData(): GetDataResponseModel {
+        return ReportingStore.GetResponseData()
+    }
 }
