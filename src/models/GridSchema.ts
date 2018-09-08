@@ -9,7 +9,7 @@ export class GridSchema {
     filterName?: string
     filterValue?: string
     sorted: SortingRule[] = []
-    page: number = 1
+    page: number = 0
     pageSize: number = 100
 
     constructor(reportId?: number,
