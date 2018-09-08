@@ -6,14 +6,18 @@ import ObjectHelper from "../common/ObjectHelper";
 import { GetDataResponseModel } from "../models/GetDataResponseModel";
 import { ReportGridModel, GridRowModel } from "../models/ReportGridModel";
 import { DateHelper } from "../common/DateHelper";
+import { GridSchema } from "../models/GridSchema";
 
 export class ReportingStore extends StoreBase<GetReportReducer> {
     private static dataSource: ReportTypeModel[] = [];
     private static dataSourceGrid: ReportGridModel = null;
+    private static gridSchema: GridSchema = null;
     private static source: BehaviorSubject<ReportTypeModel[]> = new BehaviorSubject([])
     private static sourceGrid: BehaviorSubject<ReportGridModel> = new BehaviorSubject(null)
+    private static gridSchemaBehavior: BehaviorSubject<GridSchema> = new BehaviorSubject(null)
     public static SourceObservable: Observable<ReportTypeModel[]> = ReportingStore.source.asObservable();
     public static dataSourceGridObservable: Observable<ReportGridModel> = ReportingStore.sourceGrid.asObservable();
+    public static gridSchemaObservable: Observable<GridSchema> = ReportingStore.gridSchemaBehavior.asObservable();
 
     public static UpdateData(data: ReportTypeModel[]) {
         this.dataSource = data
@@ -75,5 +79,14 @@ export class ReportingStore extends StoreBase<GetReportReducer> {
         })
         this.dataSourceGrid.Data = newData;
         this.sourceGrid.next(ObjectHelper.DeepCopyRecursive(this.dataSourceGrid));
+    }
+
+    public static UpdateGridSchema(data: GridSchema) {
+        this.gridSchema = data
+        this.source.next(ObjectHelper.DeepCopyRecursive(ReportingStore.gridSchema))
+    }
+
+    public static GetGridSchema(): GridSchema {
+        return ObjectHelper.DeepCopyRecursive(ReportingStore.gridSchema)
     }
 }

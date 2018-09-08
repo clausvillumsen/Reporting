@@ -1,32 +1,97 @@
 import * as React from "react";
+import * as moment from "moment"
 import { ComponentBase } from "../ComponentBase";
-import ReactTable from "react-table";
+import ReactTable, { SortingRule } from "react-table";
 import { ReportingStore } from "../../stores/ReportingStore";
 import { ReportGridModel } from "../../models/ReportGridModel";
-import { GetDataAction } from "../../actions/GetDataAction";
 import 'react-table/react-table.css'
 import './HomeStyles.css';
+import { UpdateGridSchemaAction } from "../../actions/UpdateGridSchemaAction";
+
+enum GridProps {
+    sorted = 1,
+    page = 2,
+    pageSize = 3
+}
+
 class GridState {
     datasource: ReportGridModel = null
+    sorted: SortingRule[] = []
+    page: number = 1
+    pageSize: number = 100
     constructor(data: ReportGridModel) {
         this.datasource = data
     }
+
 }
 export class GridSection extends ComponentBase<any, GridState> {
     constructor(props: any) {
         super(props)
         this.state = new GridState(new ReportGridModel(0, 0, new Date().toUTCString(), []))
-        new GetDataAction(1,
-        new Date('2018-07-01'),
-        new Date('2018-08-01'),
-        1000
-    ).start();
         this.subscription.add(ReportingStore.dataSourceGridObservable.pipe().subscribe(obs => {
-            this.setState(prev => { return { ...prev, datasource: obs } })
+            this.updateState(obs)
         }))
     }
-    render() {
 
+
+    updateState = (data: ReportGridModel) => {
+        if (!data) {
+            this.setState(prev => { return { ...prev, datasource: data } })
+            return
+        }
+        this.setState(prev => { return { ...prev, datasource: data } })
+
+    }
+
+
+    gridChanges = (props: GridProps, value: any) => {
+        if (props === GridProps.page) {
+            this.setState(prev => { return { ...prev, page: value } })
+            new UpdateGridSchemaAction(undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                value,
+                undefined).start();
+        }
+        if (props === GridProps.sorted) {
+            this.setState(prev => { return { ...prev, sorted: value } })
+            new UpdateGridSchemaAction(undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                value,
+                undefined,
+                undefined).start();
+        }
+    }
+
+    gridPageSizeChanges = (pageSizeValue: any, pageValue: any) => {
+        this.setState(prev => { return { ...prev, pageSize: pageSizeValue, page: pageValue } })
+        new UpdateGridSchemaAction(undefined,
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            pageValue,
+            pageSizeValue).start();
+    }
+
+    render() {
+        console.info(this.state)
         return (
             <div className="container-fluid">
                 <ReactTable
@@ -55,13 +120,18 @@ export class GridSection extends ComponentBase<any, GridState> {
                     pageText={'Page'}
                     ofText={'of'}
                     rowsText={'rows'}
+                    sorted={this.state.sorted}
+                    page={this.state.page}
+                    pageSize={this.state.pageSize}
+                    onSortedChange={sorted => this.gridChanges(GridProps.sorted, sorted)}
+                    onPageChange={page => this.gridChanges(GridProps.page, page)}
+                    onPageSizeChange={(pageSize, page) => this.gridPageSizeChanges(pageSize, page)}
+                    LoadingComponent={() => <img style={{ width: 80, height: 80 }} src={require('../../../img/loading.gif')} />}
                 />
 
             </div>
         )
     }
-
-
 }
 
 const columns = [{

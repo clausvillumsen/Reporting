@@ -7,4 +7,5 @@ export class GetReportReducer extends ReducerBase {
         ReportingStore.UpdateData(data)
     }
 
+   
 }

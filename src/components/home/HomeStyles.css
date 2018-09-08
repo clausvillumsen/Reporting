@@ -12,7 +12,6 @@ body {
 }
 
 /* HEADER */
-
 .header {
   flex: 1;
   flex-direction: row;
@@ -55,14 +54,11 @@ body {
   font-size: 14px;
 }
 
-.avatar {
-}
+.avatar {}
 
-.systemSettings {
-}
+.systemSettings {}
 
 /* SERACH FORM */
-
 .DropdownSection {
   display: flex;
   flex-direction: row;
@@ -77,10 +73,11 @@ body {
   margin: 0px 32px 0px 0px;
   outline: none;
   border: none;
-  flex: 1 1 auto; /* equals with: flex-grow: 1; flex-shrink: 1; flex-basis: auto; */
+  flex: 1 1 auto;
+  /* equals with: flex-grow: 1; flex-shrink: 1; flex-basis: auto; */
 }
 
-.dropdown > :focus {
+.dropdown> :focus {
   outline: none;
 }
 
@@ -116,12 +113,54 @@ input {
   padding: none;
   font-size: 11px;
   color: #00241b;
+  line-height: 1.6 !important;
+}
+
+.searchInput {
+  width: 100%;
+  min-height: 30px;
+  padding: 4px 4px 4px 5px;
+  border-radius: 5px;
+  border: 1px lightgray solid;
+}
+
+.CalendarDay__highlighted_calendar {
+  background: #82E0AA !important;
+  color: #186A3B !important;
+}
+
+.CalendarDay__highlighted_calendar:hover {
+  background: #58D68D !important;
+  color: #186A3B !important;
+}
+
+.CalendarDay__highlighted_calendar:active {
+  background: #58D68D !important;
+  color: #186A3B !important;
+}
+
+.CalendarDay__default {
+  border: none !important;
+}
+
+.dateRangeHeaderContainer {
+  background-color: #f8f9fb !important;
+  min-height: 100px !important;
+  padding-bottom: 20px !important;
+  padding-top: 20px !important;
+  padding-left: 20px !important;
+}
+
+.DateRangePicker>* {
+  line-height: 1.6;
+}
+
+.DateInput_fangShape {
+  fill: #f8f9fb !important;
 }
 
 /* BUTTONS */
-
-.btnHeader {
-}
+.btnHeader {}
 
 .btnCommon {
   background-color: #7f9d96;
@@ -129,7 +168,9 @@ input {
   border-radius: 2px;
   margin-top: 10px;
   width: 88px;
+  cursor: pointer;
 }
+
 .btnCommon span {
   display: inline-block;
   vertical-align: middle;
@@ -139,12 +180,49 @@ input {
   padding: 10px 8px 10px 8px;
 }
 
-/* TABLE*/
+.btnCommon:hover {
+  cursor: pointer;
+}
 
+/* TABLE*/
 .ReactTable {
   border: 0px;
 }
 
 .ReactTable .rf-thead.-header {
   box-shadow: 0px;
+}
+
+/* */
+.displayBox {
+  width: 100%;
+  min-height: 30px;
+  padding: 0 10px 0 10px;
+  border-radius: 5px;
+  border: 1px lightgray solid;
+}
+
+.popover {
+  z-index: 99;
+  opacity: 1;
+  width: 100%;
+  border: 1px lightgray solid;
+  padding: 0 5px 10px 10px;
+  background-color: #f8f9fb;
+  position: relative;
+}
+
+.dropdownItem {
+  margin: 10px 0 10px 0;
+}
+
+.dropdownItem:hover {
+  background-color: #58D68D;
+  cursor: pointer;
+}
+
+.bottomButton {
+  display: flex;
+  justify-content: space-between;
+  align-content: space-between;
 }

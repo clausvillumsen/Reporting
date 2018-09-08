@@ -35,3 +35,8 @@ export enum ColumnDataType {
     date = "DateTime",
 }
 
+
+export class FilterData {
+    id: FilterType
+    display: string
+}
