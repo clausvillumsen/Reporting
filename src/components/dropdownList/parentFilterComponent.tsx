@@ -1,7 +1,6 @@
 import * as React from "react";
 import { FilterData } from "../../models/GetDataResponseModel";
 import { FilterComponent } from "./filterComponent";
-
 interface Props {
     onFilterChange: Function
 }
@@ -34,7 +33,9 @@ export class ParentFilterComponent extends React.Component<Props, State> {
             <div className="dropdown part " ref={this.node} >
                 <div className="labelHeader">SØG PÅ BRUGER ATTRIBUTER</div>
                 <div className="displayBox" onClick={() => this.registerClick()}>
-                    {this.state.currentFilter && <p> {this.state.currentFilter.display}: {this.state.currentFilterValue}</p>}
+                    {this.state.currentFilter ? <p> {this.state.currentFilter.display}: {this.state.currentFilterValue}</p> : <p>VÆLG</p>}
+                    {this.state.popupVisible ? <i className="fa fa-sort-down fa-2x"></i> : <i className="fa fa-sort-up fa-2x"></i>}
+                    
                 </div>
                 {this.state.popupVisible && (
                     <div className="popover">

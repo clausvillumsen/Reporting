@@ -96,18 +96,18 @@ export class GridSection extends ComponentBase<any, GridState> {
                 <ReactTable
                     data={this.state.datasource.Data}
                     loading={false}
-                    showPagination={true}
+                    showPagination={false}
                     showPaginationTop={false}
-                    showPaginationBottom={true}
-                    showPageSizeOptions={true}
-                    pageSizeOptions={[5, 10, 25, 50, 100, 1000]}
+                    showPaginationBottom={false}
+                    showPageSizeOptions={false}
+                    // pageSizeOptions={[5, 10, 25, 50, 100, 1000]}
                     showPageJump={true}
                     collapseOnSortingChange={true}
                     collapseOnPageChange={true}
                     collapseOnDataChange={true}
                     freezeWhenExpanded={false}
-                    sortable={true}
-                    multiSort={true}
+                    sortable={false}
+                    multiSort={false}
                     resizable={true}
                     filterable={false}
                     defaultSortDesc={false}
@@ -119,13 +119,13 @@ export class GridSection extends ComponentBase<any, GridState> {
                     pageText={'Page'}
                     ofText={'of'}
                     rowsText={'rows'}
-                    sorted={this.state.sorted}
-                    page={this.state.page}
-                    pageSize={this.state.pageSize}
-                    onSortedChange={sorted => this.gridChanges(GridProps.sorted, sorted)}
-                    onPageChange={page => this.gridChanges(GridProps.page, page)}
-                    onPageSizeChange={(pageSize, page) => this.gridPageSizeChanges(pageSize, page)}
-                    LoadingComponent={() => <img style={{ width: 80, height: 80 }} src={require('../../../img/loading.gif')} />}
+                    // sorted={this.state.sorted}
+                    // page={this.state.page}
+                    pageSize={this.state.datasource && this.state.datasource.Data ? this.state.datasource.Data.length > 10 ? this.state.datasource.Data.length : 25 : 25}
+                // onSortedChange={sorted => this.gridChanges(GridProps.sorted, sorted)}
+                // onPageChange={page => this.gridChanges(GridProps.page, page)}
+                // onPageSizeChange={(pageSize, page) => this.gridPageSizeChanges(pageSize, page)}
+                // LoadingComponent={() => <img style={{ width: 80, height: 80 }} src={require('../../../img/loading.gif')} />}
                 />
 
             </div>

@@ -51,14 +51,14 @@ export class DropdownSection extends ComponentBase<Props, UiState> {
     handleFilterTypeChanges = (filter: FilterData, filterValue: string) => { this.setState(prev => { return { ...prev, filterType: filter, filterValue: filterValue } }) }
     handleExportTypeChanges = (data: ExportModel) => { this.setState(prev => { return { ...prev, exportType: data } }) }
     handleSearchClick = () => {
-        if (this.state.startDate == null || this.state.startDate == undefined) {
-            this.notify("Start Date must be not null")
-            return
-        }
-        if (this.state.endDate == null || this.state.endDate == undefined) {
-            this.notify("End Date must be not null")
-            return
-        }
+        // if (this.state.startDate == null || this.state.startDate == undefined) {
+        //     this.notify("Start Date must be not null")
+        //     return
+        // }
+        // if (this.state.endDate == null || this.state.endDate == undefined) {
+        //     this.notify("End Date must be not null")
+        //     return
+        // }
         if (this.state.reportType == null || this.state.reportType == undefined) {
             this.notify("Report Type must be not null")
             return
@@ -86,7 +86,6 @@ export class DropdownSection extends ComponentBase<Props, UiState> {
             });
     }
     handleExportClick = () => {
-        console.log(this.state.exportType)
         if (!(this.state.exportType && this.state.exportType.value)) {
             this.notify("Export must be not null")
             return

@@ -53,7 +53,8 @@ export class ExportComponent extends React.Component<Props, State> {
             <div className="dropdown part " ref={this.node}>
                 <div className="labelHeader">VÆLG EXPORTTYPE</div>
                 <div className="displayBox" onClick={() => this.registerClick() }>
-                    <p>{this.state.currentExport && this.state.currentExport.label}</p>
+                    <p>{this.state.currentExport ? this.state.currentExport.label : "VÆLG"}</p>
+                    {this.state.popupVisible ? <i className="fa fa-sort-down fa-2x "></i> : <i className="fa fa-sort-up fa-2x"></i>}
                 </div>
                 {this.state.popupVisible && (
                     <div className="popover">

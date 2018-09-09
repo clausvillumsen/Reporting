@@ -22,11 +22,12 @@ export class FilterComponent extends React.Component<Props, State> {
                 <div className="labelHeader">VÆLG BRUGER ATTRIBUTER</div>
                 <div className="displayBox"
                     onClick={() => this.setState(prev => { return { ...prev, popupVisible: !prev.popupVisible } })}>
-                    {this.state.currentFilter && this.state.currentFilter.display}
+                    {this.state.currentFilter ? this.state.currentFilter.display : "VÆLG"}
+                    {this.state.popupVisible ? <i className="fa fa-sort-down fa-2x"></i> : <i className="fa fa-sort-up fa-2x"></i>}
                 </div>
                 {this.state.popupVisible && (
                     <div className="popover">
-                        {this.renderOptions(this.state.filterType)}
+                        {this.renderFilters(this.state.filterType)}
                     </div>
                 )}
             </div>
@@ -34,7 +35,8 @@ export class FilterComponent extends React.Component<Props, State> {
     }
 
 
-    renderOptions = (model: FilterData[]) => {
+    renderFilters = (model: FilterData[]) => {
+        console.log(model)
         if(!model || model.length == 0) {
             return undefined
         }

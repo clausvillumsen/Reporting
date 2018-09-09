@@ -145,7 +145,7 @@ input {
 
 .dateRangeHeaderContainer {
   background-color: #f8f9fb !important;
-  min-height: 100px !important;
+  /* min-height: 100px !important; */
   padding-bottom: 20px !important;
   padding-top: 20px !important;
   padding-left: 20px !important;
@@ -155,8 +155,20 @@ input {
   line-height: 1.6;
 }
 
+.DateInput_input__focused {
+  background-color: #f8f9fb !important;
+}
+
 .DateInput_fangShape {
   fill: #f8f9fb !important;
+}
+
+.DateInput_input__small {
+  fill: #f8f9fb !important;
+}
+
+.DateInput_input {
+  background-color: #f8f9fb !important;
 }
 
 /* BUTTONS */
@@ -197,9 +209,9 @@ input {
 .displayBox {
   width: 100%;
   min-height: 30px;
-  padding: 0 10px 0 10px;
-  border-radius: 5px;
-  border: 1px lightgray solid;
+  padding: 0 10px 0 0px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .popover {
@@ -225,4 +237,33 @@ input {
   display: flex;
   justify-content: space-between;
   align-content: space-between;
+}
+
+.iconDropdown {
+  width: 24px;
+  height: 24px;
+  float: right;
+}
+
+i {
+  align-self: center;
+}
+
+.bottomCenterButton {
+  align-self: center;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.disableButton {
+  background-color: grey !important;
+}
+
+.ableButton {
+  background-color: green !important;
+}
+.longButton {
+  width: 150px !important;
 }

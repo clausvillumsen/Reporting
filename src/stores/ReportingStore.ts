@@ -40,8 +40,47 @@ export class ReportingStore extends StoreBase<GetReportReducer> {
             this.sourceGrid.next(ObjectHelper.DeepCopyRecursive(this.dataSourceGrid));
             return;
         }
+        this.dataSourceGrid.Data = this.ProcessGetDataResponseModel(data);
+        this.sourceGrid.next(ObjectHelper.DeepCopyRecursive(this.dataSourceGrid));
+    }
+
+    public static MergeGridList(data: GetDataResponseModel) {
+        this.MergeResourceResponse(data);
+        if (!this.dataSourceGrid) {
+            this.UpdateGridList(data)
+            return;
+        }
+        this.dataSourceGrid.Data.concat(this.ProcessGetDataResponseModel(data));
+        this.sourceGrid.next(ObjectHelper.DeepCopyRecursive(this.dataSourceGrid));
+    }
+
+    public static UpdateGridSchema(data: GridSchema) {
+        this.gridSchema = data
+        this.gridSchemaBehavior.next(ObjectHelper.DeepCopyRecursive(ReportingStore.gridSchema))
+    }
+
+    public static GetGridSchema(): GridSchema {
+        return ObjectHelper.DeepCopyRecursive(ReportingStore.gridSchema)
+    }
+
+
+    public static GetResponseData(): GetDataResponseModel {
+        return ObjectHelper.DeepCopyRecursive(this.dataSourceResponseData)
+    }
+
+    private static MergeResourceResponse(data: GetDataResponseModel) {
+        if (!this.dataSourceResponseData) {
+            this.dataSourceResponseData = data;
+            return;
+        }
+        if (data && data.Rows)
+            this.dataSourceResponseData.Rows.concat(data.Rows)
+    }
+
+    private static ProcessGetDataResponseModel(data: GetDataResponseModel): GridRowModel[] {
+
         let columns = data.Columns
-        if (!data.Rows) { return }
+        if (!data.Rows) { return [] }
         let newData = data.Rows.map((row) => {
             let item = new GridRowModel()
             for (var i = 0; i < row.length; i++) {
@@ -80,21 +119,6 @@ export class ReportingStore extends StoreBase<GetReportReducer> {
             }
             return item
         })
-        this.dataSourceGrid.Data = newData;
-        this.sourceGrid.next(ObjectHelper.DeepCopyRecursive(this.dataSourceGrid));
-    }
-
-    public static UpdateGridSchema(data: GridSchema) {
-        this.gridSchema = data
-        this.source.next(ObjectHelper.DeepCopyRecursive(ReportingStore.gridSchema))
-    }
-
-    public static GetGridSchema(): GridSchema {
-        return ObjectHelper.DeepCopyRecursive(ReportingStore.gridSchema)
-    }
-
-
-    public static GetResponseData(): GetDataResponseModel {
-        return ObjectHelper.DeepCopyRecursive(this.dataSourceResponseData)
+        return newData;
     }
 }

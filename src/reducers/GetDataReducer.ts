@@ -19,4 +19,9 @@ export class GetDataReducer extends ReducerBase {
     public static GetResponseData(): GetDataResponseModel {
         return ReportingStore.GetResponseData()
     }
+
+    public static MergeGridList(data: GetDataResponseModel) {
+        ReportingStore.MergeGridList(data)
+    }
+
 }

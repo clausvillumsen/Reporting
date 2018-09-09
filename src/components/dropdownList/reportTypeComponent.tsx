@@ -27,13 +27,13 @@ export class ReportTypeComponent extends ComponentBase<Props, State> {
         if (!this.state.popupVisible) {
             // attach/remove event handler
             document.addEventListener('click', this.handleOutsideClick, false);
-          } else {
+        } else {
             document.removeEventListener('click', this.handleOutsideClick, false);
-          }
-      
-          this.setState(prevState => ({
-             popupVisible: !prevState.popupVisible,
-          }));
+        }
+
+        this.setState(prevState => ({
+            popupVisible: !prevState.popupVisible,
+        }));
     }
     handleOutsideClick = (e: any) => {
         if (this.node.current.contains(e.target)) {
@@ -47,12 +47,13 @@ export class ReportTypeComponent extends ComponentBase<Props, State> {
         return (
             <div className="dropdown part " ref={this.node} >
                 <div className="labelHeader">RAPPORTTYPE</div>
-                <div className="displayBox" onClick={() => this.registerClick() }>
-                    <p>{this.state.model && this.state.model.Name}</p>
+                <div className="displayBox" onClick={() => this.registerClick()}>
+                    <p>{this.state.model ? this.state.model.Name : "VÆLG"}</p>
+                    {this.state.popupVisible ? <i className="fa fa-sort-down fa-2x"></i> : <i className="fa fa-sort-up fa-2x"></i>}
                 </div>
                 {this.state.popupVisible && (
                     <div className="popover">
-                        {this.renderOptions(this.state.ReportTypes)}
+                        {this.renderReports(this.state.ReportTypes)}
                     </div>
                 )}
             </div>
@@ -60,7 +61,8 @@ export class ReportTypeComponent extends ComponentBase<Props, State> {
     }
 
 
-    renderOptions = (model: ReportTypeModel[]) => {
+    renderReports = (model: ReportTypeModel[]) => {
+        console.log(model)
         if (!model) return undefined
         return model.map(ele => {
             return <div className="dropdownItem" onClick={() => this.setCurrentModel(ele)}>{ele.Name}</div>
