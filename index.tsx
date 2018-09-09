@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import 'font-awesome/css/font-awesome.min.css';
-import { HomeComponent } from "./components/home/HomeComponent";
+import { HomeComponent } from "./src/components/home/HomeComponent";
 
 export class Main extends React.Component<any, any>{
     constructor(props: any) {
