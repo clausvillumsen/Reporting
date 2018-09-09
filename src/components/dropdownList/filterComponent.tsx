@@ -35,6 +35,9 @@ export class FilterComponent extends React.Component<Props, State> {
 
 
     renderOptions = (model: FilterData[]) => {
+        if(!model || model.length == 0) {
+            return undefined
+        }
         return model.map(ele => {
             return <div className="dropdownItem" onClick={() => this.setCurrentModel(ele)}>{ele.display}</div>
         })

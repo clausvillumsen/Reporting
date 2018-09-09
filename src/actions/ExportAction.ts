@@ -10,7 +10,7 @@ export class ExportAction extends ActionBase {
 
     public async Execute() {
         var responseData = GetDataReducer.GetResponseData()
-        if(responseData == null || responseData == undefined || responseData.Rows == []) {
+        if(!responseData || !responseData.Columns || responseData.Columns == [] || !responseData.Rows || responseData.Rows == []) {
             return false;
         }
         DataHelper.ExportData(responseData, this.exportType)

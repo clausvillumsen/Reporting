@@ -41,6 +41,7 @@ export class ReportingStore extends StoreBase<GetReportReducer> {
             return;
         }
         let columns = data.Columns
+        if (!data.Rows) { return }
         let newData = data.Rows.map((row) => {
             let item = new GridRowModel()
             for (var i = 0; i < row.length; i++) {

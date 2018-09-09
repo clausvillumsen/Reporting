@@ -1,5 +1,17 @@
 import * as React from "react";
 import { ExportModel } from "../../models/ExportModel";
+
+const filterDataStatic: ExportModel[] = [{
+    value: 1,
+    label: "PDF"
+}, {
+    value: 2,
+    label: "XML"
+},
+{
+    value: 3,
+    label: "Excel (CSV)"
+}]
 interface Props {
     onExportTypeChanges: Function
 }
@@ -54,6 +66,9 @@ export class ExportComponent extends React.Component<Props, State> {
 
 
     renderOptions = (model: ExportModel[]) => {
+        if(!model || model.length == 0) {
+            return undefined
+        }
         return model.map(ele => {
             return <div className="dropdownItem" onClick={() => this.setCurrentModel(ele)}>{ele.label}</div>
         })
@@ -66,14 +81,3 @@ export class ExportComponent extends React.Component<Props, State> {
 
 }
 
-const filterDataStatic: ExportModel[] = [{
-    value: 1,
-    label: "PDF"
-}, {
-    value: 2,
-    label: "XML"
-},
-{
-    value: 3,
-    label: "Excel (CSV)"
-}]
