@@ -54,9 +54,11 @@ body {
   font-size: 14px;
 }
 
-.avatar {}
+.avatar {
+}
 
-.systemSettings {}
+.systemSettings {
+}
 
 /* SERACH FORM */
 .DropdownSection {
@@ -69,7 +71,7 @@ body {
 }
 
 .dropdown {
-  width: 208px;
+  /*width: 208px;*/
   margin: 0px 32px 0px 0px;
   outline: none;
   border: none;
@@ -77,7 +79,7 @@ body {
   /* equals with: flex-grow: 1; flex-shrink: 1; flex-basis: auto; */
 }
 
-.dropdown> :focus {
+.dropdown > :focus {
   outline: none;
 }
 
@@ -125,18 +127,18 @@ input {
 }
 
 .CalendarDay__highlighted_calendar {
-  background: #82E0AA !important;
-  color: #186A3B !important;
+  background: #82e0aa !important;
+  color: #186a3b !important;
 }
 
 .CalendarDay__highlighted_calendar:hover {
-  background: #58D68D !important;
-  color: #186A3B !important;
+  background: #58d68d !important;
+  color: #186a3b !important;
 }
 
 .CalendarDay__highlighted_calendar:active {
-  background: #58D68D !important;
-  color: #186A3B !important;
+  background: #58d68d !important;
+  color: #186a3b !important;
 }
 
 .CalendarDay__default {
@@ -151,7 +153,7 @@ input {
   padding-left: 20px !important;
 }
 
-.DateRangePicker>* {
+.DateRangePicker > * {
   line-height: 1.6;
 }
 
@@ -172,7 +174,8 @@ input {
 }
 
 /* BUTTONS */
-.btnHeader {}
+.btnHeader {
+}
 
 .btnCommon {
   background-color: #7f9d96;
@@ -229,7 +232,7 @@ input {
 }
 
 .dropdownItem:hover {
-  background-color: #58D68D;
+  background-color: #58d68d;
   cursor: pointer;
 }
 
