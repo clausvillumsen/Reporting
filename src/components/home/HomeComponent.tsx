@@ -24,7 +24,7 @@ export class HomeComponent extends ComponentBase<any, State> {
                 <Exportlinks onLoading={(isLoading: boolean) => this.handleLoading(isLoading)} />
                 <GridSection />
                 <FooterSection onLoading={(isLoading: boolean) => this.handleLoading(isLoading)} />
-                {this.state.loading && <div className="loadingContainer"><img className="loading" src={require("../../../img/loading.gif")} /></div>}
+                {this.state.loading && <div><div  className="loadingContainer"></div><img className="loading" src={require("../../../img/loading.gif")} /></div>}
             </div>
         );
     }

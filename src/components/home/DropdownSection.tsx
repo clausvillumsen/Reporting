@@ -111,10 +111,9 @@ export class DropdownSection extends ComponentBase<Props, UiState> {
         });
     };
     handleSearchClick = () => {
-        // if (this.state.reportType == null || this.state.reportType == undefined) {
-        //     this.notify("Report Type must be not null");
-        //     return;
-        // }
+        if (this.state.reportType == null || this.state.reportType == undefined) {
+            return;
+        }
         this.GetData();
     };
     handleExportClick = () => {

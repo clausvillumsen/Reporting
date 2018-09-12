@@ -38,8 +38,6 @@ export class GridSection extends ComponentBase<any, GridState> {
     }
 
     updateState = (data: ReportGridModel) => {
-        console.log('update state')
-        console.info(data && data.Data)
         this.setState(prev => {
             return { ...prev, datasource: data, pageSize: data && data.Data.length || 25 };
         });

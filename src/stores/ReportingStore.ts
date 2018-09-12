@@ -55,7 +55,6 @@ export class ReportingStore extends StoreBase<GetReportReducer> {
         this.dataSourceGrid.NextPageDatePointer = data.NextPageDatePointer
         let newData = this.ProcessGetDataResponseModel(data)
         this.dataSourceGrid.Data = this.dataSourceGrid.Data.concat(newData);
-        console.info(this.dataSourceGrid.Data)
         this.sourceDataGrid.next(ObjectHelper.DeepCopyRecursive(this.dataSourceGrid));
     }
 
