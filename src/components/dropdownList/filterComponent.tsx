@@ -1,104 +1,103 @@
 import * as React from "react";
 import { FilterType, FilterData } from "../../models/GetDataResponseModel";
 interface Props {
-  onSelectedFilter: Function;
+    onSelectedFilter: Function;
 }
 class State {
-  popupVisible: boolean = false;
-  filterType: FilterData[] = filterDataStatic;
-  currentFilter: FilterData;
+    popupVisible: boolean = false;
+    filterType: FilterData[] = filterDataStatic;
+    currentFilter: FilterData;
 }
 export class FilterComponent extends React.Component<Props, State> {
-  private node: React.RefObject<HTMLDivElement>;
-  constructor(props: any) {
-    super(props);
-    this.state = new State();
-    this.node = React.createRef();
-  }
-
-  render() {
-    return (
-      <div className="dropdown part " ref={this.node}>
-        <div className="labelHeader">VÆLG BRUGER ATTRIBUTER</div>
-        <div
-          className="displayBox"
-          onClick={() =>
-            this.setState(prev => {
-              return { ...prev, popupVisible: !prev.popupVisible };
-            })
-          }
-        >
-          {this.state.currentFilter
-            ? this.state.currentFilter.display
-            : "Vælg..."}
-          {this.state.popupVisible ? (
-            <i className="fa fa-sort-up" />
-          ) : (
-            <i className="fa fa-sort-down" />
-          )}
-        </div>
-        {this.state.popupVisible && (
-          <div className="popover">
-            {this.renderFilters(this.state.filterType)}
-          </div>
-        )}
-      </div>
-    );
-  }
-
-  renderFilters = (model: FilterData[]) => {
-    console.log(model);
-    if (!model || model.length == 0) {
-      return undefined;
+    private node: React.RefObject<HTMLDivElement>;
+    constructor(props: any) {
+        super(props);
+        this.state = new State();
+        this.node = React.createRef();
     }
-    return model.map(ele => {
-      return (
-        <div className="dropdownItem" onClick={() => this.setCurrentModel(ele)}>
-          {ele.display}
-        </div>
-      );
-    });
-  };
 
-  setCurrentModel = (model: any) => {
-    this.setState(prev => {
-      return {
-        ...prev,
-        currentFilter: model,
-        popupVisible: !prev.popupVisible
-      };
-    });
-    this.props.onSelectedFilter(model);
-  };
+    render() {
+        return (
+            <div className="dropdown childPadding " ref={this.node}>
+                <div className="labelHeader" style={{ marginTop: 10, marginBottom: 10 }}>VÆLG BRUGER ATTRIBUTER</div>
+                <div
+                    className="displayBox"
+                    onClick={() =>
+                        this.setState(prev => {
+                            return { ...prev, popupVisible: !prev.popupVisible };
+                        })
+                    }
+                >
+                    {this.state.currentFilter
+                        ? this.state.currentFilter.display
+                        : "Vælg..."}
+                    {this.state.popupVisible ?
+                        <i className="fa fa-chevron-up fa-lg" />
+                        :
+                        <i className="fa fa-chevron-down fa-lg" />
+                    }
+                </div>
+                {this.state.popupVisible &&
+                    <div className="popover">
+                        {this.renderFilters(this.state.filterType)}
+                    </div>
+                }
+            </div>
+        );
+    }
+
+    renderFilters = (model: FilterData[]) => {
+        if (!model || model.length == 0) {
+            return undefined;
+        }
+        return model.map(ele => {
+            return (
+                <div className="dropdownItem" onClick={() => this.setCurrentModel(ele)}>
+                    {ele.display}
+                </div>
+            );
+        });
+    };
+
+    setCurrentModel = (model: any) => {
+        this.setState(prev => {
+            return {
+                ...prev,
+                currentFilter: model,
+                popupVisible: !prev.popupVisible
+            };
+        });
+        this.props.onSelectedFilter(model);
+    };
 }
 
 const filterDataStatic: FilterData[] = [
-  {
-    id: FilterType.cvr,
-    display: "CVR"
-  },
-  {
-    id: FilterType.dateTimeUTC,
-    display: "Date Time UTC"
-  },
-  {
-    id: FilterType.email,
-    display: "Email"
-  },
-  {
-    id: FilterType.givenName,
-    display: "Given Name"
-  },
-  {
-    id: FilterType.surName,
-    display: "Sur Name"
-  },
-  {
-    id: FilterType.unieuqId,
-    display: "Unique Id"
-  },
-  {
-    id: FilterType.userId,
-    display: "User Id"
-  }
+    {
+        id: FilterType.cvr,
+        display: "CVR"
+    },
+    {
+        id: FilterType.dateTimeUTC,
+        display: "Date Time UTC"
+    },
+    {
+        id: FilterType.email,
+        display: "Email"
+    },
+    {
+        id: FilterType.givenName,
+        display: "Given Name"
+    },
+    {
+        id: FilterType.surName,
+        display: "Sur Name"
+    },
+    {
+        id: FilterType.unieuqId,
+        display: "Unique Id"
+    },
+    {
+        id: FilterType.userId,
+        display: "User Id"
+    }
 ];

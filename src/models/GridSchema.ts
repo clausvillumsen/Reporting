@@ -11,7 +11,6 @@ export class GridSchema {
     sorted: SortingRule[] = []
     page: number = 0
     pageSize: number = 100
-
     constructor(reportId?: number,
         fromDateTime?: Date,
         toDateTime?: Date,

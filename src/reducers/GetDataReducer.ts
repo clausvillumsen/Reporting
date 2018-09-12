@@ -24,4 +24,7 @@ export class GetDataReducer extends ReducerBase {
         ReportingStore.MergeGridList(data)
     }
 
+    public static GetNextPagePointer() : string {
+        return ReportingStore.GetNextResponsePageDateTime()
+    }
 }

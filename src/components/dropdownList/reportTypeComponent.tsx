@@ -17,7 +17,7 @@ export class ReportTypeComponent extends ComponentBase<Props, State> {
     this.state = new State();
     this.node = React.createRef();
     this.subscription.add(
-      ReportingStore.SourceObservable.pipe().subscribe(objs => {
+      ReportingStore.sourceReportTypeObservable.pipe().subscribe(objs => {
         this.setState(prev => {
           return { ...prev, ReportTypes: objs };
         });
@@ -56,9 +56,9 @@ export class ReportTypeComponent extends ComponentBase<Props, State> {
         <div className="displayBox" onClick={() => this.registerClick()}>
           <p>{this.state.model ? this.state.model.Name : "Vælg..."}</p>
           {this.state.popupVisible ? (
-            <i className="fa fa-sort-up" />
+            <i className="fa fa-chevron-up fa-lg" />
           ) : (
-            <i className="fa fa-sort-down" />
+            <i className="fa fa-chevron-down fa-lg" />
           )}
         </div>
         {this.state.popupVisible && (
@@ -71,7 +71,6 @@ export class ReportTypeComponent extends ComponentBase<Props, State> {
   }
 
   renderReports = (model: ReportTypeModel[]) => {
-    console.log(model);
     if (!model) return undefined;
     return model.map(ele => {
       return (

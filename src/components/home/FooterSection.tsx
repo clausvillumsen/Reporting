@@ -3,6 +3,10 @@ import { ComponentBase } from "../ComponentBase";
 import './HomeStyles.css';
 import { ReportingStore } from "../../stores/ReportingStore";
 import { ToastContainer, toast, ToastType } from 'react-toastify';
+import { GetMoreDataAction } from "../../actions/GetMoreDataAction";
+interface Props {
+    onLoading: Function
+ }
 
 class State {
     enable: boolean
@@ -10,7 +14,7 @@ class State {
         this.enable = enable
     }
 }
-export class FooterSection extends ComponentBase<any, any> {
+export class FooterSection extends ComponentBase<Props, State> {
 
     constructor(props: any) {
         super(props)
@@ -24,11 +28,12 @@ export class FooterSection extends ComponentBase<any, any> {
             this.notify("Please Search Data First or waiting data loading")
             return
         }
-
         this.setState({ enable: false })
+        this.props.onLoading(true)
         setTimeout(() => {
             this.setState({ enable: true })
-        }, 2000);
+        }, 5000);
+        new GetMoreDataAction().start().then(this.handleActionExecuted).catch(this.handleActionExecuted);
     }
     render() {
         return (
@@ -48,5 +53,9 @@ export class FooterSection extends ComponentBase<any, any> {
 
     notify = (message: string) => {
         toast(message, { type: ToastType.WARNING })
+    }
+
+    handleActionExecuted = (res: any) => {
+        this.props.onLoading(false)
     }
 }

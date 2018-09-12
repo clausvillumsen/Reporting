@@ -64,9 +64,9 @@ export class ExportComponent extends React.Component<Props, State> {
               : "Vælg..."}
           </p>
           {this.state.popupVisible ? (
-            <i className="fa fa-sort-up " />
+            <i className="fa fa-chevron-up " />
           ) : (
-            <i className="fa fa-sort-down" />
+            <i className="fa fa-chevron-down" />
           )}
         </div>
         {this.state.popupVisible && (

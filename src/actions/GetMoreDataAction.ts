@@ -5,19 +5,21 @@ import { GetDataReducer } from "../reducers/GetDataReducer";
 import { GridSchema } from "../models/GridSchema";
 
 export class GetMoreDataAction extends ActionBase {
-    constructor(dateTimeUTC: string) {
+    constructor() {
         super()
     }
     public async Execute() {
         let schema: GridSchema = GetDataReducer.GetGridSchema();
+        let lastDateTime: string = GetDataReducer.GetNextPagePointer();
         let data = await ApiHelper.simpleGet(ReportingConfiguration.GetData(schema.reportId,
             schema.fromDateTime,
             schema.toDateTime,
-            schema.maxRows,
+            100,
             schema.sortColumnIndex,
             schema.sortColumnAscending,
             schema.filterName,
-            schema.filterValue))
+            schema.filterValue,
+            lastDateTime))
         var jsonObject = await data.json()
         GetDataReducer.MergeGridList(jsonObject);
         return true
