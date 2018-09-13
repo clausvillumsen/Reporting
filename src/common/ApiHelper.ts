@@ -1,4 +1,5 @@
 export default class ApiHelper {
+    private static requestHeaders: any = { 'Content-Type': 'application/json', 'mode': 'no-cors' };
     public static simpleGet(url: string): Promise<any> {
         return fetch(url);
     }
