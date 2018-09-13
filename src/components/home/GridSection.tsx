@@ -133,38 +133,38 @@ export class GridSection extends ComponentBase<any, GridState> {
 
 const columns = [
     {
-        Header: "Tidspunkt",
+        Header: (props: any) => <div className="gridColumnHeader">Tidspunkt<i className="fa fa-sort " style={{ float: 'right' }}></i></div>,
         accessor: "Tidspunkt",
-        Cell: (props: any) => <span className="number">{props.value}</span>
+        Cell: (props: any) => <span className="gridCell">{props.value}</span>
     },
     {
-        Header: "CVR-Nummer",
+        Header: (props: any) => <div className="gridColumnHeader">CVR-Nummer<i className="fa fa-sort " style={{ float: 'right' }}></i></div>,
         accessor: "CVRNummer",
-        Cell: (props: any) => <span className="number">{props.value}</span>
+        Cell: (props: any) => <span className="gridCell">{props.value}</span>
     },
     {
-        Header: "Bruger ID",
+        Header: (props: any) => <div className="gridColumnHeader">Bruger ID<i className="fa fa-sort " style={{ float: 'right' }}></i></div>,
         accessor: "BrugerID",
-        Cell: (props: any) => <span className="number">{props.value}</span>
+        Cell: (props: any) => <span className="gridCell">{props.value}</span>
     },
     {
-        Header: "Efternavn",
+        Header: (props: any) => <div className="gridColumnHeader">Efternavn<i className="fa fa-sort " style={{ float: 'right' }}></i></div>,
         accessor: "Efternavn",
-        Cell: (props: any) => <span className="number">{props.value}</span>
+        Cell: (props: any) => <span className="gridCell">{props.value}</span>
     },
     {
-        Header: "Fornavn",
+        Header: (props: any) => <div className="gridColumnHeader">Fornavn<i className="fa fa-sort " style={{ float: 'right' }}></i></div>,
         accessor: "Fornavn",
-        Cell: (props: any) => <span className="number">{props.value}</span>
+        Cell: (props: any) => <span className="gridCell">{props.value}</span>
     },
     {
-        Header: "Unikt ID",
+        Header: (props: any) => <div className="gridColumnHeader">Unikt ID<i className="fa fa-sort " style={{ float: 'right' }}></i></div>,
         accessor: "UniktID",
-        Cell: (props: any) => <span className="number">{props.value}</span>
+        Cell: (props: any) => <span className="gridCell">{props.value}</span>
     },
     {
-        Header: "Email Adresse",
+        Header: (props: any) => <div className="gridColumnHeader">Email Adresse<i className="fa fa-sort " style={{ float: 'right' }}></i></div>,
         accessor: "Emailadresse",
-        Cell: (props: any) => <span className="number">{props.value}</span>
+        Cell: (props: any) => <span className="gridCell">{props.value}</span>
     }
 ];

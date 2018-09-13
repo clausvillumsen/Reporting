@@ -24,7 +24,7 @@ export class Exportlinks extends React.Component<Props, State> {
         <div className="headerRight">
           <p className="text-left">
             Download hele rapporten her:{" "}
-            <a onClick={() => this.handleExportCSV()}>CSV</a>
+            <a href="#" onClick={() => this.handleExportCSV()}>CSV</a>
             &nbsp;{" "}
             <a href="#" onClick={() => this.handleExportPDF()}>
               PDF

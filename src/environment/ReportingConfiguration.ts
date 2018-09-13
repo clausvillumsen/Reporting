@@ -47,14 +47,14 @@ export class ReportingConfiguration {
         if (FilterValue !== null && FilterValue !== undefined) {
             getValue += `FilterValue=${FilterValue}&`
         }
-        if(PageDateTime !== null && PageDateTime !== undefined) {
+        if (PageDateTime !== null && PageDateTime !== undefined) {
             getValue += `PageDateTime=${PageDateTime}&`
         }
-        getValue.slice(0, -1)
+        getValue = getValue.slice(0, -1)
         return encodeURI(`${this.server}${this.version}${this.reportController}GetData?${getValue}`)
     }
 
-    static Export(exportType: ExportTypeEnum, 
+    static Export(exportType: ExportTypeEnum,
         ReportId?: number,
         FromDateTime?: Date,
         ToDateTime?: Date,
@@ -67,31 +67,15 @@ export class ReportingConfiguration {
     ): string {
 
         let valueExport: string = ''
-        if (ReportId !== null && ReportId !== undefined) {
-            valueExport += `ReportId=${ReportId}&`
-        }
-        if (FromDateTime !== null && FromDateTime !== undefined) {
-            valueExport += `FromDateTime=${FromDateTime}&`
-        }
-        if (ToDateTime !== null && ToDateTime !== undefined) {
-            valueExport += `ToDateTime=${ToDateTime}&`
-        }
-        if (MaxRows !== null && MaxRows !== undefined) {
-            valueExport += `MaxRows=${MaxRows}&`
-        }
-        if (SortColumnIndex !== null && SortColumnIndex !== undefined) {
-            valueExport += `SortColumnIndex=${SortColumnIndex}&`
-        }
-        if (SortColumnAscending !== null && SortColumnAscending !== undefined) {
-            valueExport += `SortColumnAscending=${SortColumnAscending}&`
-        }
-        if (FilterName !== null && FilterName !== undefined) {
-            valueExport += `FilterName=${FilterName}&`
-        }
-        if (FilterValue !== null && FilterValue !== undefined) {
-            valueExport += `FilterValue=${FilterValue}&`
-        }
-        valueExport.slice(0, -1)
+        valueExport += `ReportId=${ReportId ? ReportId : ''}&`
+        valueExport += `FromDateTime=${FromDateTime ? FromDateTime : ''}&`
+        valueExport += `ToDateTime=${ToDateTime ? ToDateTime : ''}&`
+        valueExport += `SortColumnIndex=${SortColumnIndex ? SortColumnIndex : ''}&`
+        valueExport += `SortColumnAscending=${SortColumnAscending ? SortColumnAscending : true}&`
+        valueExport += `FilterName=${FilterName ? FilterName : ''}&`
+        valueExport += `FilterValue=${FilterValue ? FilterValue : ''}&`
+        valueExport += `MaxRows=${MaxRows ? MaxRows : 100}&`
+        valueExport = valueExport.slice(0, -1)
         return encodeURI(`${this.server}${this.version}${this.reportController}${exportType}/?${valueExport}`)
     }
 }

@@ -8,7 +8,7 @@ import { ParentFilterComponent } from "../dropdownList/parentFilterComponent";
 import { ReportTypeModel } from "../../models/ReportTypeModel";
 import { FilterData } from "../../models/GetDataResponseModel";
 import { ExportModel } from "../../models/ExportModel";
-import { toast, ToastType } from "react-toastify";
+import { toast, ToastType, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GetDataAction } from "../../actions/GetDataAction";
 import { UpdateGridSchemaAction } from "../../actions/UpdateGridSchemaAction";
@@ -55,6 +55,7 @@ export class DropdownSection extends ComponentBase<Props, UiState> {
                         <span>Søg</span>
                     </div>
                 </div>
+                <ToastContainer autoClose={5000} />
             </div>
         );
     }
@@ -112,6 +113,7 @@ export class DropdownSection extends ComponentBase<Props, UiState> {
     };
     handleSearchClick = () => {
         if (this.state.reportType == null || this.state.reportType == undefined) {
+            this.notify("Report Type must be not null")
             return;
         }
         this.GetData();

@@ -301,6 +301,10 @@ i {
     color: #7f9d96 !important;
 }
 
+.fa-sort {
+    color: #7f9d96 !important;
+}
+
 /* .DayPicker_focusRegion {
     background-color: #f8f9fb !important;
 }
@@ -310,3 +314,33 @@ td,
 th {
     background-color: #f8f9fb !important;
 } */
+
+.rt-resizer {
+    right: 0 !important;
+}
+
+.ReactTable .rt-resizer {
+    right: 0 !important;
+}
+
+
+.gridColumnHeader {
+    font-size: 12pt;
+    color: #2d3d39;
+    padding: 5px 5px 5px 20px  !important;
+
+}
+
+.gridCell {
+    padding: 10px;
+}
+
+
+.ReactTable .rt-thead.-header {
+    box-shadow: none !important;
+    border-bottom: solid 1px rgba(0,0,0,0.1);
+}
+
+.ReactTable .rt-thead .rt-tr {
+    text-align: left !important;
+}
