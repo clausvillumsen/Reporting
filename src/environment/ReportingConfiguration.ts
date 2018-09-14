@@ -28,8 +28,6 @@ export class ReportingConfiguration {
         FilterValue?: string,
         PageDateTime?: string
     ): string {
-        console.log(FromDateTime.toISOString())
-        console.log(ToDateTime.toISOString())
         let getValue: string = ''
         if (ReportId !== null && ReportId !== undefined) {
             getValue += `ReportId=${ReportId}&`

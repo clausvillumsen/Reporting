@@ -45,7 +45,6 @@ export class GridSection extends ComponentBase<Props, GridState> {
         }
         let columns = this.getColumns()
         let data = this.getData()
-        console.info(data)
         return (
             <div className="container-fluid">
                 <ReactTable
