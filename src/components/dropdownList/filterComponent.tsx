@@ -1,14 +1,15 @@
 import * as React from "react";
-import { FilterType, FilterData } from "../../models/GetDataResponseModel";
+import { FilterData } from "../../models/GetDataResponseModel";
+import { ComponentBase } from "../ComponentBase";
 interface Props {
     onSelectedFilter: Function;
 }
 class State {
     popupVisible: boolean = false;
-    filterType: FilterData[] = filterDataStatic;
+    filterType: FilterData[] = [];
     currentFilter: FilterData;
 }
-export class FilterComponent extends React.Component<Props, State> {
+export class FilterComponent extends ComponentBase<Props, State> {
     private node: React.RefObject<HTMLDivElement>;
     constructor(props: any) {
         super(props);
@@ -69,35 +70,5 @@ export class FilterComponent extends React.Component<Props, State> {
         });
         this.props.onSelectedFilter(model);
     };
-}
 
-const filterDataStatic: FilterData[] = [
-    {
-        id: FilterType.cvr,
-        display: "CVR"
-    },
-    {
-        id: FilterType.dateTimeUTC,
-        display: "Date Time UTC"
-    },
-    {
-        id: FilterType.email,
-        display: "Email"
-    },
-    {
-        id: FilterType.givenName,
-        display: "Given Name"
-    },
-    {
-        id: FilterType.surName,
-        display: "Sur Name"
-    },
-    {
-        id: FilterType.unieuqId,
-        display: "Unique Id"
-    },
-    {
-        id: FilterType.userId,
-        display: "User Id"
-    }
-];
+}

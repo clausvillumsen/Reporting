@@ -272,7 +272,7 @@ i {
 .loadingContainer {
     position: fixed;
     background-color: #cccccc;
-    opacity: .1; 
+    opacity: .1;
     width: 100%;
     height: 100%;
     top: 0;
@@ -287,13 +287,15 @@ i {
     left: 45%;
     top: 50%; */
     z-index: 999999999;
-    position:fixed;
+    position: fixed;
     top: 50%;
     left: 50%;
     width: 100px;
     height: 100px;
-    margin-top: -5em; /*set to a negative number 1/2 of your height*/
-    margin-left: -7em; /*set to a negative number 1/2 of your width*/
+    margin-top: -5em;
+    /*set to a negative number 1/2 of your height*/
+    margin-left: -7em;
+    /*set to a negative number 1/2 of your width*/
 }
 
 .fa-chevron-down,
@@ -305,15 +307,15 @@ i {
     color: #7f9d96 !important;
 }
 
-/* .DayPicker_focusRegion {
-    background-color: #f8f9fb !important;
+.warning {
+    align-items: center;
+    text-align: center;
+    font-size: 25pt;
+    color: #2d3d39;
+    min-height: 300px;
+    justify-content: center;
+    display: flex;
 }
-
-table,
-td,
-th {
-    background-color: #f8f9fb !important;
-} */
 
 .rt-resizer {
     right: 0 !important;
@@ -325,10 +327,12 @@ th {
 
 
 .gridColumnHeader {
-    font-size: 12pt;
+    font-size: 11pt;
     color: #2d3d39;
-    padding: 5px 5px 5px 20px  !important;
-
+    padding: 5px 10px 5px 10px !important;
+    break-after: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .gridCell {
@@ -339,7 +343,7 @@ th {
 
 .ReactTable .rt-thead.-header {
     box-shadow: none !important;
-    border-bottom: solid 1px rgba(0,0,0,0.1);
+    border-bottom: solid 1px rgba(0, 0, 0, 0.1);
 }
 
 .ReactTable .rt-thead .rt-tr {

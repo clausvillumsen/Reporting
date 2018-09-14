@@ -6,10 +6,11 @@ import { ToastContainer, toast, ToastType } from 'react-toastify';
 import { GetMoreDataAction } from "../../actions/GetMoreDataAction";
 interface Props {
     onLoading: Function
- }
+}
 
 class State {
     enable: boolean
+    hasData: boolean = false
     constructor(enable: boolean) {
         this.enable = enable
     }
@@ -19,8 +20,8 @@ export class FooterSection extends ComponentBase<Props, State> {
     constructor(props: any) {
         super(props)
         this.state = new State(false)
-        this.subscription.add(ReportingStore.dataSourceGridObservable.pipe().subscribe(objs => {
-            this.setState({ enable: objs && objs.Data && objs.Data.length > 0 })
+        this.subscription.add(ReportingStore.gridDataSourceObservable.pipe().subscribe(objs => {
+            this.setState({ enable: objs && objs.Rows && objs.Rows.length > 0, hasData: objs && objs.Rows && objs.Rows.length > 0 })
         }))
     }
     handleLoadMore = () => {
@@ -36,6 +37,9 @@ export class FooterSection extends ComponentBase<Props, State> {
         new GetMoreDataAction().start().then(this.handleActionExecuted).catch(this.handleActionExecuted);
     }
     render() {
+        if (!this.state.hasData) {
+            return <div></div>
+        }
         return (
             <div>
                 <div className="bottomCenterButton">

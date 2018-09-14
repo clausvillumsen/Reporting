@@ -12,8 +12,8 @@ export class ExportAction extends ActionBase {
 
     public async Execute() {
         let schema: GridSchema = GetDataReducer.GetGridSchema();
-        let gridRowsData = GetDataReducer.GetResponseData()
-        let maxRows = gridRowsData && gridRowsData.Rows && gridRowsData.Rows.length || 100
+        let responseData = GetDataReducer.GetResponseData()
+        let maxRows = responseData && responseData.Rows && responseData.Rows.length || 100
         await ApiHelper.downloadFile(ReportingConfiguration.Export(this.exportType,
             schema.reportId,
             schema.fromDateTime,

@@ -17,7 +17,7 @@ export class ReportTypeComponent extends ComponentBase<Props, State> {
     this.state = new State();
     this.node = React.createRef();
     this.subscription.add(
-      ReportingStore.sourceReportTypeObservable.pipe().subscribe(objs => {
+      ReportingStore.reportTypeDataSourceObservable.pipe().subscribe(objs => {
         this.setState(prev => {
           return { ...prev, ReportTypes: objs };
         });

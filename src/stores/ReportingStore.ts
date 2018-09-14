@@ -4,58 +4,39 @@ import { StoreBase } from "./StoreBase";
 import { GetReportReducer } from "../reducers/GetReportReducer";
 import ObjectHelper from "../common/ObjectHelper";
 import { GetDataResponseModel } from "../models/GetDataResponseModel";
-import { ReportGridModel, GridRowModel } from "../models/ReportGridModel";
-import { DateHelper } from "../common/DateHelper";
 import { GridSchema } from "../models/GridSchema";
 
 export class ReportingStore extends StoreBase<GetReportReducer> {
-    private static dataSourceReportType: ReportTypeModel[] = [];
-    private static dataSourceGrid: ReportGridModel = null;
+    // Static data
+    private static reportTypeDataSource: ReportTypeModel[] = [];
     private static gridSchema: GridSchema = null;
-    private static dataSourceResponseData: GetDataResponseModel = null;
-    private static sourceReportType: BehaviorSubject<ReportTypeModel[]> = new BehaviorSubject([])
-    private static sourceDataGrid: BehaviorSubject<ReportGridModel> = new BehaviorSubject(null)
+    private static responseDataSource: GetDataResponseModel = null;
+    // Behavior Subject
+    private static reportTypeDataSourceSubject: BehaviorSubject<ReportTypeModel[]> = new BehaviorSubject([])
+    private static gridDataSourceSubject: BehaviorSubject<GetDataResponseModel> = new BehaviorSubject(null)
     private static gridSchemaBehavior: BehaviorSubject<GridSchema> = new BehaviorSubject(null)
-    public static sourceReportTypeObservable: Observable<ReportTypeModel[]> = ReportingStore.sourceReportType.asObservable();
-    public static dataSourceGridObservable: Observable<ReportGridModel> = ReportingStore.sourceDataGrid.asObservable();
+    // Observable
+    public static reportTypeDataSourceObservable: Observable<ReportTypeModel[]> = ReportingStore.reportTypeDataSourceSubject.asObservable();
+    public static gridDataSourceObservable: Observable<GetDataResponseModel> = ReportingStore.gridDataSourceSubject.asObservable();
     public static gridSchemaObservable: Observable<GridSchema> = ReportingStore.gridSchemaBehavior.asObservable();
 
     public static UpdateData(data: ReportTypeModel[]) {
-        this.dataSourceReportType = data
-        this.sourceReportType.next(ObjectHelper.DeepCopyRecursive(data))
+        this.reportTypeDataSource = data
+        this.reportTypeDataSourceSubject.next(ObjectHelper.DeepCopyRecursive(data))
     }
     public static MergeData(data: ReportTypeModel[]) {
-        this.dataSourceReportType = this.dataSourceReportType.concat(data)
-        this.sourceReportType.next(ObjectHelper.DeepCopyRecursive(ReportingStore.dataSourceReportType))
+        this.reportTypeDataSource = this.reportTypeDataSource.concat(data)
+        this.reportTypeDataSourceSubject.next(ObjectHelper.DeepCopyRecursive(ReportingStore.reportTypeDataSource))
     }
 
     public static UpdateGridList(data: GetDataResponseModel) {
-        this.dataSourceResponseData = data;
-        this.dataSourceGrid = new ReportGridModel(data && data.TotalCount ? data.TotalCount : 0,
-            data && data.PageCount ? data.PageCount : 0,
-            data && data.NextPageDatePointer ? data.NextPageDatePointer : new Date().toUTCString(),
-            []
-        )
-        if (!data) {
-            this.sourceDataGrid.next(ObjectHelper.DeepCopyRecursive(this.dataSourceGrid));
-            return;
-        }
-        this.dataSourceGrid.Data = this.ProcessGetDataResponseModel(data);
-        this.sourceDataGrid.next(ObjectHelper.DeepCopyRecursive(this.dataSourceGrid));
+        this.responseDataSource = data
+        this.gridDataSourceSubject.next(ObjectHelper.DeepCopyRecursive(this.responseDataSource));
     }
 
     public static MergeGridList(data: GetDataResponseModel) {
         this.MergeResourceResponse(data);
-        if (!this.dataSourceGrid) {
-            this.UpdateGridList(data)
-            return;
-        }
-        this.dataSourceGrid.PageCount = data.PageCount
-        this.dataSourceGrid.TotalCount = data.TotalCount
-        this.dataSourceGrid.NextPageDatePointer = data.NextPageDatePointer
-        let newData = this.ProcessGetDataResponseModel(data)
-        this.dataSourceGrid.Data = this.dataSourceGrid.Data.concat(newData);
-        this.sourceDataGrid.next(ObjectHelper.DeepCopyRecursive(this.dataSourceGrid));
+        this.gridDataSourceSubject.next(ObjectHelper.DeepCopyRecursive(this.responseDataSource));
     }
 
     public static UpdateGridSchema(data: GridSchema) {
@@ -67,71 +48,27 @@ export class ReportingStore extends StoreBase<GetReportReducer> {
         return ObjectHelper.DeepCopyRecursive(ReportingStore.gridSchema)
     }
 
-
     public static GetResponseData(): GetDataResponseModel {
-        return ObjectHelper.DeepCopyRecursive(this.dataSourceResponseData)
+        return ObjectHelper.DeepCopyRecursive(this.responseDataSource)
     }
 
     private static MergeResourceResponse(data: GetDataResponseModel) {
-        if (!this.dataSourceResponseData) {
-            this.dataSourceResponseData = data;
+        if (!this.responseDataSource) {
+            this.responseDataSource = data;
             return;
         }
         if (data && data.Rows) {
-            this.dataSourceResponseData.Columns = data.Columns
-            this.dataSourceResponseData.PageCount = data.PageCount
-            this.dataSourceResponseData.TotalCount = data.TotalCount
-            this.dataSourceResponseData.NextPageDatePointer = data.NextPageDatePointer
-            this.dataSourceResponseData.Rows = this.dataSourceResponseData.Rows.concat(data.Rows)
+            this.responseDataSource.ExportLinks = data.ExportLinks
+            this.responseDataSource.Columns = data.Columns
+            this.responseDataSource.PageCount = data.PageCount
+            this.responseDataSource.TotalCount = data.TotalCount
+            this.responseDataSource.NextPageDatePointer = data.NextPageDatePointer
+            this.responseDataSource.Rows = this.responseDataSource.Rows.concat(data.Rows)
         }
 
     }
 
-    private static ProcessGetDataResponseModel(data: GetDataResponseModel): GridRowModel[] {
-        let columns = data.Columns
-        if (!data.Rows) { return [] }
-        let newData = data.Rows.map((row) => {
-            let item = new GridRowModel()
-            for (var i = 0; i < row.length; i++) {
-                var columnName = columns[i].Name.replace(/\W/, '')
-                switch (columnName) {
-                    case "Tidspunkt": {
-                        item.Tidspunkt = DateHelper.GetDateStringFromUTC(row[i])
-                        break;
-                    }
-                    case "CVRNummer": {
-                        item.CVRNummer = row[i]
-                        break;
-                    }
-                    case "BrugerID": {
-                        item.BrugerID = row[i]
-                        break;
-                    }
-                    case "Fornavn": {
-                        item.Fornavn = row[i]
-                        break;
-                    }
-                    case "Efternavn": {
-                        item.Efternavn = row[i]
-                        break;
-                    }
-                    case "Emailadresse": {
-                        item.Emailadresse = row[i]
-                        break;
-                    }
-                    case "UniktID": {
-                        item.UniktID = row[i]
-                        break;
-                    }
-                }
-
-            }
-            return item
-        })
-        return newData;
-    }
-
     public static GetNextResponsePageDateTime(): string {
-        return this.dataSourceResponseData.NextPageDatePointer;
+        return this.responseDataSource.NextPageDatePointer;
     }
 }
