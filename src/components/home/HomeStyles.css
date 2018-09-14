@@ -1,340 +1,349 @@
 /* GENERAL */
 body {
-    font-size: 12px;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #00241b;
-    margin: 0px;
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #00241b;
+  margin: 0px;
 }
 
 .HomePage {
-    flex: 1;
-    flex-direction: column;
+  flex: 1;
+  flex-direction: column;
 }
 
 /* HEADER */
 .header {
-    flex: 1;
-    flex-direction: row;
-    margin: 12px 32px 12px 32px;
-    overflow: hidden;
-    background-color: #ffffff;
+  flex: 1;
+  flex-direction: row;
+  margin: 12px 32px 12px 32px;
+  overflow: hidden;
+  background-color: #ffffff;
 }
 
 .headerLeft {
-    float: left;
-    display: flex;
-    justify-content: flex-start;
-    font-size: 15px;
-    height: 32px;
+  float: left;
+  display: flex;
+  justify-content: flex-start;
+  font-size: 15px;
+  height: 32px;
 }
 
 .headerRight {
-    float: right;
-    display: flex;
-    justify-content: flex-end;
-    height: 32px;
+  float: right;
+  display: flex;
+  justify-content: flex-end;
+  height: 32px;
 }
 
 .applicationLogo {
-    width: 32px;
-    height: 32px;
-    margin-right: 80px;
+  width: 32px;
+  height: 32px;
+  margin-right: 80px;
 }
 
 .Anvendelsesrapporter {
-    padding: 6px 80px 6px 0px;
+  padding: 6px 80px 6px 0px;
 }
 
 .Performancerapporter {
-    padding: 6px 80px 6px 0px;
+  padding: 6px 80px 6px 0px;
 }
 
 .userName {
-    padding: 8px 0px 8px 0px;
-    font-size: 14px;
+  padding: 8px 0px 8px 0px;
+  font-size: 14px;
 }
 
-.avatar {}
+.avatar {
+}
 
-.systemSettings {}
+.systemSettings {
+}
 
 /* SERACH FORM */
 .DropdownSection {
-    display: flex;
-    flex-direction: row;
-    background-color: #f8f9fb;
-    padding: 12px 32px 12px 32px;
-    height: 54px;
+  display: flex;
+  flex-direction: row;
+  background-color: #f8f9fb;
+  padding: 12px 32px 12px 32px;
+  height: 54px;
+}
+
+:global .DateInput_input__small {
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.2px;
+  padding: 7px 7px 5px;
 }
 
 .dropdown {
-    margin: 0px 32px 0px 0px;
-    outline: none;
-    border: none;
-    flex: 1;
-    /* equals with: flex-grow: 1; flex-shrink: 1; flex-basis: auto; */
+  margin: 0px 32px 0px 0px;
+  outline: none;
+  border: none;
+  flex: 1;
+  /* equals with: flex-grow: 1; flex-shrink: 1; flex-basis: auto; */
 }
 
-.dropdown> :focus {
-    outline: none;
+.dropdown > :focus {
+  outline: none;
 }
 
 .DropdownSection .labelHeader {
-    font-size: 10px;
-    font-weight: 800;
-    color: #7f9d96;
-    text-transform: uppercase;
+  font-size: 10px;
+  font-weight: 800;
+  color: #7f9d96;
+  text-transform: uppercase;
 }
 
 .part {
-    flex: 1;
-    justify-content: center;
-    align-content: center;
+  flex: 1;
+  justify-content: center;
+  align-content: center;
 }
 
 .react-select__indicator-separator {
-    width: 0px;
+  width: 0px;
 }
 
 .DateInput_input {
-    font-size: 11px;
-    font-weight: 0;
-    color: #00241b;
-    line-height: 12px;
-    background-color: none;
-    padding: none;
-    margin: none;
+  font-size: 11px;
+  font-weight: 0;
+  color: #00241b;
+  line-height: 12px;
+  background-color: none;
+  padding: none;
+  margin: none;
 }
 
 input {
-    background-color: none;
-    padding: none;
-    font-size: 11px;
-    color: #00241b;
-    line-height: 1.6 !important;
+  background-color: none;
+  padding: none;
+  font-size: 11px;
+  color: #00241b;
+  line-height: 1.6 !important;
 }
 
 .searchInput {
-    min-height: 30px;
-    padding: 4px 4px 4px 5px;
-    border-radius: 5px;
-    border: 1px lightgray solid;
+  min-height: 30px;
+  padding: 4px 4px 4px 5px;
+  border-radius: 5px;
+  border: 1px lightgray solid;
 }
 
 .childPadding {
-    margin: 10px 30px 10px 30px;
+  margin: 10px 30px 10px 30px;
 }
 
 .CalendarDay__highlighted_calendar {
-    background: #82e0aa !important;
-    color: #186a3b !important;
+  background: #f8f9fb !important;
+  color: #186a3b !important;
 }
 
 .CalendarDay__highlighted_calendar:hover {
-    background: #58d68d !important;
-    color: #186a3b !important;
+  background: #7f9d96 !important;
+  color: #186a3b !important;
 }
 
 .CalendarDay__highlighted_calendar:active {
-    background: #58d68d !important;
-    color: #186a3b !important;
+  background: #7f9d96 !important;
+  color: #186a3b !important;
 }
 
 .CalendarDay__default {
-    border: none !important;
+  border: none !important;
 }
 
 .dateRangeHeaderContainer {
-    background-color: #f8f9fb !important;
-    /* min-height: 100px !important; */
-    padding-bottom: 20px !important;
-    padding-top: 20px !important;
-    padding-left: 20px !important;
+  background-color: #f8f9fb !important;
+  /* min-height: 100px !important; */
+  padding-bottom: 20px !important;
+  padding-top: 20px !important;
+  padding-left: 20px !important;
 }
 
-.DateRangePicker>* {
-    line-height: 1.6;
+.DateRangePicker > * {
+  line-height: 1.6;
 }
 
 .DateInput_input__focused {
-    background-color: #f8f9fb !important;
+  background-color: #f8f9fb !important;
 }
 
 .DateInput_fangShape {
-    fill: #f8f9fb !important;
+  fill: #f8f9fb !important;
 }
 
 .DateInput_input__small {
-    fill: #f8f9fb !important;
+  fill: #f8f9fb !important;
 }
 
 .DateInput_input {
-    background-color: #f8f9fb !important;
+  background-color: #f8f9fb !important;
 }
 
 /* BUTTONS */
-.btnHeader {}
+.btnHeader {
+}
 
 .btnCommon {
-    background-color: #7f9d96;
-    text-align: center;
-    border-radius: 2px;
-    width: 88px;
-    cursor: pointer;
+  background-color: #7f9d96;
+  text-align: center;
+  border-radius: 2px;
+  width: 88px;
+  cursor: pointer;
 }
 
 .btnCommon span {
-    display: inline-block;
-    vertical-align: middle;
-    line-height: normal;
-    font-size: 14px;
-    color: white;
-    padding: 10px 8px 10px 8px;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+  font-size: 14px;
+  color: white;
+  padding: 10px 8px 10px 8px;
 }
 
 .btnCommon:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 /* TABLE*/
 .ReactTable {
-    border: 0px;
+  border: 0px;
 }
 
 .ReactTable .rf-thead.-header {
-    box-shadow: 0px;
+  box-shadow: 0px;
 }
 
 /* */
 .displayBox {
-    width: 100%;
-    min-height: 30px;
-    padding: 0 10px 0 0px;
-    display: flex;
-    justify-content: space-between;
+  width: 100%;
+  min-height: 30px;
+  padding: 0 10px 0 0px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .popover {
-    z-index: 99;
-    opacity: 1;
-    width: 100%;
-    padding: 0 5px 10px 10px;
-    background-color: #f8f9fb;
-    position: relative;
-    margin-left: -10px;
+  z-index: 99;
+  opacity: 1;
+  width: 100%;
+  padding: 0 5px 10px 10px;
+  background-color: #f8f9fb;
+  position: relative;
+  margin-left: -10px;
 }
 
 .dropdownItem {
-    padding: 5px;
+  padding: 5px;
 }
 
 .dropdownItem:hover {
-    background-color: #58d68d;
-    cursor: pointer;
+  /*background-color: #58d68d;*/
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .bottomButton {
-    display: flex;
-    justify-content: space-between;
-    align-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  align-content: space-between;
 }
 
 .iconDropdown {
-    width: 24px;
-    height: 24px;
-    float: right;
+  width: 24px;
+  height: 24px;
+  float: right;
 }
 
 i {
-    align-self: center;
+  align-self: center;
 }
 
 .bottomCenterButton {
-    align-self: center;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  align-self: center;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .disableButton {
-    background-color: grey !important;
+  background-color: grey !important;
 }
 
 .ableButton {
-    background-color: green !important;
+  background-color: #7f9d96 !important;
 }
 
 .longButton {
-    width: 150px !important;
+  width: 150px !important;
 }
 
 .loadingContainer {
-    position: fixed;
-    background-color: #cccccc;
-    opacity: .1;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
+  position: fixed;
+  background-color: #cccccc;
+  opacity: 0.1;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
 }
 
 .loading {
-    font-size:48px;
-    z-index: 999999999;
-    position: fixed;
-    top: 50%;
-    left: 50%;
+  font-size: 48px;
+  z-index: 999999999;
+  position: fixed;
+  top: 50%;
+  left: 50%;
 }
 
 .fa-chevron-down,
 .fa-chevron-up {
-    color: #7f9d96 !important;
+  color: #7f9d96 !important;
 }
 
 .fa-sort {
-    color: #7f9d96 !important;
+  color: #7f9d96 !important;
 }
 
 .warning {
-    align-items: center;
-    text-align: center;
-    font-size: 25pt;
-    color: #2d3d39;
-    min-height: 300px;
-    justify-content: center;
-    display: flex;
+  align-items: center;
+  text-align: center;
+  font-size: 25pt;
+  color: #2d3d39;
+  min-height: 300px;
+  justify-content: center;
+  display: flex;
 }
 
 .rt-resizer {
-    right: 0 !important;
+  right: 0 !important;
 }
 
 .ReactTable .rt-resizer {
-    right: 0 !important;
+  right: 0 !important;
 }
 
-
 .gridColumnHeader {
-    font-size: 11pt;
-    color: #2d3d39;
-    padding: 5px 10px 5px 10px !important;
-    break-after: auto;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  font-size: 11pt;
+  color: #2d3d39;
+  padding: 5px 10px 5px 10px !important;
+  break-after: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .gridCell {
-    padding: 10px;
-    color: #7f9d96 !important;
+  padding: 10px;
+  color: #7f9d96 !important;
 }
 
-
 .ReactTable .rt-thead.-header {
-    box-shadow: none !important;
-    border-bottom: solid 1px rgba(0, 0, 0, 0.1);
+  box-shadow: none !important;
+  border-bottom: solid 1px rgba(0, 0, 0, 0.1);
 }
 
 .ReactTable .rt-thead .rt-tr {
-    text-align: left !important;
+  text-align: left !important;
 }
