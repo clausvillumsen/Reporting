@@ -1,6 +1,6 @@
 export enum ColumnDataType {
     guid = "Guid",
-    string =  "String",
+    string = "String",
     date = "DateTime",
 }
 
@@ -34,4 +34,8 @@ export class ExportLinkModel {
 export class FilterData {
     id: string
     display: string
+    constructor(id: string, display: string) {
+        this.display = display
+        this.id = id
+    }
 }

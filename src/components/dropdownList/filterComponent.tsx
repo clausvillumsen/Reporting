@@ -1,6 +1,7 @@
 import * as React from "react";
 import { FilterData } from "../../models/GetDataResponseModel";
 import { ComponentBase } from "../ComponentBase";
+import { ReportingStore } from "../../stores/ReportingStore";
 interface Props {
     onSelectedFilter: Function;
 }
@@ -15,6 +16,13 @@ export class FilterComponent extends ComponentBase<Props, State> {
         super(props);
         this.state = new State();
         this.node = React.createRef();
+        this.subscription.add(
+            ReportingStore.filterDataSourceObservable.pipe().subscribe(objs => {
+                this.setState(prev => {
+                    return { ...prev, filterType: objs };
+                });
+            })
+        );
     }
 
     render() {
@@ -61,6 +69,7 @@ export class FilterComponent extends ComponentBase<Props, State> {
     };
 
     setCurrentModel = (model: any) => {
+        this.props.onSelectedFilter(model);
         this.setState(prev => {
             return {
                 ...prev,
@@ -68,7 +77,6 @@ export class FilterComponent extends ComponentBase<Props, State> {
                 popupVisible: !prev.popupVisible
             };
         });
-        this.props.onSelectedFilter(model);
     };
 
 }

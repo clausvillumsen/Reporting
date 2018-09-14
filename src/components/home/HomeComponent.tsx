@@ -1,6 +1,5 @@
 import { ComponentBase } from "../ComponentBase";
 import * as React from "react";
-import { HeaderSection } from "./HeaderSection";
 import { DropdownSection } from "./DropdownSection";
 import { GridSection } from "./GridSection";
 import { FooterSection } from "./FooterSection";
@@ -24,7 +23,7 @@ export class HomeComponent extends ComponentBase<any, State> {
                 <Exportlinks onLoading={(isLoading: boolean) => this.handleLoading(isLoading)} />
                 <GridSection onLoading={(isLoading: boolean) => this.handleLoading(isLoading)}/>
                 <FooterSection onLoading={(isLoading: boolean) => this.handleLoading(isLoading)} />
-                {this.state.loading && <div><div  className="loadingContainer"></div><img className="loading" src={require("../../../img/loading.gif")} /></div>}
+                {this.state.loading && <div><div  className="loadingContainer"></div><i className="fa fa-refresh fa-spin loading"></i></div>}
             </div>
         );
     }

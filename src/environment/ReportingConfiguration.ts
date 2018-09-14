@@ -11,6 +11,13 @@ export class ReportingConfiguration {
     static GetReports(): string {
         return `${this.server}${this.version}${this.reportController}GetReports`
     }
+    static GetFilter(reportId: string) {
+        let getValue: string = ''
+        if (reportId !== null && reportId !== undefined) {
+            getValue += `ReportId=${reportId}&MaxRows=1`
+        }
+        return encodeURI(`${this.server}${this.version}${this.reportController}GetData?${getValue}`)
+    }
     static GetData(ReportId?: number,
         FromDateTime?: Date,
         ToDateTime?: Date,

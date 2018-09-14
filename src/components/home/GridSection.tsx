@@ -45,6 +45,7 @@ export class GridSection extends ComponentBase<Props, GridState> {
         }
         let columns = this.getColumns()
         let data = this.getData()
+        console.info(data)
         return (
             <div className="container-fluid">
                 <ReactTable
@@ -83,9 +84,9 @@ export class GridSection extends ComponentBase<Props, GridState> {
             undefined,
             undefined,
             undefined,
-            undefined,
-            sortObject.desc,
             this.getColumnIndex(sortObject.id),
+            sortObject.desc,
+            undefined,
             undefined,
             this.state.sorted,
             undefined,
@@ -103,13 +104,13 @@ export class GridSection extends ComponentBase<Props, GridState> {
         this.props.onLoading(false)
     }
 
-    getColumnIndex = (columnName: string): string => {
+    getColumnIndex = (columnName: string): number => {
         for (let i = 0; i < this.state.datasource.Columns.length; i++) {
             if (this.state.datasource.Columns[i].Name === columnName) {
-                return i.toString();
+                return i;
             }
         }
-        return "0";
+        return 0;
     }
 
     getColumns = () => {
@@ -120,8 +121,6 @@ export class GridSection extends ComponentBase<Props, GridState> {
         this.state.datasource.Columns.forEach(p => {
             let newColumn = {
                 Header: (props: any) => {
-                    console.log('props')
-                    console.info(props)
                     return <div className="gridColumnHeader">{p.Name}<i className="fa fa-sort " style={{ float: 'right' }}></i></div>
                 },
                 accessor: p.Name,
