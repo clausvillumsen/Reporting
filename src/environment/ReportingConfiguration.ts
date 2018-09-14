@@ -74,8 +74,8 @@ export class ReportingConfiguration {
 
         let valueExport: string = ''
         valueExport += `ReportId=${ReportId ? ReportId : ''}&`
-        valueExport += `FromDateTime=${FromDateTime ? FromDateTime : ''}&`
-        valueExport += `ToDateTime=${ToDateTime ? ToDateTime : ''}&`
+        valueExport += `FromDateTime=${FromDateTime ? FromDateTime.toUTCString() : ''}&`
+        valueExport += `ToDateTime=${ToDateTime ? ToDateTime.toUTCString() : ''}&`
         valueExport += `SortColumnIndex=${SortColumnIndex ? SortColumnIndex : ''}&`
         valueExport += `SortColumnAscending=${SortColumnAscending ? SortColumnAscending : true}&`
         valueExport += `FilterName=${FilterName ? FilterName : ''}&`
