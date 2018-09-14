@@ -28,16 +28,17 @@ export class ReportingConfiguration {
         FilterValue?: string,
         PageDateTime?: string
     ): string {
-
+        console.log(FromDateTime.toISOString())
+        console.log(ToDateTime.toISOString())
         let getValue: string = ''
         if (ReportId !== null && ReportId !== undefined) {
             getValue += `ReportId=${ReportId}&`
         }
         if (FromDateTime !== null && FromDateTime !== undefined) {
-            getValue += `FromDateTime=${FromDateTime}&`
+            getValue += `FromDateTime=${FromDateTime.toUTCString()}&`
         }
         if (ToDateTime !== null && ToDateTime !== undefined) {
-            getValue += `ToDateTime=${ToDateTime}&`
+            getValue += `ToDateTime=${ToDateTime.toUTCString()}&`
         }
         if (MaxRows !== null && MaxRows !== undefined) {
             getValue += `MaxRows=${MaxRows}&`
