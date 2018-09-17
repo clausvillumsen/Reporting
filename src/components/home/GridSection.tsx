@@ -12,6 +12,7 @@ import {
   ColumnDataType
 } from "../../models/GetDataResponseModel";
 import { DateHelper } from "../../common/DateHelper";
+import { GetDataDefaultAction } from "../../actions/GetDataDefaultAction";
 
 interface Props {
   onLoading: Function;
@@ -30,6 +31,8 @@ export class GridSection extends ComponentBase<Props, GridState> {
   constructor(props: any) {
     super(props);
     this.state = new GridState(null);
+    new GetDataDefaultAction().start().then(this.handleActionExecuted).catch(this.handleActionExecuted);
+    props.onLoading(true);
     this.subscription.add(
       ReportingStore.gridDataSourceObservable.pipe().subscribe(obs => {
         this.updateState(obs);
