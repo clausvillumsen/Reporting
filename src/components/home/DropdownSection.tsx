@@ -18,8 +18,8 @@ interface Props {
 
 class UiState {
     focusedInput: any;
-    startDate: any;
-    endDate: any;
+    startDate: any = moment(new Date()).add(-1, 'days');
+    endDate: any = moment(new Date());
     reportType: ReportTypeModel;
     filterType: FilterData;
     filterValue: string;
@@ -27,9 +27,11 @@ class UiState {
 }
 
 export class DropdownSection extends ComponentBase<Props, UiState> {
+    private nodeParentFilter: React.RefObject<ParentFilterComponent>;
     constructor(props: any) {
         super(props);
         this.state = new UiState();
+        this.nodeParentFilter = React.createRef();
     }
 
     render(): React.ReactNode {
@@ -46,6 +48,7 @@ export class DropdownSection extends ComponentBase<Props, UiState> {
                     onDateChange={(date: any) => this.handleDateChange(date)}
                 />
                 <ParentFilterComponent
+                    ref={this.nodeParentFilter}
                     onFilterChange={(filter: FilterData, filterValue: string) =>
                         this.handleFilterTypeChanges(filter, filterValue)
                     }
@@ -90,7 +93,8 @@ export class DropdownSection extends ComponentBase<Props, UiState> {
             undefined,
             undefined,
             undefined,
-            undefined).start()
+            undefined).start();
+        this.nodeParentFilter.current.clearFilter();
     };
     handleFilterTypeChanges = (filter: FilterData, filterValue: string) => {
         this.setState(prev => {

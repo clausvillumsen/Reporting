@@ -1,28 +1,25 @@
 import * as React from "react";
 import { FilterData } from "../../models/GetDataResponseModel";
-import { ComponentBase } from "../ComponentBase";
 import { ReportingStore } from "../../stores/ReportingStore";
+import { Subscription } from "rxjs";
 interface Props {
     onSelectedFilter: Function;
+    filterType: FilterData[];
 }
 class State {
     popupVisible: boolean = false;
     filterType: FilterData[] = [];
     currentFilter: FilterData;
+    constructor(filterType: FilterData[]) {
+        this.filterType = filterType;
+    }
 }
-export class FilterComponent extends ComponentBase<Props, State> {
+export class FilterComponent extends React.Component<Props, State> {
     private node: React.RefObject<HTMLDivElement>;
     constructor(props: any) {
         super(props);
-        this.state = new State();
+        this.state = new State(props.filterType);
         this.node = React.createRef();
-        this.subscription.add(
-            ReportingStore.filterDataSourceObservable.pipe().subscribe(objs => {
-                this.setState(prev => {
-                    return { ...prev, filterType: objs };
-                });
-            })
-        );
     }
 
     render() {
@@ -46,11 +43,9 @@ export class FilterComponent extends ComponentBase<Props, State> {
                         <i className="fa fa-chevron-down fa-lg" />
                     }
                 </div>
-                {this.state.popupVisible &&
-                    <div className="popover">
-                        {this.renderFilters(this.state.filterType)}
-                    </div>
-                }
+                <div className="popover" style={{ display: this.state.popupVisible ? 'block' : 'none' }}>
+                    {this.renderFilters(this.state.filterType)}
+                </div>
             </div>
         );
     }

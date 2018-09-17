@@ -20,6 +20,10 @@ export class ReportTypeComponent extends ComponentBase<Props, State> {
         this.subscription.add(
             ReportingStore.reportTypeDataSourceObservable.pipe().subscribe(objs => {
                 this.setState(prev => {
+                    if (objs != null && (prev.model === undefined || prev.model === null)) {
+                        new GetFilterAction(objs[0].ID.toString()).start()
+                        return { ...prev, ReportTypes: objs, model: objs[0] };
+                    }
                     return { ...prev, ReportTypes: objs };
                 });
             })
