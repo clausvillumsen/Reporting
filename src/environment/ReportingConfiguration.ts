@@ -33,10 +33,10 @@ export class ReportingConfiguration {
             getValue += `ReportId=${ReportId}&`
         }
         if (FromDateTime !== null && FromDateTime !== undefined) {
-            getValue += `FromDateTime=${FromDateTime.toUTCString()}&`
+            getValue += `FromDateTime=${FromDateTime.toISOString()}&`
         }
         if (ToDateTime !== null && ToDateTime !== undefined) {
-            getValue += `ToDateTime=${ToDateTime.toUTCString()}&`
+            getValue += `ToDateTime=${ToDateTime.toISOString()}&`
         }
         if (MaxRows !== null && MaxRows !== undefined) {
             getValue += `MaxRows=${MaxRows}&`
@@ -74,8 +74,8 @@ export class ReportingConfiguration {
 
         let valueExport: string = ''
         valueExport += `ReportId=${ReportId ? ReportId : ''}&`
-        valueExport += `FromDateTime=${FromDateTime ? FromDateTime.toUTCString() : ''}&`
-        valueExport += `ToDateTime=${ToDateTime ? ToDateTime.toUTCString() : ''}&`
+        valueExport += `FromDateTime=${FromDateTime ? FromDateTime.toISOString() : ''}&`
+        valueExport += `ToDateTime=${ToDateTime ? ToDateTime.toISOString() : ''}&`
         valueExport += `SortColumnIndex=${SortColumnIndex ? SortColumnIndex : ''}&`
         valueExport += `SortColumnAscending=${SortColumnAscending ? SortColumnAscending : true}&`
         valueExport += `FilterName=${FilterName ? FilterName : ''}&`

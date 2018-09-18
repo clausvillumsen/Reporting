@@ -20,11 +20,10 @@ export class ReportTypeComponent extends ComponentBase<Props, State> {
         this.subscription.add(
             ReportingStore.reportTypeDataSourceObservable.pipe().subscribe(objs => {
                 this.setState(prev => {
-                    if (objs != null && (prev.model === undefined || prev.model === null)) {
-                        new GetFilterAction(objs[0].ID.toString()).start()
-                        return { ...prev, ReportTypes: objs, model: objs[0] };
+                    if (objs == null || prev.model) {
+                        return { ...prev, ReportTypes: objs };
                     }
-                    return { ...prev, ReportTypes: objs };
+                    this.changeReportsAndSetCurrentModel(objs[0], objs)
                 });
             })
         );
@@ -56,7 +55,7 @@ export class ReportTypeComponent extends ComponentBase<Props, State> {
 
     render() {
         return (
-            <div className="dropdown part " ref={this.node}>
+            <div className="dropdown part" ref={this.node}>
                 <div className="labelHeader">RAPPORTTYPE</div>
                 <div className="displayBox" onClick={() => this.registerClick()}>
                     <p>{this.state.model ? this.state.model.Name : "Vælg..."}</p>
@@ -97,4 +96,17 @@ export class ReportTypeComponent extends ComponentBase<Props, State> {
         this.props.onReportTypeChange(model);
         new GetFilterAction(model.ID.toString()).start()
     };
+
+    changeReportsAndSetCurrentModel = (model: ReportTypeModel, newData: ReportTypeModel[]) => {
+        this.setState(prev => {
+            return {
+                ...prev,
+                model: model,
+                popupVisible: false,
+                ReportTypes: newData
+            };
+        });
+        this.props.onReportTypeChange(model);
+        new GetFilterAction(model.ID.toString()).start()
+    }
 }

@@ -18,8 +18,8 @@ interface Props {
 
 class UiState {
     focusedInput: any;
-    startDate: any = moment(new Date()).add(-1, 'days');
-    endDate: any = moment(new Date());
+    startDate: any = moment(new Date()).add(-1, 'days').toDate();
+    endDate: any = moment(new Date()).toDate();
     reportType: ReportTypeModel;
     filterType: FilterData;
     filterValue: string;
@@ -32,6 +32,7 @@ export class DropdownSection extends ComponentBase<Props, UiState> {
         super(props);
         this.state = new UiState();
         this.nodeParentFilter = React.createRef();
+        
     }
 
     render(): React.ReactNode {
@@ -45,7 +46,7 @@ export class DropdownSection extends ComponentBase<Props, UiState> {
                 <CalendarSelect
                     startDate={this.state.startDate}
                     endDate={this.state.endDate}
-                    onDateChange={(date: any) => this.handleDateChange(date)}
+                    onDateChange={(startDate: Date, endDate: Date) => this.handleDateChange(startDate, endDate)}
                 />
                 <ParentFilterComponent
                     ref={this.nodeParentFilter}
@@ -63,19 +64,17 @@ export class DropdownSection extends ComponentBase<Props, UiState> {
         );
     }
 
-    handleDateChange = (data: any): any => {
-        let newStartDate = moment(data.startDate).toDate()
-        let newEndDate = moment(data.endDate).toDate()
+    handleDateChange = (startDate: Date, endDate: Date): any => {
         this.setState(prev => {
             return {
                 ...prev,
-                startDate: newStartDate,
-                endDate: newEndDate
+                startDate: startDate,
+                endDate: endDate
             };
         });
         new UpdateGridSchemaAction(undefined,
-            newStartDate,
-            newEndDate,
+            startDate,
+            endDate,
             undefined,
             undefined,
             undefined,
@@ -130,6 +129,8 @@ export class DropdownSection extends ComponentBase<Props, UiState> {
     };
 
     GetData = () => {
+        console.log('state')
+        console.info(this.state)
         this.props.onLoading(true);
         new UpdateGridSchemaAction(this.state.reportType.ID,
             this.state.startDate,
