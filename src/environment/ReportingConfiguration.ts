@@ -1,4 +1,5 @@
 import { ExportTypeEnum } from "../common/constants/exportType";
+import { DateHelper } from '../common/DateHelper'
 
 export class ReportingConfiguration {
     static server: string = "http://reporting.kundedemo.dk/api/"
@@ -33,10 +34,10 @@ export class ReportingConfiguration {
             getValue += `ReportId=${ReportId}&`
         }
         if (FromDateTime !== null && FromDateTime !== undefined) {
-            getValue += `FromDateTime=${FromDateTime.toISOString()}&`
+            getValue += `FromDateTime=${DateHelper.GetISOStringWithoutOffset(FromDateTime)}&`
         }
         if (ToDateTime !== null && ToDateTime !== undefined) {
-            getValue += `ToDateTime=${ToDateTime.toISOString()}&`
+            getValue += `ToDateTime=${DateHelper.GetISOStringWithoutOffset(ToDateTime)}&`
         }
         if (MaxRows !== null && MaxRows !== undefined) {
             getValue += `MaxRows=${MaxRows}&`
@@ -74,8 +75,8 @@ export class ReportingConfiguration {
 
         let valueExport: string = ''
         valueExport += `ReportId=${ReportId ? ReportId : ''}&`
-        valueExport += `FromDateTime=${FromDateTime ? FromDateTime.toISOString() : ''}&`
-        valueExport += `ToDateTime=${ToDateTime ? ToDateTime.toISOString() : ''}&`
+        valueExport += `FromDateTime=${FromDateTime ? DateHelper.GetISOStringWithoutOffset(FromDateTime) : ''}&`
+        valueExport += `ToDateTime=${ToDateTime ? DateHelper.GetISOStringWithoutOffset(ToDateTime) : ''}&`
         valueExport += `SortColumnIndex=${SortColumnIndex ? SortColumnIndex : ''}&`
         valueExport += `SortColumnAscending=${SortColumnAscending ? SortColumnAscending : true}&`
         valueExport += `FilterName=${FilterName ? FilterName : ''}&`
