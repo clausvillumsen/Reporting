@@ -9,8 +9,9 @@ export class DateHelper {
     }
 
     public static GetISOStringWithoutOffset(date: Date): string {
-        return new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString()
+        // return new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString()
+        return date.toISOString()
     }
 
-   
+
 }

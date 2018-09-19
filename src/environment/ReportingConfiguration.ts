@@ -1,23 +1,22 @@
 import { ExportTypeEnum } from "../common/constants/exportType";
 import { DateHelper } from '../common/DateHelper'
-
+import { DataHelper } from "../common/DataHelper";
 export class ReportingConfiguration {
-    static server: string = "http://reporting.kundedemo.dk/api/"
-    static version: string = "v1/"
-    static reportController: string = "Reporting/"
     static exportCSV: string = "csv/"
     static exportXML: string = "xml/"
     static exportJSON: string = "json/"
-
+    static getEndPoint = (): string => {
+        return (window as any)['endpoint'];
+    }
     static GetReports(): string {
-        return `${this.server}${this.version}${this.reportController}GetReports`
+        return `${ReportingConfiguration.getEndPoint()}/GetReports`
     }
     static GetFilter(reportId: string) {
         let getValue: string = ''
         if (reportId !== null && reportId !== undefined) {
             getValue += `ReportId=${reportId}&MaxRows=1`
         }
-        return encodeURI(`${this.server}${this.version}${this.reportController}GetData?${getValue}`)
+        return encodeURI(`${ReportingConfiguration.getEndPoint()}/GetData?${getValue}`)
     }
     static GetData(ReportId?: number,
         FromDateTime?: Date,
@@ -58,7 +57,7 @@ export class ReportingConfiguration {
             getValue += `PageDateTime=${PageDateTime}&`
         }
         getValue = getValue.slice(0, -1)
-        return encodeURI(`${this.server}${this.version}${this.reportController}GetData?${getValue}`)
+        return encodeURI(`${ReportingConfiguration.getEndPoint()}/GetData?${getValue}`)
     }
 
     static Export(exportType: ExportTypeEnum,
@@ -83,6 +82,6 @@ export class ReportingConfiguration {
         valueExport += `FilterValue=${FilterValue ? FilterValue : ''}&`
         valueExport += `MaxRows=${MaxRows ? MaxRows : 100}&`
         valueExport = valueExport.slice(0, -1)
-        return encodeURI(`${this.server}${this.version}${this.reportController}${exportType}/?${valueExport}`)
+        return encodeURI(`${ReportingConfiguration.getEndPoint()}/${exportType}/?${valueExport}`)
     }
 }
