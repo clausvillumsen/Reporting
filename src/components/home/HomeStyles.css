@@ -378,8 +378,21 @@ i {
 }
 
 .dateRangeSelect {
-    width: 300px;
     border: none;
     background-color: inherit;
-    padding: 10px 10px 0 0;
+    padding: 0 10px 0 0;
+    margin: 0.8em 0 0.8em 0;
+    font-size: 12px;
+    max-width: 120px;
+}
+
+.dateRangeContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.dateRangeSeparator {
+    margin-right: 40px;
+    margin-left: 5px;
 }

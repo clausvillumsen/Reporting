@@ -7,6 +7,7 @@ export class ReportingConfiguration {
     static exportJSON: string = "json/"
     static getEndPoint = (): string => {
         return (window as any)['endpoint'];
+
     }
     static GetReports(): string {
         return `${ReportingConfiguration.getEndPoint()}/GetReports`

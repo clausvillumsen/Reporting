@@ -55,7 +55,7 @@ export class ReportTypeComponent extends ComponentBase<Props, State> {
 
     render() {
         return (
-            <div className="dropdown part" ref={this.node}>
+            <div className="dropdown" ref={this.node}>
                 <div className="labelHeader">RAPPORTTYPE</div>
                 <div className="displayBox" onClick={() => this.registerClick()}>
                     <p>{this.state.model ? this.state.model.Name : "Vælg..."}</p>

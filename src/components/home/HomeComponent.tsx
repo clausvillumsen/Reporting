@@ -21,9 +21,9 @@ export class HomeComponent extends ComponentBase<any, State> {
             <div className="HomePage">
                 <DropdownSection onLoading={(isLoading: boolean) => this.handleLoading(isLoading)} />
                 <Exportlinks onLoading={(isLoading: boolean) => this.handleLoading(isLoading)} />
-                <GridSection onLoading={(isLoading: boolean) => this.handleLoading(isLoading)}/>
+                <GridSection onLoading={(isLoading: boolean) => this.handleLoading(isLoading)} />
                 <FooterSection onLoading={(isLoading: boolean) => this.handleLoading(isLoading)} />
-                {this.state.loading && <div><div  className="loadingContainer"></div><i className="fa fa-refresh fa-spin loading"></i></div>}
+                {this.state.loading && <div><div className="loadingContainer"></div><i className="fa fa-refresh fa-spin loading"></i></div>}
             </div>
         );
     }

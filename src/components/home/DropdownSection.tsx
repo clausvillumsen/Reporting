@@ -129,8 +129,6 @@ export class DropdownSection extends ComponentBase<Props, UiState> {
     };
 
     GetData = () => {
-        console.log('state')
-        console.info(this.state)
         this.props.onLoading(true);
         new UpdateGridSchemaAction(this.state.reportType.ID,
             this.state.startDate,

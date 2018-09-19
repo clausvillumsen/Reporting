@@ -55,7 +55,7 @@ export class ParentFilterComponent extends ComponentBase<Props, State> {
     };
     render() {
         return (
-            <div className="dropdown part" ref={this.node}>
+            <div className="dropdown" ref={this.node}>
                 <div className="labelHeader">SØG PÅ BRUGER ATTRIBUTER</div>
                 <div className="displayBox" onClick={() => this.registerClick()}>
                     {this.state.currentFilter ? (
