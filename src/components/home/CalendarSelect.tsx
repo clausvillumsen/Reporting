@@ -7,7 +7,6 @@ import 'flatpickr/dist/themes/material_green.css'
 import Flatpickr from 'react-flatpickr'
 import { Danish } from "flatpickr/dist/l10n/da.js"
 import { Instance } from "flatpickr/dist/types/instance";
-import rangePlugin from 'flatpickr/dist/plugins/rangePlugin'
 interface CalendarProps {
     startDate: Date,
     endDate: Date,
@@ -28,6 +27,8 @@ export class CalendarSelect extends React.Component<CalendarProps, CalendarState
         this.state = new CalendarState(props.startDate, props.endDate);
     }
     render() {
+        let startDate = this.state.startDate
+        let endDate = this.state.endDate
         return (
             <div className="dropdown">
                 <div className="labelHeader">VÆLG TIDSPERIODE</div>
@@ -42,35 +43,64 @@ export class CalendarSelect extends React.Component<CalendarProps, CalendarState
                             dateFormat: "d/m/Y H.i",
                             enable: [
                                 function (date) {
-                                    return date <= new Date()
+                                    return endDate != null && endDate != undefined ? date <= new Date() && date < endDate : date <= new Date()
                                 }
                             ],
-                            defaultDate: [this.state.startDate, this.state.endDate],
+                            defaultDate: this.state.startDate,
                             disable: [function (date) {
-                                return date > new Date()
+                                return !(endDate != null && endDate != undefined ? date <= new Date() && date < endDate : date <= new Date())
                             }],
-                            plugins: [new (rangePlugin as any)({ input: "#secondRangeInput" })]
-                        }} 
+                        }}
                         className={" dateRangeSelect"}
-                        onChange={(a, b, c, d) => this.handleTimeChanges(a, b, c, d)} >
+                        onChange={(a, b, c, d) => this.handleStartChange(a, b, c, d)} >
                     </Flatpickr>
                     <p className="dateRangeSeparator">til</p>
-                    <input id="secondRangeInput" className="dateRangeSelect" />
+                    <Flatpickr
+                        data-allow-input={false}
+                        options={{
+                            allowInput: false,
+                            enableTime: true,
+                            locale: Danish,
+                            time_24hr: true,
+                            dateFormat: "d/m/Y H.i",
+                            enable: [
+                                function (date) {
+                                    return startDate != null && startDate != undefined ? date <= new Date() && date > startDate : date <= new Date()
+                                }
+                            ],
+                            defaultDate: this.state.endDate,
+                            disable: [function (date) {
+                                return !(startDate != null && startDate != undefined ? date <= new Date() && date > startDate : date <= new Date())
+                            }],
+                        }}
+                        className={" dateRangeSelect"}
+                        onChange={(a, b, c, d) => this.handleEndDateChanges(a, b, c, d)} >
+                    </Flatpickr>
                 </div>
             </div>
         );
     }
 
-    handleTimeChanges = (dates: Date[], currentDateString: string, self: Instance, data?: any) => {
+    handleStartChange = (dates: Date[], currentDateString: string, self: Instance, data?: any) => {
         let newStartDate: Date = dates[0]
-        let newEndDate: Date = dates[1]
         this.setState(prev => {
             return {
+                ...prev,
                 startDate: newStartDate,
+            }
+        });
+        this.props.onDateChange(newStartDate, this.state.endDate)
+    };
+
+    handleEndDateChanges = (dates: Date[], currentDateString: string, self: Instance, data?: any) => {
+        let newEndDate: Date = dates[0]
+        this.setState(prev => {
+            return {
+                ...prev,
                 endDate: newEndDate
             }
         });
-        this.props.onDateChange(newStartDate, newEndDate)
+        this.props.onDateChange(this.state.startDate, newEndDate)
     };
 
 }
