@@ -76,7 +76,7 @@ export class ParentFilterComponent extends ComponentBase<Props, State> {
                 {this.state.popupVisible && (
                     <div
                         className="popover"
-                        style={{ display: "flex", flexDirection: "column" }}
+                        style={{ display: "block" }}
                     >
                         <FilterComponent
                             filterType={this.state.filterType}
@@ -84,19 +84,20 @@ export class ParentFilterComponent extends ComponentBase<Props, State> {
                                 this.handleSelectedFilter(selectedModel)
                             }
                         />
-                        <div
-                            className="labelHeader"
-                            style={{ marginLeft: 30, marginRight: 30 }}
-                        >
-                            SØG PÅ BRUGER ATTRIBUTER
-            </div>
-                        <input
-                            placeholder="Skriv værdi"
-                            type="text"
-                            className="searchInput childPadding"
-                            aria-describedby="basic-addon2"
-                            ref={this.searchInput}
-                        />
+                        <div className="childPadding">
+                            <div
+                                className="labelHeader"
+                            >
+                                SØG PÅ BRUGER ATTRIBUTER
+                            </div>
+                            <input
+                                placeholder="Skriv værdi"
+                                type="text"
+                                className="searchInput"
+                                aria-describedby="basic-addon2"
+                                ref={this.searchInput}
+                            />
+                        </div>
                         <div className="bottomButton childPadding">
                             <div
                                 className="btn btn-default btnCommon btnHeader floatLeft"
@@ -131,10 +132,11 @@ export class ParentFilterComponent extends ComponentBase<Props, State> {
             return {
                 ...prev,
                 currentFilter: null,
-                currentFilterValue: "",
+                currentFilterValue: null,
                 popupVisible: false
             };
         });
+        this.props.onFilterChange(null, null);
     };
     applyFilter = () => {
         let text = this.searchInput.current.value;

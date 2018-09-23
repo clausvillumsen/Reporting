@@ -30,13 +30,13 @@ export class Exportlinks extends ComponentBase<Props, State> {
                 <div className="headerRight">
                     <p className="text-left">
                         Download hele rapporten her:{" "}
-                        <a href="#" onClick={() => this.handleActionExecuting(ExportTypeEnum.csv)}>CSV</a>
+                        <a href="#" target="_blank" onClick={() => this.handleActionExecuting(ExportTypeEnum.csv)}>CSV</a>
                         &nbsp;{" "}
-                        <a href="#" onClick={() => this.handleActionExecuting(ExportTypeEnum.pdf)}>PDF</a>
+                        <a href="#" target="_blank" onClick={() => this.handleActionExecuting(ExportTypeEnum.pdf)}>PDF</a>
                         &nbsp;{" "}
-                        <a href="#" onClick={() => this.handleActionExecuting(ExportTypeEnum.xml)}>XML</a>
+                        <a href="#" target="_blank" onClick={() => this.handleActionExecuting(ExportTypeEnum.xml)}>XML</a>
                         &nbsp;{" "}
-                        <a href="#" onClick={() => this.handleActionExecuting(ExportTypeEnum.json)}>JSON</a>
+                        <a href="#" target="_blank" onClick={() => this.handleActionExecuting(ExportTypeEnum.json)}>JSON</a>
                         &nbsp;</p>
                 </div>
             </div>
@@ -58,7 +58,9 @@ export class Exportlinks extends ComponentBase<Props, State> {
             .catch(this.handleActionExecuted);
     }
     handleActionExecuted = (res: any) => {
-        this.props.onLoading(false)
+        this.props.onLoading(false);
+        this.setState(prev => {
+            return { ...prev, exporting: false };
+        });
     }
-
 }

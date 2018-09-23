@@ -34,17 +34,19 @@ export class UpdateGridSchemaAction extends ActionBase {
                 this.pageSize))
                 return true
         }
-        schema.reportId = this.reportId != undefined ? this.reportId : oldSchema.reportId
-        schema.fromDateTime = this.fromDateTime != undefined ? this.fromDateTime : oldSchema.fromDateTime
-        schema.toDateTime = this.toDateTime != undefined ? this.toDateTime : oldSchema.toDateTime
-        schema.maxRows = this.maxRows != undefined ? this.maxRows : oldSchema.maxRows
-        schema.sortColumnIndex = this.sortColumnIndex != undefined ? this.sortColumnIndex : oldSchema.sortColumnIndex
-        schema.sortColumnAscending = this.sortColumnAscending != undefined ? this.sortColumnAscending : oldSchema.sortColumnAscending
-        schema.filterName = this.filterName != undefined ? this.filterName : oldSchema.filterName
-        schema.filterValue = this.filterValue != undefined ? this.filterValue : oldSchema.filterValue
-        schema.sorted = this.sorted != undefined ? this.sorted : oldSchema.sorted
-        schema.page = this.page != undefined ? this.page : oldSchema.page
-        schema.pageSize = this.pageSize != undefined ? this.pageSize : oldSchema.pageSize
+        // null != undefined --> false
+        // null !== undefined --> true
+        schema.reportId = this.reportId !== undefined ? this.reportId : oldSchema.reportId
+        schema.fromDateTime = this.fromDateTime !== undefined ? this.fromDateTime : oldSchema.fromDateTime
+        schema.toDateTime = this.toDateTime !== undefined ? this.toDateTime : oldSchema.toDateTime
+        schema.maxRows = this.maxRows !== undefined ? this.maxRows : oldSchema.maxRows
+        schema.sortColumnIndex = this.sortColumnIndex !== undefined ? this.sortColumnIndex : oldSchema.sortColumnIndex
+        schema.sortColumnAscending = this.sortColumnAscending !== undefined ? this.sortColumnAscending : oldSchema.sortColumnAscending
+        schema.filterName = this.filterName !== undefined ? this.filterName : oldSchema.filterName
+        schema.filterValue = this.filterValue !== undefined ? this.filterValue : oldSchema.filterValue
+        schema.sorted = this.sorted !== undefined ? this.sorted : oldSchema.sorted
+        schema.page = this.page !== undefined ? this.page : oldSchema.page
+        schema.pageSize = this.pageSize !== undefined ? this.pageSize : oldSchema.pageSize
         GetDataReducer.UpdateGridSchema(schema)
         return true
     }
