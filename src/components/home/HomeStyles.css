@@ -396,3 +396,12 @@ i {
     margin-right: 40px;
     margin-left: 5px;
 }
+
+.total-row {
+    margin-top: -35px;
+    padding: 5px 17px;
+}
+
+.gridCell a {
+    color: #7f9d96;
+}

@@ -49,6 +49,15 @@ export class GridSection extends ComponentBase<Props, GridState> {
         });
     };
 
+    renderNumberOfRows() {
+        if (this.state.datasource.Rows.length > 0) {
+            return (
+                <div className="total-row">{this.state.datasource.Rows.length} ud af {this.state.datasource.TotalCount} resutater</div>
+            );
+        }
+        return;
+    }
+
     render() {
         if (!(this.state.datasource && this.state.datasource.Rows)) {
             return (
@@ -61,6 +70,7 @@ export class GridSection extends ComponentBase<Props, GridState> {
         let data = this.getData();
         return (
             <div className="container-fluid">
+                {this.renderNumberOfRows()}
                 <ReactTable
                     data={data}
                     loading={false}
@@ -155,7 +165,14 @@ export class GridSection extends ComponentBase<Props, GridState> {
                     );
                 },
                 accessor: p.Name,
-                Cell: (props: any) => <span className="gridCell">{props.value}</span>
+                Cell: (props: any) => {
+                    if (props.value && (props.value.indexOf('http://') == 0 || props.value.indexOf('https://') == 0)) {
+                        return <span title={props.value} className="gridCell">
+                            <a target="_blank" href={props.value}>{props.value}</a>
+                        </span>;
+                    }
+                    return <span title={props.value} className="gridCell">{props.value}</span>;
+                }
             };
             columns.push(newColumn);
         });

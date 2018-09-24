@@ -3,7 +3,7 @@ export class DateHelper {
     public static GetDateStringFromUTC(dateString: string): string {
         try {
             // fix for IE - doesn't accept the "-" date format
-            return new Date(dateString.replace("-", "/")).toDateString();
+            return new Date(dateString.replace("-", "/")).toLocaleString();
         } catch {
             return "Invalid Date"
         }
