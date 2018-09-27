@@ -11,6 +11,7 @@ export class GetDataResponseModel {
     Columns: ColumnModel[]
     ExportLinks: ExportLinkModel[]
     Rows: string[][]
+    IsLast: boolean
 }
 
 export class ColumnModel {

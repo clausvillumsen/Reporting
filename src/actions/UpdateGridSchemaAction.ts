@@ -7,11 +7,11 @@ export class UpdateGridSchemaAction extends ActionBase {
     constructor(readonly reportId?: number,
         readonly fromDateTime?: Date,
         readonly toDateTime?: Date,
-        readonly maxRows?: number,
-        readonly sortColumnIndex?: number,
-        readonly sortColumnAscending?: boolean,
-        readonly filterName?: string,
-        readonly filterValue?: string,
+        readonly maxRows: number = 100,
+        readonly sortColumnIndex: number = 0,
+        readonly sortColumnAscending: boolean = true,
+        readonly filterName: string = "",
+        readonly filterValue: string = "",
         readonly sorted?: SortingRule[],
         readonly page?: number,
         readonly pageSize?: number) {
@@ -47,6 +47,7 @@ export class UpdateGridSchemaAction extends ActionBase {
         schema.sorted = this.sorted !== undefined ? this.sorted : oldSchema.sorted
         schema.page = this.page !== undefined ? this.page : oldSchema.page
         schema.pageSize = this.pageSize !== undefined ? this.pageSize : oldSchema.pageSize
+        
         GetDataReducer.UpdateGridSchema(schema)
         return true
     }

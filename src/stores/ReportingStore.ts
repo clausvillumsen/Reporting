@@ -67,6 +67,8 @@ export class ReportingStore extends StoreBase<GetReportReducer> {
             this.responseDataSource.TotalCount = data.TotalCount
             this.responseDataSource.NextPageDatePointer = data.NextPageDatePointer
             this.responseDataSource.Rows = this.responseDataSource.Rows.concat(data.Rows)
+            this.responseDataSource.IsLast = data.Rows.length == 0
+
         }
         this.gridDataSourceSubject.next(ObjectHelper.DeepCopyRecursive(this.responseDataSource));
     }

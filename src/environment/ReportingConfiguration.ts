@@ -34,7 +34,7 @@ export class ReportingConfiguration {
             getValue += `ReportId=${ReportId}&`
         }
         if (FromDateTime !== null && FromDateTime !== undefined) {
-            getValue += `FromDateTime=${DateHelper.GetISOStringWithoutOffset(FromDateTime)}&`
+            getValue += `FromDateTime=${PageDateTime ? PageDateTime : DateHelper.GetISOStringWithoutOffset(FromDateTime)}&`
         }
         if (ToDateTime !== null && ToDateTime !== undefined) {
             getValue += `ToDateTime=${DateHelper.GetISOStringWithoutOffset(ToDateTime)}&`

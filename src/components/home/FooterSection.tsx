@@ -21,10 +21,15 @@ export class FooterSection extends ComponentBase<Props, State> {
     this.state = new State(false);
     this.subscription.add(
       ReportingStore.gridDataSourceObservable.pipe().subscribe(objs => {
+      console.log('dddd', objs)
+
         this.setState({
-          enable: objs && objs.Rows && objs.Rows.length > 0,
+          enable: objs && !objs.IsLast,
           hasData: objs && objs.Rows && objs.Rows.length > 0
         });
+
+      console.log('zzzz', this.state)
+
       })
     );
   }
@@ -33,11 +38,11 @@ export class FooterSection extends ComponentBase<Props, State> {
       this.notify("Please Search Data First or waiting data loading");
       return;
     }
-    this.setState({ enable: false });
+    // this.setState({ enable: false });
     this.props.onLoading(true);
-    setTimeout(() => {
-      this.setState({ enable: true });
-    }, 5000);
+    // setTimeout(() => {
+    //   this.setState({ enable: true });
+    // }, 5000);
     new GetMoreDataAction()
       .start()
       .then(this.handleActionExecuted)
@@ -56,6 +61,7 @@ export class FooterSection extends ComponentBase<Props, State> {
                 ? "ableButton btnCommon btnHeader"
                 : "disableButton btnCommon btnHeader"
             }
+            style={this.state.enable ? {} : {pointerEvents: "none"}}
             onClick={() => this.handleLoadMore()}
           >
             <span>Load more</span>
