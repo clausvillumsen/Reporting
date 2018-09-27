@@ -21,15 +21,10 @@ export class FooterSection extends ComponentBase<Props, State> {
     this.state = new State(false);
     this.subscription.add(
       ReportingStore.gridDataSourceObservable.pipe().subscribe(objs => {
-      console.log('dddd', objs)
-
         this.setState({
           enable: objs && !objs.IsLast,
           hasData: objs && objs.Rows && objs.Rows.length > 0
         });
-
-      console.log('zzzz', this.state)
-
       })
     );
   }

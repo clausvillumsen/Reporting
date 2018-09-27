@@ -21,9 +21,11 @@ class GridState {
     sorted: SortingRule[] = [];
     page: number = 0;
     pageSize: number = 100;
+    initialCount: number;
     constructor(data: GetDataResponseModel) {
         this.datasource = data;
         this.pageSize = (data && data.Rows.length) || 25;
+        this.initialCount = 0;
     }
 }
 export class GridSection extends ComponentBase<Props, GridState> {
@@ -40,11 +42,14 @@ export class GridSection extends ComponentBase<Props, GridState> {
     }
 
     updateState = (data: GetDataResponseModel) => {
+        console.log("here");
+
         this.setState(prev => {
             return {
                 ...prev,
                 datasource: data,
-                pageSize: (data && data.Rows.length) || 25
+                pageSize: (data && data.Rows.length) || 25,
+                initialCount: data.TotalCount ? data.TotalCount : this.state.initialCount
             };
         });
     };
@@ -52,7 +57,7 @@ export class GridSection extends ComponentBase<Props, GridState> {
     renderNumberOfRows() {
         if (this.state.datasource.Rows.length > 0) {
             return (
-                <div className="total-row">{this.state.datasource.Rows.length} ud af {this.state.datasource.TotalCount} resutater</div>
+                <div className="total-row">{this.state.datasource.Rows.length} ud af {this.state.initialCount} resutater</div>
             );
         }
         return;
@@ -70,7 +75,7 @@ export class GridSection extends ComponentBase<Props, GridState> {
         let data = this.getData();
         return (
             <div className="container-fluid">
-                {this.renderNumberOfRows()}
+                {/* {this.renderNumberOfRows()} */}
                 <ReactTable
                     data={data}
                     loading={false}
@@ -83,7 +88,7 @@ export class GridSection extends ComponentBase<Props, GridState> {
                     collapseOnPageChange={true}
                     collapseOnDataChange={true}
                     freezeWhenExpanded={false}
-                    sortable={true}
+                    sortable={false}
                     multiSort={false}
                     resizable={true}
                     filterable={false}
@@ -91,10 +96,10 @@ export class GridSection extends ComponentBase<Props, GridState> {
                     columns={columns}
                     rowsText={"rows"}
                     pageSize={this.state.pageSize}
-                    sorted={this.state.sorted}
-                    onSortedChange={(data: SortingRule[]) =>
-                        this.handleSortedChange(data)
-                    }
+                    // sorted={this.state.sorted}
+                    // onSortedChange={(data: SortingRule[]) =>
+                    //     this.handleSortedChange(data)
+                    // }
                 />
             </div>
         );
@@ -160,7 +165,7 @@ export class GridSection extends ComponentBase<Props, GridState> {
                     return (
                         <div className="gridColumnHeader">
                             {p.Name}
-                            <i className="fa fa-sort " style={{ float: "right" }} />
+                            {/* <i className="fa fa-sort " style={{ float: "right" }} /> */}
                         </div>
                     );
                 },
