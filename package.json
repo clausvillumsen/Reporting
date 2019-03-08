@@ -7,7 +7,8 @@
     "webpack": "webpack-cli --config='config/webpack.config.js' --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "./node_modules/.bin/webpack",
-    "wpstart": "webpack-dev-server"
+    "wpstart": "webpack-dev-server",
+    "start": "webpack-dev-server"
   },
   "author": "Claus Villumsen",
   "license": "ISC",
@@ -32,7 +33,6 @@
     "isomorphic-fetch": "^2.2.1",
     "moment": "^2.22.2",
     "react": "^16.4.2",
-    "react-bootstrap-table-next": "^1.1.4",
     "react-dates": "^17.2.0",
     "react-dom": "^16.4.2",
     "react-flatpickr": "^3.6.4",
@@ -41,7 +41,6 @@
     "react-text-mask": "^5.4.3",
     "react-toastify": "^4.3.0",
     "react-with-styles": "^3.2.1",
-    "react-with-styles-interface-css": "^4.0.3",
     "rxjs": "^6.2.2",
     "styled-components": "^3.4.5",
     "text-mask-addons": "^3.8.0"
