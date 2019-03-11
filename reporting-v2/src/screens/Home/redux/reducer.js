@@ -233,6 +233,7 @@ const initRows = [
 
 
 const initState = {
+  FilterTypes: [],
   Reports: [],
   Columns: [],
   ExportLinks: [],
@@ -268,7 +269,8 @@ const report = (state = initState, action = {}) => {
         ...state,
         ...data,
         Rows: buildRows(data.Rows, data.Columns),
-        Columns: buildColumns(data.Columns)
+        Columns: buildColumns(data.Columns),
+        FilterTypes: data.Columns.map(item => (item.Name))
       }
     }
     case GET_REPORTS_SUCCESS: {

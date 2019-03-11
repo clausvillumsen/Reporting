@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {
   UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem
 } from 'reactstrap';
+import LabelHeader from 'components/LabelHeader';
 
 const ReportsSelect = ({ Reports, selected, onClick }) => {
   const listMenus = Reports.map(item => (
@@ -19,6 +20,7 @@ const ReportsSelect = ({ Reports, selected, onClick }) => {
   ))
   return (
     <div className="c-reports-select">
+      <LabelHeader>RAPPORTTYPE</LabelHeader>
       <UncontrolledDropdown>
         <DropdownToggle nav caret color="outline">
           {selected}
@@ -41,7 +43,7 @@ ReportsSelect.propTypes = {
 }
 
 ReportsSelect.defaultProps = {
-  selected: 'RAPPORTTYPE'
+  selected: 'Select'
 }
 
 export default connect(state => ({

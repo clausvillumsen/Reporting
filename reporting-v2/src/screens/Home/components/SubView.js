@@ -6,9 +6,7 @@ import styled from 'styled-components';
 import createMarkup from '../createMarkup';
 
 const ListContainer = styled.div`
-  display: flex;
-  background: #fafafa;
-  padding: 20px;
+  background: #f3f3f3;
 `;
 
 const SubItem = styled.div`
@@ -39,11 +37,13 @@ const SubView = ({ SubViews }) => {
       ))
     )
   return (
-    <div className="c-sub-view">
-      <ListContainer>
-        {listView}
-      </ListContainer>
-    </div>
+    <ListContainer>
+      <div className="container-fluid">
+        <div className="d-flex pt-3 pb-3">
+          {listView}
+        </div>
+      </div>
+    </ListContainer>
   )
 };
 
