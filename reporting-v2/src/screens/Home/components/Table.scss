@@ -1,0 +1,20 @@
+.ReactTable {
+  border: 0px;
+}
+
+.ReactTable .rf-thead.-header {
+  box-shadow: 0px;
+}
+
+.ReactTable .rt-resizer {
+  right: 0 !important;
+}
+
+.ReactTable .rt-thead.-header {
+  box-shadow: none !important;
+  border-bottom: solid 1px rgba(0, 0, 0, 0.1);
+}
+
+.ReactTable .rt-thead .rt-tr {
+  text-align: left !important;
+}
