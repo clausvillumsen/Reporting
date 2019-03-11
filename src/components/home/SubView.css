@@ -1,0 +1,11 @@
+.muted {
+  font-size: 11px;
+  color: #999;
+}
+.sub-view-container {
+  display: flex;
+  padding: 20px;
+}
+.sub-view-item {
+  padding-right: 40px;
+}

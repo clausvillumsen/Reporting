@@ -1,6 +1,11 @@
 var path = require("path");
 
 module.exports = {
+  mode: 'development',
+  devServer: {
+    hot: true,
+    open: true
+  },
   entry: ["babel-polyfill", "./index.tsx"],
   output: {
     filename: "bundle.js",

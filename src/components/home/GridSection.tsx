@@ -12,6 +12,8 @@ import {
 } from "../../models/GetDataResponseModel";
 import { DateHelper } from "../../common/DateHelper";
 import { GetDataDefaultAction } from "../../actions/GetDataDefaultAction";
+import SubView from './SubView';
+import BottomView from './BottomView';
 
 interface Props {
     onLoading: Function;
@@ -75,7 +77,7 @@ export class GridSection extends ComponentBase<Props, GridState> {
         let data = this.getData();
         return (
             <div className="container-fluid">
-                {/* {this.renderNumberOfRows()} */}
+                <SubView />
                 <ReactTable
                     data={data}
                     loading={false}
@@ -101,6 +103,7 @@ export class GridSection extends ComponentBase<Props, GridState> {
                     //     this.handleSortedChange(data)
                     // }
                 />
+                <BottomView />
             </div>
         );
     }
