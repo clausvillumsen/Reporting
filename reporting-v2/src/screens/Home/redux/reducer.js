@@ -4,6 +4,7 @@ import buildRows from '../buildRows';
 
 export const GET_REPORT_REQUEST = 'GET_REPORT_REQUEST';
 export const GET_REPORT_SUCCESS = 'GET_REPORT_SUCCESS';
+export const LOADMORE_REPORT_SUCCESS = 'LOADMORE_REPORT_SUCCESS';
 export const GET_REPORT_FAIL = 'GET_REPORT_FAIL';
 
 export const GET_REPORTS_REQUEST = 'GET_REPORTS_REQUEST';
@@ -237,38 +238,47 @@ const initState = {
   Reports: [],
   Columns: [],
   ExportLinks: [],
+  // to show Load more
   NextPageDatePointer: '',
   PageCount: 0,
   Rows: buildRows(initRows, []),
   TotalCount: 0,
-  RequestCharge: 11.65,
-  RequestExecutionTime: 81,
-  SubViews: [
-    {
-      'Name': 'Max, Min & Average',
-      'RequestCharge': 4.49,
-      'SubViews': [
-        'Max:1745 Ms.<br/>Min:0 Ms.<br/>Average:66.6451612903226 Ms.</br>'
-      ]
-    },
-    {
-      'Name': 'Last downtime',
-      'RequestCharge': 8.620000000000001,
-      'SubViews': [
-        '2019-02-26 02:02:57'
-      ]
-    }
-  ]
+  RequestCharge: 0,
+  RequestExecutionTime: 0,
+  SubViews: []
 };
 
 const report = (state = initState, action = {}) => {
   switch (action.type) {
     case GET_REPORT_SUCCESS: {
       const data = get(action, 'payload.data');
+      let newNextPageDatePointer = data.NextPageDatePointer;
+      if (data.Rows.length === 0) {
+        newNextPageDatePointer = '';
+      }
       return {
         ...state,
         ...data,
+        NextPageDatePointer: newNextPageDatePointer,
         Rows: buildRows(data.Rows, data.Columns),
+        Columns: buildColumns(data.Columns),
+        FilterTypes: data.Columns.map(item => (item.Name))
+      }
+    }
+    case LOADMORE_REPORT_SUCCESS: {
+      const data = get(action, 'payload.data');
+      let newNextPageDatePointer = data.NextPageDatePointer;
+      if (data.Rows.length === 0) {
+        newNextPageDatePointer = '';
+      }
+      return {
+        ...state,
+        ...data,
+        NextPageDatePointer: newNextPageDatePointer,
+        Rows: [
+          ...state.Rows,
+          ...buildRows(data.Rows, data.Columns)
+        ],
         Columns: buildColumns(data.Columns),
         FilterTypes: data.Columns.map(item => (item.Name))
       }

@@ -10,9 +10,11 @@ const Table = ({ Columns, Rows }) => {
     <div id="s-home">
       <ReactTable
         data={Rows}
+        minRows={1}
+        defaultPageSize={500}
         showPagination={false}
         showPaginationTop={false}
-        showPageJump={true}
+        showPageJump={false}
         collapseOnSortingChange={true}
         collapseOnPageChange={true}
         sortable={false}

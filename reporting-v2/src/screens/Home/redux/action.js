@@ -6,6 +6,7 @@ import {
   GET_REPORTS_REQUEST,
   GET_REPORTS_SUCCESS,
   GET_REPORTS_FAIL,
+  LOADMORE_REPORT_SUCCESS
 } from './reducer';
 
 
@@ -19,10 +20,16 @@ const getReport = (payload) => {
   const newParams = {
     ReportId: 2,
     MaxRows: 100,
+    SortColumnIndex: 0,
+    SortColumnAscending: true,
     ...newPayload
   };
+  let successType = GET_REPORT_SUCCESS;
+  if (payload.PageDateTime) {
+    successType = LOADMORE_REPORT_SUCCESS;
+  }
   return {
-    types: [GET_REPORT_REQUEST, GET_REPORT_SUCCESS, GET_REPORT_FAIL],
+    types: [GET_REPORT_REQUEST, successType, GET_REPORT_FAIL],
     payload: {
       request: {
         url: GET_REPORT,
