@@ -9,6 +9,7 @@ import SubView from './components/SubView';
 import ReportsSelect from './components/ReportsSelect';
 import CalendarSelect from './components/CalendarSelect';
 import ParentFilter from './components/ParentFilter';
+import ExportButtons from './components/ExportButtons';
 
 const StyledHeader = styled.div`
   display: flex;
@@ -18,7 +19,17 @@ const StyledHeader = styled.div`
 
 class Container extends Component {
   state = {
-    ReportName: 'Select'
+    ReportName: 'Select',
+    filter: {
+      ReportId: 0,
+      MaxRows: 100,
+      FromDateTime: '',
+      ToDateTime: '',
+      SortColumnIndex: '0',
+      SortColumnAscending: 'true',
+      FilterName: '',
+      FilterValue: ''
+    }
   };
 
   componentDidMount() {
@@ -27,20 +38,50 @@ class Container extends Component {
     dispatch(getReports())
   }
 
-  loadData = (ReportId = 1) => {
+  loadData = () => {
     const { dispatch } = this.props;
-    dispatch(getReport(ReportId))
+    const { filter } = this.state;
+    dispatch(getReport(filter))
+  }
+
+  filterColumn = (column, value) => {
+    const { filter } = this.state;
+    this.setState({
+      filter: {
+        ...filter,
+        FilterName: column,
+        FilterValue: value
+      }
+    }, () => {
+      this.loadData();
+    })
   }
 
   _changeType = (e) => {
     const { key, name } = e.target.dataset;
-    this.loadData(key);
-    this.setState({ ReportName: name })
+    const { filter } = this.state;
+    this.setState({
+      ReportName: name,
+      filter: {
+        ...filter,
+        ReportId: key
+      }
+    }, () => {
+      this.loadData();
+    })
   }
 
-  _changeDate = (value) => {
-    console.log(value.start.toISOString());
-    console.log(value.end.toISOString());
+  _changeDate = ({ start, end }) => {
+    if (start && end) {
+      this.setState({
+        filter: {
+          FromDateTime: start.toISOString(),
+          ToDateTime: end.toISOString()
+        }
+      }, () => {
+        this.loadData();
+      })
+    }
   }
 
   render() {
@@ -49,20 +90,21 @@ class Container extends Component {
       <div id="s-home">
         <StyledHeader>
           <div className="container-fluid">
-            <div className="row">
-              <div className="col-12 col-sm-4 col-md-4">
+            <div className="d-flex">
+              <div className="border-right">
                 <ReportsSelect selected={ReportName} onClick={this._changeType} />
               </div>
-              <div className="col-12 col-sm-4 col-md-4">
+              <div className="border-right">
                 <CalendarSelect onChange={this._changeDate} />
               </div>
-              <div className="col-12 col-sm-4 col-md-4">
-                <ParentFilter />
+              <div className="border-right">
+                <ParentFilter updateFilter={this.filterColumn} />
               </div>
             </div>
           </div>
         </StyledHeader>
         <SubView />
+        <ExportButtons />
         <Table />
         <BottomView />
       </div>

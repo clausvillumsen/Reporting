@@ -1,71 +1,55 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {
-  Button,
-  Popover, PopoverBody
-} from 'reactstrap';
-import DateRangePicker from 'react-daterange-picker';
-
-import 'react-daterange-picker/dist/css/react-calendar.css';
-import originalMoment from 'moment';
-import { extendMoment } from 'moment-range';
+import Datetime from 'react-datetime';
+import moment from 'moment';
+import './CalendarSelect.scss';
 import LabelHeader from '../../../components/LabelHeader';
-/**
- * Set the default moment locale
- */
-
-const moment = extendMoment(originalMoment);
-const today = moment();
 
 class CalendarSelect extends React.Component {
   state = {
-    value: moment.range(today.clone().subtract(1, 'days'), today.clone()),
-    popoverOpen: false
+    // value: moment.range(today.clone().subtract(1, 'days'), today.clone()),
+    startDate: '',
+    endDate: ''
   }
 
-  showPopup = () => {
-    this.setState({
-      popoverOpen: !this.state.popoverOpen
-    });
-  }
-
-  handleSelect = (value) => {
+  changeStartDate = (startDate) => {
     const { onChange } = this.props;
-    this.setState({ value });
-    onChange(value);
+    const { endDate } = this.state;
+    onChange({ start: startDate, end: endDate });
+    this.setState({ startDate });
   }
 
-  renderSelectionValue = () => {
-    return (
-      <span className="pr-2">
-        {this.state.value.start.format('YYYY-MM-DD')}
-        {' - '}
-        {this.state.value.end.format('YYYY-MM-DD')}
-      </span>
-    );
-  };
+  changeEndDate = (endDate) => {
+    const { onChange } = this.props;
+    const { startDate } = this.state;
+    onChange({ start: startDate, end: endDate });
+    this.setState({ endDate });
+  }
+
+  checkValidDate = (currentDate, selectedDate) => {
+    const { startDate } = this.state;
+    return (currentDate.isAfter(moment(startDate, 'day')));
+  }
 
   render() {
-    const { value } = this.state;
+    const {
+      startDate,
+      endDate
+    } = this.state;
     return (
       <div className="c-reports-select">
         <LabelHeader>VÆLG TIDSPERIODE</LabelHeader>
-        <div>
-          {this.renderSelectionValue()}
-          <Button size="sm" outline id="Popover1" onClick={this.showPopup}>Change</Button>
-          <Popover placement="bottom" isOpen={this.state.popoverOpen} target="Popover1" toggle={this.toggle}>
-            <PopoverBody>
-              <DateRangePicker
-                locale='de'
-                value={value}
-                onSelect={this.handleSelect}
-                numberOfCalendars={1}
-                maximumDate={this.today}
-                minimumDate={new Date()}
-              />
-            </PopoverBody>
-          </Popover>
+        <div className="d-flex align-items-center">
+          <div className="input-group" style={{ minWidth: 200 }}>
+            <Datetime value={startDate} onChange={this.changeStartDate} />
+          </div>
+          <div className="pl-2 pr-2">
+            til
+          </div>
+          <div className="input-group" style={{ minWidth: 200 }}>
+            <Datetime isValidDate={this.checkValidDate} value={endDate} onChange={this.changeEndDate} />
+          </div>
         </div>
       </div>
     )

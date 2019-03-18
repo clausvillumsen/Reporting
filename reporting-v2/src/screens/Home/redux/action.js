@@ -9,12 +9,24 @@ import {
 } from './reducer';
 
 
-const getReport = (ReportId = 2, MaxRows = 1) => {
+const getReport = (payload) => {
+  const newPayload = { ...payload };
+  Object.keys(newPayload).map(key => {
+    if (!newPayload[key]) {
+      delete newPayload[key];
+    }
+  })
+  const newParams = {
+    ReportId: 2,
+    MaxRows: 100,
+    ...newPayload
+  };
   return {
     types: [GET_REPORT_REQUEST, GET_REPORT_SUCCESS, GET_REPORT_FAIL],
     payload: {
       request: {
-        url: GET_REPORT(ReportId, MaxRows),
+        url: GET_REPORT,
+        params: newParams
       }
     }
   }

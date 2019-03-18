@@ -12,6 +12,7 @@ import LabelHeader from '../../../components/LabelHeader';
 class ParentFilter extends Component {
   static propTypes = {
     FilterTypes: PropTypes.array,
+    updateFilter: PropTypes.func.isRequired
   }
 
   static defaultProps = {
@@ -23,8 +24,43 @@ class ParentFilter extends Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      popoverOpen: false
+      popoverOpen: false,
+      column: '',
+      value: '',
     };
+  }
+
+  changeColumn = (e) => {
+    const { value } = e.currentTarget;
+    this.setState({
+      column: value
+    })
+  }
+
+  changeValue = (e) => {
+    const { value } = e.currentTarget;
+    this.setState({
+      value
+    })
+  }
+
+  resetFilter = () => {
+    this.setState({
+      value: '',
+      column: '',
+      popoverOpen: false
+    })
+  }
+
+  updateFilter = () => {
+    const { column, value } = this.state;
+    const { updateFilter } = this.props;
+    if (value && column) {
+      updateFilter(column, value);
+      this.setState({
+        popoverOpen: false
+      })
+    }
   }
 
   toggle() {
@@ -36,30 +72,42 @@ class ParentFilter extends Component {
 
   render() {
     const { FilterTypes } = this.props;
-    const radios = FilterTypes.map((item, index) => (
-      <FormGroup check key={index}>
-        <CustomInput type="radio" id={`customRadio${index}`} name="customRadio" label={item} />
-      </FormGroup>
-    ))
+    const { column, value } = this.state;
     return (
-      <div>
+      <div className="c-parent-filter">
         <LabelHeader title="SEARCH FOR USER ATTRIBUTES">SØG PÅ BRUGER ATTRIBUTER</LabelHeader>
         <Button id="Popover2" color="link" onClick={this.toggle} title="Choose...">
-          Vælg...
+          {(column && value) ? (
+            <span>{`${column} = ${value}`}</span>
+          ) : (
+            <span>Vælg...</span>
+          )}
         </Button>
         <Popover placement="bottom" isOpen={this.state.popoverOpen} target="Popover2" toggle={this.toggle}>
           <PopoverBody>
             <h6 title="SELECT USER ATTRIBUTES">VÆLG BRUGER ATTRIBUTER</h6>
             <FormGroup tag="fieldset">
-              {radios}
+              {FilterTypes.map((item, index) => (
+                <FormGroup check key={index}>
+                  <CustomInput
+                    type="radio"
+                    id={`customRadio${index}`}
+                    name="customRadio"
+                    label={item}
+                    value={item}
+                    checked={(item === column)}
+                    onChange={this.changeColumn}
+                  />
+                </FormGroup>
+              ))}
             </FormGroup>
             <h6 title="SEARCH FOR USER ATTRIBUTES">SØG PÅ BRUGER ATTRIBUTER</h6>
             <div className="form-group">
-              <Input />
+              <Input required value={value} onChange={this.changeValue} />
             </div>
             <div className="form-group d-flex justify-content-end">
-              <Button title="Reset Filter" className="mr-2" outline>Ryd filter</Button>
-              <Button title="Add" color="primary">Tilføj</Button>
+              <Button onClick={this.resetFilter} title="Reset Filter" className="mr-2" outline>Ryd filter</Button>
+              <Button title="Add" color="primary" onClick={this.updateFilter}>Tilføj</Button>
             </div>
           </PopoverBody>
         </Popover>

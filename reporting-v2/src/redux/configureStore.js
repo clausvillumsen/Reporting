@@ -7,7 +7,7 @@ import rootReducer from './reducers';
 
 
 const client = axios.create({
-  baseURL: process.env.REACT_APP_API_HOST,
+  baseURL: process.env.REACT_APP_API_HOST || 'http://reporting.kundedemo.dk/api/v1/',
   responseType: 'json'
 });
 
