@@ -7,10 +7,10 @@ import {
 } from 'reactstrap';
 import DateRangePicker from 'react-daterange-picker';
 
-import LabelHeader from 'components/LabelHeader';
 import 'react-daterange-picker/dist/css/react-calendar.css';
 import originalMoment from 'moment';
 import { extendMoment } from 'moment-range';
+import LabelHeader from '../../../components/LabelHeader';
 /**
  * Set the default moment locale
  */

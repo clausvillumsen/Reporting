@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import report from 'screens/Home/redux/reducer';
+import report from '../../screens/Home/redux/reducer';
 import loading from './loading.reducer';
 
 const rootReducer = combineReducers({

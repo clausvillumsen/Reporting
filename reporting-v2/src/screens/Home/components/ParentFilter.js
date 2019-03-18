@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import LabelHeader from 'components/LabelHeader';
 import {
   Button, Popover, PopoverBody,
   Input,
   FormGroup,
-  Label,
   CustomInput
 } from 'reactstrap';
+import LabelHeader from '../../../components/LabelHeader';
 
 class ParentFilter extends Component {
   static propTypes = {

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {
   UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem
 } from 'reactstrap';
-import LabelHeader from 'components/LabelHeader';
+import LabelHeader from '../../../components/LabelHeader';
 
 const ReportsSelect = ({ Reports, selected, onClick }) => {
   const listMenus = Reports.map(item => (

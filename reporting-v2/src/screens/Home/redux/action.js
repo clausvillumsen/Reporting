@@ -1,4 +1,4 @@
-import { GET_REPORT, GET_REPORTS } from 'api/endpoints';
+import { GET_REPORT, GET_REPORTS } from '../../../api/endpoints';
 import {
   GET_REPORT_REQUEST,
   GET_REPORT_SUCCESS,
