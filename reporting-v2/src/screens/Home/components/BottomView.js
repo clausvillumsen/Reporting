@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const ListContainer = styled.div`
   display: flex;
-  background: #fafafa;
+  background: #fff;
   padding: 20px;
   justify-content: flex-end;
 `;

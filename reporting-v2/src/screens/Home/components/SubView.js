@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import createMarkup from '../createMarkup';
 
 const ListContainer = styled.div`
-  background: #f3f3f3;
+  background: #fff;
 `;
 
 const SubItem = styled.div`

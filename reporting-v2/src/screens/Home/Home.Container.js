@@ -108,20 +108,27 @@ class Container extends Component {
         <StyledHeader>
           <div className="container-fluid">
             <div className="d-flex">
-              <div className="border-right">
+              <div className="pr-4">
                 <ReportsSelect selected={ReportName} onClick={this._changeType} />
               </div>
-              <div className="border-right">
+              <div className="pr-4">
                 <CalendarSelect onChange={this._changeDate} />
               </div>
-              <div className="border-right">
+              <div className="pr-4">
                 <ParentFilter updateFilter={this.filterColumn} />
+              </div>
+              <div title="Search">
+                <Button color="primary" size="lg">
+                  Søg
+                </Button>
+              </div>
+              <div className="ml-auto">
+                <ExportButtons />
               </div>
             </div>
           </div>
         </StyledHeader>
         <SubView />
-        <ExportButtons />
         <Table />
         {NextPageDatePointer && (
           <div className="pt-4 pb-4 text-center">

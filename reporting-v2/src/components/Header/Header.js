@@ -13,6 +13,8 @@ import {
   DropdownMenu,
   DropdownItem
 } from 'reactstrap';
+import Avatar from '../Avatar';
+import './Header.scss';
 
 const StyledHeader = styled.div`
   background: #fff;
@@ -43,25 +45,25 @@ class Header extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav navbar>
               <NavItem>
-                <NavLink className="nav-link" activeClassName="active" to="/">Anvendelsesrapporter</NavLink>
+                <NavLink className="nav-link" activeClassName="active" to="/reports">Anvendelsesrapporter</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink className="nav-link" activeClassName="active" to="/performance">Performancerapporter</NavLink>
               </NavItem>
+            </Nav>
+            <Nav navbar className="ml-auto">
               <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
-                Hans Hansen
+                <DropdownToggle nav >
+                  <div className="userNav">
+                    <span className="pr-2">
+                      Hans Hansen
+                    </span>
+                    <Avatar name="Hans Hansen" />
+                  </div>
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem>
-                    Option 1
-                  </DropdownItem>
-                  <DropdownItem>
-                    Option 2
-                  </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>
-                    Reset
+                    Logout
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>

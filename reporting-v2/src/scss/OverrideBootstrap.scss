@@ -1,0 +1,241 @@
+@import './_variable';
+
+.popover {
+  max-width: 400px;
+}
+@media (min-width: 768px) {
+  .navbar-expand-md .navbar-nav .nav-link {
+    font-size: 1.2rem;
+    padding-right: 2rem;
+    padding-left: 2rem;
+  }
+}
+.navbar-brand {
+  margin-right: 2.5rem;
+  padding-left: 20px;
+}
+
+
+/* OVERRIDE BOOTSTRAP
+-------------------------------------------------------------- */
+// Button
+.btn {
+  border-radius: 2px;
+  + .btn {
+    margin-left: 20px;
+  }
+  &.btn-link {
+    padding-left: 0;
+    padding-right: 0;
+    color: $primary-color;
+  }
+  &.btn-rounded {
+    border-radius: 999em;  
+    padding-left: 2.5em;
+    padding-right: 2.5em;  
+  }
+  &.btn-success{
+    background-color: $green;
+    border-color: $green;
+    &:hover,
+    &:focus,
+    &:active{
+      background-color: darken($green,5%);
+      border-color: darken($green,5%);    
+    }  
+    &:focus:active{
+      background-color: darken($green,10%);
+      border-color: darken($green,10%);   
+    }
+  }
+  &.btn-info{
+    background-color: $cyan;
+    border-color: $cyan;
+    &:hover,
+    &:focus,
+    &:active{
+      background-color: darken($cyan,5%);
+      border-color: darken($cyan,5%);    
+    }  
+    &:focus:active{
+      background-color: darken($cyan,10%);
+      border-color: darken($cyan,10%);   
+    }
+  }
+  &.btn-warning{
+    background-color: $orange;
+    border-color: $orange;
+    &:hover,
+    &:focus,
+    &:active{
+      background-color: darken($orange,5%);
+      border-color: darken($orange,5%);    
+    }  
+    &:focus:active{
+      background-color: darken($orange,10%);
+      border-color: darken($orange,10%);   
+    }
+  }
+  &.bnt-danger{
+    background-color: $red;
+    border-color: $red;
+    &:hover,
+    &:focus,
+    &:active{
+      background-color: darken($red,5%);
+      border-color: darken($red,5%);    
+    }  
+    &:focus:active{
+      background-color: darken($red,10%);
+      border-color: darken($red,10%);   
+    }
+  }
+  &.btn-primary {
+    background-color: #7f9d96;
+    border-color: #7f9d96;  
+    &:not(:disabled):not(.disabled):active,
+    &:hover,
+    &:focus,
+    &:active{
+      background-color: darken(#7f9d96,10%);
+      border-color: darken(#7f9d96,10%);    
+      box-shadow: none;
+    }  
+    &:not(:disabled):not(.disabled):active:focus {
+      box-shadow: none;
+    }
+    &:focus:active{
+      background-color: darken(#7f9d96,15%);
+      border-color: darken(#7f9d96,15%);  
+      box-shadow: none;
+    }
+  }
+  &.btn-outline-secondary{
+    &:hover {
+      background: $gray;
+      border-color: $border-color;
+      color: $primary-text-color;
+    }
+  }
+  &.btn-outline-primary{
+    border-color: $primary-color;
+    color: $primary-color;
+  }
+}
+.dropdown {
+  .nav-link {
+    padding-left: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+// Dropdown
+.dropdown-menu{
+  border-color: $border-color;
+  -webkit-box-shadow: none;
+    box-shadow: none;
+  border-radius: 0;
+  > li {
+    > a{
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+  }
+}
+.dropdown-menu {
+  border: none;
+  color: $primary-text-color;
+  background: #f8f9fb;
+}
+.dropdown-toggle::after {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAtUlEQVQ4jWNgGAXUBQ3zpq2qmT1VE5d8zeypmg3zpq1CFmNCUfHv3xQWJsaN1XOmyGMYPn+6AgsT48a/jAyTcRrQkJJziIGJqYCFkWlb1ezZ4gjNUyX+//u/lYGJqaA5Meswsh5GrF6ZMz2CgfF/GQPTT6cf39kZOdgZ9v5j/N/ZlJS9El0tVgMYGBgY6uZMT2di/B/7n4GBkZGRYWFDUtYsXGpxgoa50yvq5kwrJ1njKCANAAAKnzX9G2DOwwAAAABJRU5ErkJggg==") no-repeat;
+  border: none;
+  width: 15px;
+  height: 15px;
+  top: 5px;
+  right: 0;
+  position: absolute;
+}
+// Input
+.form-control {
+  &:focus {
+    border-color: $primary-color;
+    box-shadow: 0 0 0 0.2rem rgba($primary-color, .2);
+  }
+  &.is-invalid {
+    &:focus {
+      border-color: $red;
+    } 
+  }
+}
+.custom-control-input{
+  &:checked ~ .custom-control-indicator {
+    background-color: $primary-color;
+  }
+  &:focus ~ .custom-control-indicator {
+    box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba($primary-color, .25);
+  }
+}
+// Select
+.custom-select {
+  &:focus {
+    border-color: $primary-color;
+    box-shadow: 0 0 0 0.2rem rgba($primary-color,.5);
+  }
+}
+// Checkbox
+.custom-checkbox {
+  .custom-control-input {
+    &:checked
+    ~ .custom-control-label::before {
+      background: $primary-color;
+    }
+    &:focus ~ .custom-control-label::before {
+      box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba($primary-color, 0.3);
+    }
+  }  
+}
+// Radio
+.custom-radio {
+  .custom-control-input {
+    &:checked
+    ~ .custom-control-label::before {
+      background: $primary-color;
+    }
+    &:focus ~ .custom-control-label::before {
+      box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba($primary-color, 0.3);
+    }
+  }  
+}
+.dropdown-item.active, .dropdown-item:active {
+  background-color: $primary-color;
+}
+/*-----------------------------
+# [OVERRIDE Utitilities]
+----------------------------- */
+// Background Color
+.bg-primary { background-color: $primary-color !important; }
+.bg-secondary { background-color: $secondary-color !important; }
+.bg-success { background-color: $green !important; }
+.bg-danger { background-color: $red !important; }
+.bg-warning { background-color: $yellow !important; }
+.bg-info { background-color: $cyan !important; }
+.bg-light { background-color: $gray !important; }
+.bg-dark { background-color: $dark !important; }
+// ... and my custom background
+.bg-blue { background-color: $blue !important; }
+.bg-red { background-color: $red !important; }
+.bg-green { background-color: $green !important; }
+.bg-yellow { background-color: $yellow !important; }
+.bg-cyan { background-color: $cyan !important; }
+.bg-orange { background-color: $orange !important; }
+// Text Color
+.text-primary {color: $primary-color !important;}
+.text-secondary {color: $secondary-color !important;}
+.text-success { color: $green !important; }
+.text-danger { color: $red !important; }
+.text-warning { color: $orange !important; }
+.text-info { color: $cyan !important; }
+.text-body { color: $primary-text-color !important; }
+.text-muted { color: $muted !important; }
+/* OVERRIDE BOOTSTRAP -------------------------------------------- */

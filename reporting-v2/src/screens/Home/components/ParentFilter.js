@@ -75,7 +75,7 @@ class ParentFilter extends Component {
     const { column, value } = this.state;
     return (
       <div className="c-parent-filter">
-        <LabelHeader title="SEARCH FOR USER ATTRIBUTES">SØG PÅ BRUGER ATTRIBUTER</LabelHeader>
+        <LabelHeader title="SEARCH FOR USER ATTRIBUTES">BRUGER ATTRIBUTER</LabelHeader>
         <Button id="Popover2" color="link" onClick={this.toggle} title="Choose...">
           {(column && value) ? (
             <span>{`${column} = ${value}`}</span>
