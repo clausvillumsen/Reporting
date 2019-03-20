@@ -1,9 +1,15 @@
 import React from "react";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
+import styled from "styled-components";
 import Loading from "./components/Loading";
-import Home from "./screens/Home";
+// import Home from './screens/Home';
+import Header from "./components/Header";
 
-// const Home = React.lazy(() => import('./screens/Home'));
+const Home = React.lazy(() => import("./screens/Home"));
+
+const Master = styled.div`
+  padding-top: 60px;
+`;
 
 const AppRouter = () => {
   return (

@@ -1,0 +1,171 @@
+
+/*-----------------------------
+# [Color variable]
+----------------------------- */
+$primary-color: #00A5B4;
+$secondary-color: #C9DC08;
+$link-color: #222;
+$link-color-hover: #000;
+$primary-text-color: #3f465e;
+$border-color: #e1e3ea;
+$input-border-color: #e5e5e5;
+$dark: #252525;
+$muted: #596377;
+$gray: #f8f8f8;
+$red: #e41919;
+$black: #000;
+$orange: #f47631;
+$yellow: #ffce02;
+$cyan: #27c5c3;
+$blue: #43a5de;
+$green: #65B044;
+
+$facebook: #3F5C99;
+$twitter: #1DA0F2;
+$google: #DC4A38;
+$instagram: #A4785B;
+
+/*-----------------------------
+# [Breakpoint Variable]
+----------------------------- */
+$breakpoint-lg: 1440px;
+$breakpoint-laptop: 1366px;
+$breakpoint-m: 1280px;
+$breakpoint-ipad: 1024px;
+$breakpoint-sm: 768px;
+$breakpoint-xs: 600px;
+$breakpoint-xxs: 480px;
+
+/*-----------------------------
+# [Typography]
+----------------------------- */
+
+$font-size-base: 1rem;
+$san-serif: Oxygen, arial, sans-serif;
+$serif: 'Source Sans Pro', 'Times New Roman', Times, serif;
+$monospace: Inconsolata, monospace;
+
+/*-----------------------------
+# [Media Visibility Utils]
+----------------------------- */
+@media(max-width: $breakpoint-xs){
+  .hidden-xs{
+    display: none;
+  }
+}
+
+/*-----------------------------
+# [MIXIN]
+----------------------------- */
+@mixin link() {
+  color: $link-color;
+  text-decoration: none;
+  outline: none;
+}
+@mixin paragraph() {
+  line-height: 1.6;
+  font-family: $san-serif;
+}
+@mixin heading1() {
+  margin-top: 48px;
+  color: rgba(0,0,0,.54);  
+}
+@mixin heading2() {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  color: rgba(0,0,0,.54);
+}
+@mixin heading3() { 
+  color: rgba(0,0,0,.85);
+}
+@mixin heading4() {
+  color: rgba(0,0,0,.85);
+  letter-spacing: 0.05px;
+}
+@mixin heading5() {
+  color: rgba(0,0,0,.87);
+  letter-spacing: 0.1px;
+}
+@mixin heading6() { 
+  font-weight: bold;
+  letter-spacing: 0.2px;
+}
+@mixin defaultInput(){
+  border: 1px solid $input-border-color;
+  background: #fff;  
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  display: block;
+  width: 100%;
+  padding: .5rem .75rem;
+  font-size: 1rem;
+  line-height: 1.25;
+  border-radius: .25rem;
+  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+@mixin defaultInputFocus(){
+  border-color: $primary-color;
+  outline: 0;
+}
+@mixin defaultButtonFocus() {
+  box-shadow: inset 0 0 40px rgba(0,0,0,.1);
+}
+@mixin defaultButton() {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+  transition: background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  background-color: #f8f9fa;
+  border-color: #f8f9fa;
+}
+@mixin defaultSubmit(){
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: .5rem 1.25rem;
+  font-size: 1rem;
+  line-height: 1.25;
+  border-radius: .25rem;
+  transition: all .15s ease-in-out;
+  background-color: $primary-color;
+  border-color: $primary-color;
+  color: #fff;
+  cursor: pointer;
+}
+@mixin defaultSelect(){
+  display: inline-block;
+  max-width: 100%;
+  height: calc(2.25rem + 2px);
+  padding: .375rem 1.75rem .375rem .75rem;
+  line-height: 1.25;
+  color: #495057;
+  vertical-align: middle;
+  background: #fff url("data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'><path fill='%23333' d='M2 0L0 2h4zm0 5L0 3h4z'/></svg>") no-repeat right .75rem center;
+  background-size: 8px 10px;
+  border: 1px solid rgba(0,0,0,.15);
+  border-radius: .25rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+@mixin defaultCheckbox(){
+  
+}
