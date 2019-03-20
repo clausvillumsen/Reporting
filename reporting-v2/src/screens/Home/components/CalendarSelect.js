@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Datetime from 'react-datetime';
 import moment from 'moment';
 import './CalendarSelect.scss';
+import { DATE_FORMAT, TIME_FORMAT } from '../../../config';
 import LabelHeader from '../../../components/LabelHeader';
 
 class CalendarSelect extends React.Component {
@@ -42,13 +43,13 @@ class CalendarSelect extends React.Component {
         <LabelHeader>VÆLG TIDSPERIODE</LabelHeader>
         <div className="d-flex align-items-center">
           <div className="input-group" style={{ minWidth: 200 }}>
-            <Datetime value={startDate} onChange={this.changeStartDate} />
+            <Datetime value={startDate} dateFormat={DATE_FORMAT} timeFormat={TIME_FORMAT} onChange={this.changeStartDate} />
           </div>
           <div className="pl-2 pr-2">
             til
           </div>
           <div className="input-group" style={{ minWidth: 200 }}>
-            <Datetime isValidDate={this.checkValidDate} value={endDate} onChange={this.changeEndDate} />
+            <Datetime isValidDate={this.checkValidDate} dateFormat={DATE_FORMAT} timeFormat={TIME_FORMAT} value={endDate} onChange={this.changeEndDate} />
           </div>
         </div>
       </div>
