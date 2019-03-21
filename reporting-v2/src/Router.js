@@ -9,6 +9,7 @@ import Header from './components/Header';
 
 const Master = styled.div`
   padding-top: 94px;
+  padding-bottom: 86px;
 `;
 
 const AppRouter = () => {

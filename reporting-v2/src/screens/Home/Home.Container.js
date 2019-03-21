@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
 import styled from 'styled-components';
 import { Button } from 'reactstrap';
+import isEmpty from 'lodash.isempty';
+import moment from 'moment';
 import getReport, { getReports } from './redux/action';
 import Table from './components/Table';
 import BottomView from './components/BottomView';
@@ -21,11 +23,12 @@ const StyledHeader = styled.div`
 class Container extends Component {
   state = {
     ReportName: 'Select',
+    exportType: 'Select',
     filter: {
       ReportId: 0,
       MaxRows: 100,
-      FromDateTime: '',
-      ToDateTime: '',
+      FromDateTime: moment().subtract(5, 'months').toISOString(),
+      ToDateTime: moment().toISOString(),
       SortColumnIndex: '0',
       SortColumnAscending: 'true',
       FilterName: '',
@@ -34,10 +37,19 @@ class Container extends Component {
     }
   };
 
-  componentDidMount() {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (prevState.ReportName === 'Select' && !isEmpty(nextProps.Reports)) {
+      const firstReport = nextProps.Reports[0];
+      const newFilter = { ...prevState.filter };
+      return { ReportName: firstReport.Name, filter: { ...newFilter, ReportId: firstReport.ID} }
+    }
+    return null;
+  }
+
+  async componentDidMount() {
     const { dispatch } = this.props;
+    await dispatch(getReports());
     this.loadData();
-    dispatch(getReports())
   }
 
   loadData = () => {
@@ -100,8 +112,13 @@ class Container extends Component {
     }
   }
 
+  changeExportType = (e) => {
+    const { name } = e.currentTarget.dataset;
+    this.setState({ exportType: name })
+  }
+
   render() {
-    const { ReportName } = this.state;
+    const { ReportName, exportType } = this.state;
     const { NextPageDatePointer } = this.props;
     return (
       <div id="s-home">
@@ -123,7 +140,7 @@ class Container extends Component {
                 </Button>
               </div>
               <div className="ml-auto">
-                <ExportButtons />
+                <ExportButtons select={exportType} onChange={this.changeExportType} />
               </div>
             </div>
           </div>
@@ -142,10 +159,12 @@ class Container extends Component {
 }
 
 Container.propTypes = {
+  Reports: PropTypes.array.isRequired,
   dispatch: PropTypes.func.isRequired,
   NextPageDatePointer: PropTypes.string.isRequired,
 }
 
 export default connect(state => ({
+  Reports: state.report.Reports,
   NextPageDatePointer: state.report.NextPageDatePointer
 }))(Container);

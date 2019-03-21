@@ -9,9 +9,8 @@ import LabelHeader from '../../../components/LabelHeader';
 
 class CalendarSelect extends React.Component {
   state = {
-    // value: moment.range(today.clone().subtract(1, 'days'), today.clone()),
-    startDate: '',
-    endDate: ''
+    startDate: moment().subtract(5, 'months'),
+    endDate: moment()
   }
 
   changeStartDate = (startDate) => {

@@ -18,24 +18,23 @@ const SmallInfo = styled.div`
 `;
 
 const SubView = ({ SubViews }) => {
-  const listView = isEmpty(SubViews)
-    ? null
-    : (
-      SubViews.map((item, index) => (
-        <div key={index}>
-          <SubItem>
-            <div><strong>{item.Name}</strong></div>
-            <SmallInfo>
-              <div dangerouslySetInnerHTML={createMarkup(item.SubViews[0])} />
-              <div className="text-muted">
-                Ru=
-                <span>{item.RequestCharge}</span>
-              </div>
-            </SmallInfo>
-          </SubItem>
-        </div>
-      ))
-    )
+  if (isEmpty(SubViews)) {
+    return null;
+  }
+  const listView = SubViews.map((item, index) => (
+    <div key={index}>
+      <SubItem>
+        <div><strong>{item.Name}</strong></div>
+        <SmallInfo>
+          <div dangerouslySetInnerHTML={createMarkup(item.SubViews[0])} />
+          <div className="text-muted">
+            Ru=
+            <span>{item.RequestCharge}</span>
+          </div>
+        </SmallInfo>
+      </SubItem>
+    </div>
+  ))
   return (
     <ListContainer>
       <div className="container-fluid">

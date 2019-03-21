@@ -7,6 +7,7 @@ import {
   FormGroup,
   CustomInput
 } from 'reactstrap';
+import isEmpty from 'lodash.isempty';
 import LabelHeader from '../../../components/LabelHeader';
 
 class ParentFilter extends Component {
@@ -73,6 +74,9 @@ class ParentFilter extends Component {
   render() {
     const { FilterTypes } = this.props;
     const { column, value } = this.state;
+    if (isEmpty(FilterTypes)) {
+      return <LabelHeader title="SEARCH FOR USER ATTRIBUTES">BRUGER ATTRIBUTER</LabelHeader>
+    }
     return (
       <div className="c-parent-filter">
         <LabelHeader title="SEARCH FOR USER ATTRIBUTES">BRUGER ATTRIBUTER</LabelHeader>
@@ -89,7 +93,7 @@ class ParentFilter extends Component {
             <LabelHeader title="SELECT USER ATTRIBUTES">VÆLG BRUGER ATTRIBUTER</LabelHeader>
             <FormGroup tag="fieldset">
               {FilterTypes.map((item, index) => (
-                <FormGroup check key={index}>
+                <FormGroup check key={index} style={{ paddingLeft: 0 }}>
                   <CustomInput
                     type="radio"
                     id={`customRadio${index}`}
