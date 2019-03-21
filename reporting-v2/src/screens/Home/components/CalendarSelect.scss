@@ -9,13 +9,12 @@
 .rdtPicker {
   display: none;
   position: absolute;
-  width: 250px;
+  width: 300px;
   padding: 4px;
   margin-top: 1px;
   z-index: 99999 !important;
-  background: #fff;
-  box-shadow: 0 1px 3px rgba(0,0,0,.1);
-  border: 1px solid #f9f9f9;
+  background: #f8f9fb;
+  padding: 40px;
 }
 .rdtOpen .rdtPicker {
   display: block;
@@ -60,7 +59,7 @@
   content: '';
   display: inline-block;
   border-left: 7px solid transparent;
-  border-bottom: 7px solid #428bca;
+  border-bottom: 7px solid #00241b;
   border-top-color: rgba(0, 0, 0, 0.2);
   position: absolute;
   bottom: 4px;
@@ -68,7 +67,7 @@
 }
 .rdtPicker td.rdtActive,
 .rdtPicker td.rdtActive:hover {
-  background-color: #428bca;
+  background-color: #00241b;
   color: #fff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }

@@ -2,6 +2,17 @@
 
 .popover {
   max-width: 400px;
+  font-weight: 200;
+  border: none;
+  .popover-inner {
+    background: #f8f9fb;
+  }
+  .popover-body {
+    padding: 40px;
+  }
+  .arrow {
+    display: none;
+  }
 }
 @media (min-width: 768px) {
   .navbar-expand-md .navbar-nav .nav-link {
@@ -9,6 +20,11 @@
     padding-right: 2rem;
     padding-left: 2rem;
   }
+}
+.navbar-nav .nav-link {
+}
+.nav-link.active {
+  color: #7f9d96;
 }
 .navbar-brand {
   margin-right: 2.5rem;
@@ -27,7 +43,7 @@
   &.btn-link {
     padding-left: 0;
     padding-right: 0;
-    color: $primary-color;
+    color: $muted;
   }
   &.btn-rounded {
     border-radius: 999em;  
@@ -133,13 +149,19 @@
 .dropdown-menu{
   border-color: $border-color;
   -webkit-box-shadow: none;
-    box-shadow: none;
+  box-shadow: none;
   border-radius: 0;
+  margin: 0;
+  padding: 20px 40px;
   > li {
     > a{
       padding-top: 10px;
       padding-bottom: 10px;
     }
+  }
+  .dropdown-item {
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 .dropdown-menu {

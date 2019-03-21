@@ -6,25 +6,25 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import LabelHeader from '../../../components/LabelHeader';
+import './ExportButtons.scss';
 
-const rootLink = process.env.REACT_APP_HOST || 'http://reporting.kundedemo.dk';
+const rootLink = process.env.REACT_APP_HOST || 'https://log-in.kundedemo.dk';
 
 const ExportButtons = ({ ExportLinks }) => {
   return (
     <div className="c-export-buttons d-flex">
-      <div className="pr-2">
+      <div className="pr-4">
         <LabelHeader title="SEARCH FOR USER ATTRIBUTES">EXPORTTYPE</LabelHeader>
         <UncontrolledDropdown>
           <DropdownToggle nav caret color="outline">
             ---
           </DropdownToggle>
-          {Boolean(ExportLinks.length) && (
+          {(Boolean(ExportLinks.length)) && (
             <DropdownMenu>
               {ExportLinks.map(item => (
-                <a className="btn btn-outline-primary mr-3 btn-sm" key={item.Name} href={`${rootLink}${item.Url}`}>
-                  <span className="pr-1">Download</span>
+                <div className="dropdown-item" key={item.Name} data-link={`${rootLink}${item.Url}`}>
                   {item.Name}
-                </a>
+                </div>
               ))}
             </DropdownMenu>
           )}

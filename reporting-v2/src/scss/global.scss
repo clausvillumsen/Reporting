@@ -5,6 +5,7 @@ body {
   text-rendering: optimizelegibility;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: none;
+  color: #304d45;
 }
 
 img {
@@ -268,3 +269,21 @@ img {
   text-align: center !important;
 }
 /* MISC --------------------------------------------- */
+
+i.caret {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAtUlEQVQ4jWNgGAXUBQ3zpq2qmT1VE5d8zeypmg3zpq1CFmNCUfHv3xQWJsaN1XOmyGMYPn+6AgsT48a/jAyTcRrQkJJziIGJqYCFkWlb1ezZ4gjNUyX+//u/lYGJqaA5Meswsh5GrF6ZMz2CgfF/GQPTT6cf39kZOdgZ9v5j/N/ZlJS9El0tVgMYGBgY6uZMT2di/B/7n4GBkZGRYWFDUtYsXGpxgoa50yvq5kwrJ1njKCANAAAKnzX9G2DOwwAAAABJRU5ErkJggg==") no-repeat;
+  border: none;
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  margin-left: 15px;
+}
+
+.common__btn-size {
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.no-border {
+  border: none !important;
+}

@@ -80,12 +80,13 @@ class ParentFilter extends Component {
           {(column && value) ? (
             <span>{`${column} = ${value}`}</span>
           ) : (
-            <span>Vælg...</span>
+            <span title="Choose...">Vælg...</span>
           )}
+          <i className="caret"/>
         </Button>
         <Popover placement="bottom" isOpen={this.state.popoverOpen} target="Popover2" toggle={this.toggle}>
           <PopoverBody>
-            <h6 title="SELECT USER ATTRIBUTES">VÆLG BRUGER ATTRIBUTER</h6>
+            <LabelHeader title="SELECT USER ATTRIBUTES">VÆLG BRUGER ATTRIBUTER</LabelHeader>
             <FormGroup tag="fieldset">
               {FilterTypes.map((item, index) => (
                 <FormGroup check key={index}>
@@ -101,13 +102,13 @@ class ParentFilter extends Component {
                 </FormGroup>
               ))}
             </FormGroup>
-            <h6 title="SEARCH FOR USER ATTRIBUTES">SØG PÅ BRUGER ATTRIBUTER</h6>
+            <LabelHeader title="SEARCH FOR USER ATTRIBUTES">SØG PÅ BRUGER ATTRIBUTER</LabelHeader>
             <div className="form-group">
-              <Input required value={value} onChange={this.changeValue} />
+              <Input className="no-border" required value={value} onChange={this.changeValue} />
             </div>
-            <div className="form-group d-flex justify-content-end">
-              <Button onClick={this.resetFilter} title="Reset Filter" className="mr-2" outline>Ryd filter</Button>
-              <Button title="Add" color="primary" onClick={this.updateFilter}>Tilføj</Button>
+            <div className="d-flex justify-content-between">
+              <Button onClick={this.resetFilter} title="Reset Filter" color="link" size="sm" className="mr-2">Ryd filter</Button>
+              <Button title="Add" color="primary" className="common__btn-size" onClick={this.updateFilter}>Tilføj</Button>
             </div>
           </PopoverBody>
         </Popover>

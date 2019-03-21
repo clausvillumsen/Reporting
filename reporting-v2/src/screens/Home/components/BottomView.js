@@ -3,39 +3,45 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
+const BottomContainer = styled.div`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #f8f9fb;
+`;
+
 const ListContainer = styled.div`
   display: flex;
-  background: #fff;
-  padding: 20px;
+  padding: 15px 20px;
   justify-content: flex-end;
 `;
 
 const SmallInfo = styled.div`
-  font-size: .9em;
+  font-size: 11px;
   padding-right: 10px;
-  color: #999;
 `;
 
 const BottomView = ({ RequestCharge, RequestExecutionTime }) => {
   return (
-    <div className="c-sub-view">
+    <BottomContainer className="c-sub-view">
       <ListContainer>
         <SmallInfo>
-          <span>Request Time = </span>
+          <span className="text-muted">Request Time = </span>
           {new Date().toString()}
           ,
         </SmallInfo>
         <SmallInfo>
-          <span className="pr-2">Request Units Spent:</span>
-          <span className="badge badge-secondary">{RequestCharge}</span>
+          <span className="pr-2 text-muted">Request Units Spent:</span>
+          <span className="font-weight-bold">{RequestCharge}</span>
           ,
         </SmallInfo>
         <SmallInfo>
-          <span className="pr-2">Query Execution Time (ms.):</span>
-          <span className="badge badge-secondary">{RequestExecutionTime}</span>
+          <span className="pr-2 text-muted">Query Execution Time (ms.):</span>
+          <span className="font-weight-bold">{RequestExecutionTime}</span>
         </SmallInfo>
       </ListContainer>
-    </div>
+    </BottomContainer>
   )
 };
 

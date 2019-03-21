@@ -6,23 +6,27 @@ import 'react-table/react-table.css';
 import './Table.scss';
 
 const Table = ({ Columns, Rows }) => {
+  console.log(Rows.length);
+  console.log(Rows);
   return (
     <div id="s-home">
-      <ReactTable
-        data={Rows}
-        minRows={1}
-        defaultPageSize={500}
-        showPagination={false}
-        showPaginationTop={false}
-        showPageJump={false}
-        collapseOnSortingChange={true}
-        collapseOnPageChange={true}
-        sortable={false}
-        multiSort={false}
-        resizable={true}
-        filterable={false}
-        columns={Columns}
-      />
+      {(Rows && Rows.length > 0) ? (
+        <ReactTable
+          data={Rows}
+          minRows={1}
+          defaultPageSize={500}
+          showPagination={false}
+          showPaginationTop={false}
+          showPageJump={false}
+          collapseOnSortingChange={true}
+          collapseOnPageChange={true}
+          sortable={false}
+          multiSort={false}
+          resizable={true}
+          filterable={false}
+          columns={Columns}
+        />
+      ) : <div className="alert alert-warning text-center">No data</div>}
     </div>
   )
 }
