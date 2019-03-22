@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import axios from 'axios';
 import PropTypes from 'prop-types'
 import styled from 'styled-components';
 import { Button } from 'reactstrap';
 import isEmpty from 'lodash.isempty';
 import moment from 'moment';
-import getReport, { getReports } from './redux/action';
+import find from 'lodash.find';
+import getReport, { getReports, exportReport } from './redux/action';
 import Table from './components/Table';
 import BottomView from './components/BottomView';
 import SubView from './components/SubView';
@@ -41,7 +43,7 @@ class Container extends Component {
     if (prevState.ReportName === 'Select' && !isEmpty(nextProps.Reports)) {
       const firstReport = nextProps.Reports[0];
       const newFilter = { ...prevState.filter };
-      return { ReportName: firstReport.Name, filter: { ...newFilter, ReportId: firstReport.ID} }
+      return { ReportName: firstReport.Name, exportType: 'CSV', filter: { ...newFilter, ReportId: firstReport.ID } }
     }
     return null;
   }
@@ -83,6 +85,14 @@ class Container extends Component {
     }, () => {
       this.loadData();
     })
+  }
+
+  handleExport = (e) => {
+    const { exportType, filter } = this.state;
+    const { ExportLinks, dispatch } = this.props;
+    const found = find(ExportLinks, item => item.Name === exportType);
+    // axios.post(`${process.env.REACT_APP_HOST || 'https://log-in.kundedemo.dk'}${found.Url}`)
+    dispatch(exportReport({ type: exportType.toLowerCase(), filter: filter }));
   }
 
   _changeType = (e) => {
@@ -139,8 +149,8 @@ class Container extends Component {
                   Søg
                 </Button>
               </div>
-              <div className="ml-auto">
-                <ExportButtons select={exportType} onChange={this.changeExportType} />
+              <div className="ml-auto pl-4">
+                <ExportButtons select={exportType} onChange={this.changeExportType} onExport={this.handleExport} />
               </div>
             </div>
           </div>
@@ -159,12 +169,14 @@ class Container extends Component {
 }
 
 Container.propTypes = {
+  ExportLinks: PropTypes.array.isRequired,
   Reports: PropTypes.array.isRequired,
   dispatch: PropTypes.func.isRequired,
   NextPageDatePointer: PropTypes.string.isRequired,
 }
 
 export default connect(state => ({
+  ExportLinks: state.report.ExportLinks,
   Reports: state.report.Reports,
   NextPageDatePointer: state.report.NextPageDatePointer
 }))(Container);

@@ -12,7 +12,12 @@ import './ExportButtons.scss';
 
 const rootLink = process.env.REACT_APP_HOST || 'https://log-in.kundedemo.dk';
 
-const ExportButtons = ({ ExportLinks, select, onChange }) => {
+const ExportButtons = ({
+  ExportLinks,
+  select,
+  onChange,
+  onExport
+}) => {
   if (isEmpty(ExportLinks)) {
     return null;
   }
@@ -36,7 +41,7 @@ const ExportButtons = ({ ExportLinks, select, onChange }) => {
         </UncontrolledDropdown>
       </div>
       <div>
-        <Button color="primary" size="lg">
+        <Button onClick={onExport} color="primary" size="lg">
           Export
         </Button>
       </div>
@@ -47,6 +52,7 @@ const ExportButtons = ({ ExportLinks, select, onChange }) => {
 ExportButtons.propTypes = {
   ExportLinks: PropTypes.array.isRequired,
   select: PropTypes.string.isRequired,
+  onExport: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired
 }
 

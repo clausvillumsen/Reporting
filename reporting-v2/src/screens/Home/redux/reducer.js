@@ -11,6 +11,10 @@ export const GET_REPORTS_REQUEST = 'GET_REPORTS_REQUEST';
 export const GET_REPORTS_SUCCESS = 'GET_REPORTS_SUCCESS';
 export const GET_REPORTS_FAIL = 'GET_REPORTS_FAIL';
 
+export const EXPORT_REQUEST = 'EXPORT_REQUEST';
+export const EXPORT_SUCCESS = 'EXPORT_SUCCESS';
+export const EXPORT_FAIL = 'EXPORT_FAIL';
+
 const initRows = [];
 
 

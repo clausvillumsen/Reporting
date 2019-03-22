@@ -6,8 +6,6 @@ import 'react-table/react-table.css';
 import './Table.scss';
 
 const Table = ({ Columns, Rows }) => {
-  console.log(Rows.length);
-  console.log(Rows);
   return (
     <div id="s-home">
       {(Rows && Rows.length > 0) ? (

@@ -1,4 +1,4 @@
-import { GET_REPORT, GET_REPORTS } from '../../../api/endpoints';
+import { GET_REPORT, GET_REPORTS, EXPORT_REPORT } from '../../../api/endpoints';
 import {
   GET_REPORT_REQUEST,
   GET_REPORT_SUCCESS,
@@ -6,7 +6,10 @@ import {
   GET_REPORTS_REQUEST,
   GET_REPORTS_SUCCESS,
   GET_REPORTS_FAIL,
-  LOADMORE_REPORT_SUCCESS
+  LOADMORE_REPORT_SUCCESS,
+  EXPORT_REQUEST,
+  EXPORT_SUCCESS,
+  EXPORT_FAIL
 } from './reducer';
 
 
@@ -51,5 +54,18 @@ const getReports = () => {
 }
 
 export { getReports }
+
+export const exportReport = ({ type, filter }) => {
+  return {
+    types: [EXPORT_REQUEST, EXPORT_SUCCESS, EXPORT_FAIL],
+    payload: {
+      request: {
+        url: `${EXPORT_REPORT}${type}`,
+        method: 'POST',
+        data: filter
+      }
+    }
+  }
+}
 
 export default getReport;
