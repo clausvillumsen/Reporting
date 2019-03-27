@@ -61,8 +61,7 @@ export const exportReport = ({ type, filter }) => {
     payload: {
       request: {
         url: `${EXPORT_REPORT}${type}`,
-        method: 'POST',
-        data: filter
+        params: filter
       }
     }
   }

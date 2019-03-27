@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Button,
-  UncontrolledDropdown, DropdownToggle, DropdownMenu,
-  DropdownItem
+  Button
 } from 'reactstrap';
 import isEmpty from 'lodash.isempty';
 import { connect } from 'react-redux';
@@ -14,8 +12,6 @@ const rootLink = process.env.REACT_APP_HOST;
 
 const ExportButtons = ({
   ExportLinks,
-  select,
-  onChange,
   onExport
 }) => {
   if (isEmpty(ExportLinks)) {
@@ -25,25 +21,20 @@ const ExportButtons = ({
     <div className="c-export-buttons d-flex">
       <div className="pr-4">
         <LabelHeader title="SEARCH FOR USER ATTRIBUTES">EXPORTTYPE</LabelHeader>
-        <UncontrolledDropdown>
-          <DropdownToggle nav caret color="outline">
-            {select}
-          </DropdownToggle>
-          {(Boolean(ExportLinks.length)) && (
-            <DropdownMenu>
-              {ExportLinks.map(item => (
-                <DropdownItem onClick={onChange} data-name={item.Name} key={item.Name} data-link={`${rootLink}${item.Url}`}>
-                  {item.Name}
-                </DropdownItem>
-              ))}
-            </DropdownMenu>
-          )}
-        </UncontrolledDropdown>
-      </div>
-      <div>
-        <Button onClick={onExport} color="primary" size="lg">
-          Export
-        </Button>
+        {(Boolean(ExportLinks.length)) && (
+          ExportLinks.map(item => (
+            <Button
+              onClick={onExport}
+              color="primary"
+              size="sm"
+              data-name={item.Name}
+              key={item.Name}
+              data-link={`${rootLink}${item.Url}`}
+            >
+              <span>{item.Name}</span>
+            </Button>
+          ))
+        )}
       </div>
     </div>
   )
@@ -51,9 +42,7 @@ const ExportButtons = ({
 
 ExportButtons.propTypes = {
   ExportLinks: PropTypes.array.isRequired,
-  select: PropTypes.string.isRequired,
-  onExport: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired
+  onExport: PropTypes.func.isRequired
 }
 
 export default connect(state => ({

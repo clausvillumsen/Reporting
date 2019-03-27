@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import axios from 'axios';
 import PropTypes from 'prop-types'
 import styled from 'styled-components';
 import { Button } from 'reactstrap';
 import isEmpty from 'lodash.isempty';
 import moment from 'moment';
-import find from 'lodash.find';
 import getReport, { getReports, exportReport } from './redux/action';
 import Table from './components/Table';
 import BottomView from './components/BottomView';
@@ -25,11 +23,10 @@ const StyledHeader = styled.div`
 class Container extends Component {
   state = {
     ReportName: 'Select',
-    exportType: 'Select',
     filter: {
       ReportId: 0,
       MaxRows: 100,
-      FromDateTime: moment().subtract(5, 'months').toISOString(),
+      FromDateTime: moment().subtract(1, 'days').toISOString(),
       ToDateTime: moment().toISOString(),
       SortColumnIndex: '0',
       SortColumnAscending: 'true',
@@ -43,7 +40,7 @@ class Container extends Component {
     if (prevState.ReportName === 'Select' && !isEmpty(nextProps.Reports)) {
       const firstReport = nextProps.Reports[0];
       const newFilter = { ...prevState.filter };
-      return { ReportName: firstReport.Name, exportType: 'CSV', filter: { ...newFilter, ReportId: firstReport.ID } }
+      return { ReportName: firstReport.Name, filter: { ...newFilter, ReportId: firstReport.ID } }
     }
     return null;
   }
@@ -88,11 +85,12 @@ class Container extends Component {
   }
 
   handleExport = (e) => {
-    const { exportType, filter } = this.state;
-    const { ExportLinks, dispatch } = this.props;
-    const found = find(ExportLinks, item => item.Name === exportType);
+    const { filter } = this.state;
+    const { name } = e.currentTarget.dataset;
+    const { dispatch } = this.props;
+    // const found = find(ExportLinks, item => item.Name === exportType);
     // axios.post(`${process.env.REACT_APP_HOST || 'https://log-in.kundedemo.dk'}${found.Url}`)
-    dispatch(exportReport({ type: exportType.toLowerCase(), filter: filter }));
+    dispatch(exportReport({ type: name.toLowerCase(), filter }));
   }
 
   _changeType = (e) => {
@@ -102,7 +100,12 @@ class Container extends Component {
       ReportName: name,
       filter: {
         ...filter,
-        ReportId: key
+        ReportId: key,
+        // reset other filter
+        FromDateTime: moment().subtract(1, 'days').toISOString(),
+        ToDateTime: moment().toISOString(),
+        FilterName: '',
+        FilterValue: ''
       }
     }, () => {
       this.loadData();
@@ -122,13 +125,8 @@ class Container extends Component {
     }
   }
 
-  changeExportType = (e) => {
-    const { name } = e.currentTarget.dataset;
-    this.setState({ exportType: name })
-  }
-
   render() {
-    const { ReportName, exportType } = this.state;
+    const { ReportName } = this.state;
     const { NextPageDatePointer } = this.props;
     return (
       <div id="s-home">
@@ -144,13 +142,8 @@ class Container extends Component {
               <div className="pr-4">
                 <ParentFilter updateFilter={this.filterColumn} />
               </div>
-              <div title="Search">
-                <Button color="primary" size="lg">
-                  Søg
-                </Button>
-              </div>
               <div className="ml-auto pl-4">
-                <ExportButtons select={exportType} onChange={this.changeExportType} onExport={this.handleExport} />
+                <ExportButtons onExport={this.handleExport} />
               </div>
             </div>
           </div>
