@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import LabelHeader from '../../../components/LabelHeader';
 import './ExportButtons.scss';
 
-const rootLink = process.env.REACT_APP_HOST || 'https://log-in.kundedemo.dk';
+const rootLink = process.env.REACT_APP_HOST;
 
 const ExportButtons = ({
   ExportLinks,
