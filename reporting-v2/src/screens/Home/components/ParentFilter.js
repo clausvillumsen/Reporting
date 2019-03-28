@@ -75,7 +75,19 @@ class ParentFilter extends Component {
     const { FilterTypes } = this.props;
     const { column, value } = this.state;
     if (isEmpty(FilterTypes)) {
-      return <LabelHeader title="SEARCH FOR USER ATTRIBUTES">BRUGER ATTRIBUTER</LabelHeader>
+      return (
+        <div className="c-parent-filter">
+          <LabelHeader title="SEARCH FOR USER ATTRIBUTES">BRUGER ATTRIBUTER</LabelHeader>
+          <Button id="Popover2" color="link" title="Choose...">
+            {(column && value) ? (
+              <span>{`${column} = ${value}`}</span>
+            ) : (
+              <span title="Choose...">Vælg...</span>
+            )}
+            <i className="caret"/>
+          </Button>
+        </div>
+      )
     }
     return (
       <div className="c-parent-filter">

@@ -15,9 +15,6 @@ export const EXPORT_REQUEST = 'EXPORT_REQUEST';
 export const EXPORT_SUCCESS = 'EXPORT_SUCCESS';
 export const EXPORT_FAIL = 'EXPORT_FAIL';
 
-const initRows = [];
-
-
 const initState = {
   FilterTypes: [],
   Reports: [],
@@ -26,7 +23,7 @@ const initState = {
   // to show Load more
   NextPageDatePointer: '',
   PageCount: 0,
-  Rows: buildRows(initRows, []),
+  Rows: [],
   TotalCount: 0,
   RequestCharge: 0,
   RequestExecutionTime: 0,
@@ -72,6 +69,12 @@ const report = (state = initState, action = {}) => {
       return {
         ...state,
         Reports: get(action, 'payload.data')
+      }
+    }
+    case GET_REPORT_FAIL: {
+      return {
+        ...initState,
+        Reports: state.Reports
       }
     }
     default:
