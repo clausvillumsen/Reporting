@@ -17,24 +17,50 @@ const SmallInfo = styled.div`
   font-size: .9em;
 `;
 
+const NestedSubview = ({ SubViews }) => {
+  return (
+    <div dangerouslySetInnerHTML={createMarkup(SubViews[0])} />
+  )
+}
+
+NestedSubview.propTypes = {
+  SubViews: PropTypes.array.isRequired,
+}
+
 const SubView = ({ SubViews }) => {
   if (isEmpty(SubViews)) {
     return null;
   }
-  const listView = SubViews.map((item, index) => (
-    <div key={index}>
-      <SubItem>
-        <div><strong>{item.Name}</strong></div>
-        <SmallInfo>
-          <div dangerouslySetInnerHTML={createMarkup(item.SubViews[0])} />
-          <div className="text-muted">
-            Ru=
-            <span>{item.RequestCharge}</span>
+  const listView = SubViews.map((item, index) => {
+    // have nestest subview
+    let childView = null;
+    if (SubViews && SubViews[index] && SubViews[index].SubViews) {
+      childView = <NestedSubview SubViews={SubViews[index].SubViews} />
+    }
+    return (
+      <React.Fragment key={index}>
+        <div>
+          <SubItem>
+            <div><strong>{item.Name}</strong></div>
+            <SmallInfo>
+              <div dangerouslySetInnerHTML={createMarkup(item.SubViews[index])} />
+              <div className="text-muted">
+                Ru=
+                <span>{item.RequestCharge}</span>
+              </div>
+            </SmallInfo>
+          </SubItem>
+        </div>
+        {childView && (
+          <div>
+            <SubItem>
+              {childView}
+            </SubItem>
           </div>
-        </SmallInfo>
-      </SubItem>
-    </div>
-  ))
+        )}
+      </React.Fragment>
+    )
+  })
   return (
     <ListContainer>
       <div className="container-fluid">
