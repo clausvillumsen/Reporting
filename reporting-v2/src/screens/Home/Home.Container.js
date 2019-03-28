@@ -37,7 +37,7 @@ class Container extends Component {
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (prevState.ReportName === 'Select' && !isEmpty(nextProps.Reports)) {
+    if (prevState.ReportName === 'Select' && prevState.filter.ReportId === 0 && !isEmpty(nextProps.Reports)) {
       const firstReport = nextProps.Reports[0];
       const newFilter = { ...prevState.filter };
       return { ReportName: firstReport.Name, filter: { ...newFilter, ReportId: firstReport.ID } }
@@ -114,8 +114,10 @@ class Container extends Component {
 
   _changeDate = ({ start, end }) => {
     if (start && end) {
+      const { filter } = this.state;
       this.setState({
         filter: {
+          ...filter,
           FromDateTime: start.toISOString(),
           ToDateTime: end.toISOString()
         }

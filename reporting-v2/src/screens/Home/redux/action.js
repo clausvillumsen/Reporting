@@ -21,7 +21,7 @@ const getReport = (payload) => {
     }
   })
   const newParams = {
-    ReportId: 2,
+    ReportId: 0,
     MaxRows: 100,
     SortColumnIndex: 0,
     SortColumnAscending: true,
