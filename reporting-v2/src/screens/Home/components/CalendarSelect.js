@@ -8,27 +8,18 @@ import { DATE_FORMAT, TIME_FORMAT } from '../../../config';
 import LabelHeader from '../../../components/LabelHeader';
 
 class CalendarSelect extends React.Component {
-  state = {
-    startDate: moment().subtract(5, 'months'),
-    endDate: moment()
-  }
-
   changeStartDate = (startDate) => {
-    const { onChange } = this.props;
-    const { endDate } = this.state;
+    const { onChange, endDate } = this.props;
     onChange({ start: startDate, end: endDate });
-    this.setState({ startDate });
   }
 
   changeEndDate = (endDate) => {
-    const { onChange } = this.props;
-    const { startDate } = this.state;
+    const { onChange, startDate } = this.props;
     onChange({ start: startDate, end: endDate });
-    this.setState({ endDate });
   }
 
   checkValidDate = (currentDate, selectedDate) => {
-    const { startDate } = this.state;
+    const { startDate } = this.props;
     return (currentDate.isAfter(moment(startDate, 'day')));
   }
 
@@ -36,7 +27,7 @@ class CalendarSelect extends React.Component {
     const {
       startDate,
       endDate
-    } = this.state;
+    } = this.props;
     return (
       <div className="c-reports-select">
         <LabelHeader>VÆLG TIDSPERIODE</LabelHeader>
@@ -44,9 +35,7 @@ class CalendarSelect extends React.Component {
           <div className="input-group" style={{ minWidth: 200 }}>
             <Datetime value={startDate} dateFormat={DATE_FORMAT} timeFormat={TIME_FORMAT} onChange={this.changeStartDate} />
           </div>
-          <div className="pl-2 pr-2">
-            til
-          </div>
+          <div className="pl-2 pr-2">til</div>
           <div className="input-group" style={{ minWidth: 200 }}>
             <Datetime isValidDate={this.checkValidDate} dateFormat={DATE_FORMAT} timeFormat={TIME_FORMAT} value={endDate} onChange={this.changeEndDate} />
           </div>
@@ -58,6 +47,8 @@ class CalendarSelect extends React.Component {
 
 CalendarSelect.propTypes = {
   Reports: PropTypes.array.isRequired,
+  startDate: PropTypes.any.isRequired,
+  endDate: PropTypes.any.isRequired,
   selected: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number

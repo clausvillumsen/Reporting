@@ -1,4 +1,5 @@
 import get from 'lodash.get';
+import moment from 'moment';
 import buildColumns from '../buildColumns';
 import buildRows from '../buildRows';
 
@@ -27,7 +28,7 @@ const initState = {
   TotalCount: 0,
   RequestCharge: 0,
   RequestExecutionTime: 0,
-  SubViews: []
+  SubViews: [],
 };
 
 const report = (state = initState, action = {}) => {

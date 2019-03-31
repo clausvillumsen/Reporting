@@ -26,13 +26,13 @@ class Container extends Component {
     filter: {
       ReportId: 0,
       MaxRows: 100,
-      FromDateTime: moment().subtract(1, 'days').toISOString(),
-      ToDateTime: moment().toISOString(),
+      FromDateTime: moment().subtract(1, 'days'),
+      ToDateTime: moment(),
       SortColumnIndex: '0',
       SortColumnAscending: 'true',
       FilterName: '',
       FilterValue: '',
-      PageDateTime: ''
+      PageDateTime: '',
     }
   };
 
@@ -54,7 +54,11 @@ class Container extends Component {
   loadData = () => {
     const { dispatch } = this.props;
     const { filter } = this.state;
-    dispatch(getReport(filter))
+    dispatch(getReport({
+      ...filter,
+      FromDateTime: filter.FromDateTime.toISOString(),
+      ToDateTime: filter.ToDateTime.toISOString()
+    }))
   }
 
   loadMore = () => {
@@ -63,6 +67,7 @@ class Container extends Component {
     this.setState({
       filter: {
         ...filter,
+        ToDateTime: filter.ToDateTime.toISOString(),
         FromDateTime: NextPageDatePointer,
         PageDateTime: NextPageDatePointer
       }
@@ -102,8 +107,8 @@ class Container extends Component {
         ...filter,
         ReportId: key,
         // reset other filter
-        FromDateTime: moment().subtract(1, 'days').toISOString(),
-        ToDateTime: moment().toISOString(),
+        FromDateTime: moment().subtract(1, 'days'),
+        ToDateTime: moment(),
         FilterName: '',
         FilterValue: ''
       }
@@ -118,8 +123,8 @@ class Container extends Component {
       this.setState({
         filter: {
           ...filter,
-          FromDateTime: start.toISOString(),
-          ToDateTime: end.toISOString()
+          FromDateTime: start,
+          ToDateTime: end
         }
       }, () => {
         this.loadData();
@@ -128,7 +133,7 @@ class Container extends Component {
   }
 
   render() {
-    const { ReportName } = this.state;
+    const { ReportName, filter: { FromDateTime, ToDateTime } } = this.state;
     const { NextPageDatePointer } = this.props;
     return (
       <div id="s-home">
@@ -139,7 +144,11 @@ class Container extends Component {
                 <ReportsSelect selected={ReportName} onClick={this._changeType} />
               </div>
               <div className="pr-4">
-                <CalendarSelect onChange={this._changeDate} />
+                <CalendarSelect
+                  startDate={FromDateTime}
+                  endDate={ToDateTime}
+                  onChange={this._changeDate}
+                />
               </div>
               <div className="pr-4">
                 <ParentFilter updateFilter={this.filterColumn} />
