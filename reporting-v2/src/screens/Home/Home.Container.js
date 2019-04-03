@@ -18,6 +18,12 @@ const StyledHeader = styled.div`
   display: flex;
   background: #f8f9fb;
   padding: 15px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 44;
+  box-shadow: 0 1px 3px rgba(0,0,0,.09);
 `;
 
 class Container extends Component {
@@ -135,7 +141,7 @@ class Container extends Component {
     const { ReportName, filter: { FromDateTime, ToDateTime } } = this.state;
     const { NextPageDatePointer } = this.props;
     return (
-      <div id="s-home">
+      <div id="s-home" style={{ paddingTop: 84 }}>
         <StyledHeader>
           <div className="container-fluid">
             <div className="d-flex">

@@ -38,12 +38,18 @@ const SubView = ({ SubViews }) => {
       childView = <NestedSubview SubViews={SubViews[index].SubViews} />
     }
     return (
-      <React.Fragment key={index}>
-        <div>
+      <div className="card border-light" key={index}>
+        <div className="card-body">
           <SubItem>
-            <div><strong>{item.Name}</strong></div>
+            <div className="card-title"><strong>{item.Name}</strong></div>
             <SmallInfo>
-              <div dangerouslySetInnerHTML={createMarkup(item.SubViews[index])} />
+              {childView && (
+                <div className="card-text">
+                  <SubItem>
+                    {childView}
+                  </SubItem>
+                </div>
+              )}
               <div className="text-muted">
                 Ru=
                 <span>{item.RequestCharge}</span>
@@ -51,22 +57,13 @@ const SubView = ({ SubViews }) => {
             </SmallInfo>
           </SubItem>
         </div>
-        {childView && (
-          <div>
-            <SubItem>
-              {childView}
-            </SubItem>
-          </div>
-        )}
-      </React.Fragment>
+      </div>
     )
   })
   return (
     <ListContainer>
-      <div className="container-fluid">
-        <div className="d-flex pt-3 pb-3">
-          {listView}
-        </div>
+      <div className="card-group">
+        {listView}
       </div>
     </ListContainer>
   )

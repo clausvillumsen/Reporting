@@ -16,11 +16,11 @@ const Table = ({ Columns, Rows }) => {
           showPagination={false}
           showPaginationTop={false}
           showPageJump={false}
-          collapseOnSortingChange={true}
-          collapseOnPageChange={true}
+          collapseOnSortingChange={false}
+          collapseOnPageChange={false}
           sortable={false}
           multiSort={false}
-          resizable={true}
+          resizable={false}
           filterable={false}
           columns={Columns}
         />
