@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { GET_REPORT, GET_REPORTS, EXPORT_REPORT } from '../../../api/endpoints';
 import {
   GET_REPORT_REQUEST,
@@ -69,11 +70,10 @@ export const exportReport = ({ type, filter }) => {
     MaxRows: 100,
     SortColumnIndex: 0,
     SortColumnAscending: true,
-    ...newPayload
+    ...newPayload,
+    FromDateTime: moment(newPayload.FromDateTime).toISOString(),
+    ToDateTime: moment(newPayload.ToDateTime).toISOString()
   };
-  delete newParams.SortColumnIndex;
-  delete newParams.MaxRows;
-  delete newParams.SortColumnAscending;
   return {
     types: [EXPORT_REQUEST, EXPORT_SUCCESS, EXPORT_FAIL],
     payload: {
