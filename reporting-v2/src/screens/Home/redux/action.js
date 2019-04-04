@@ -57,12 +57,29 @@ const getReports = () => {
 export { getReports }
 
 export const exportReport = ({ type, filter }) => {
+  // Remove empty
+  const newPayload = { ...filter };
+  Object.keys(newPayload).map(key => {
+    if (!newPayload[key]) {
+      delete newPayload[key];
+    }
+  })
+  const newParams = {
+    ReportId: 0,
+    MaxRows: 100,
+    SortColumnIndex: 0,
+    SortColumnAscending: true,
+    ...newPayload
+  };
+  delete newParams.SortColumnIndex;
+  delete newParams.MaxRows;
+  delete newParams.SortColumnAscending;
   return {
     types: [EXPORT_REQUEST, EXPORT_SUCCESS, EXPORT_FAIL],
     payload: {
       request: {
         url: `${EXPORT_REPORT}${type}`,
-        params: filter
+        params: newParams
       }
     }
   }
