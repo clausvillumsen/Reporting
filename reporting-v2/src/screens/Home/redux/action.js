@@ -9,7 +9,8 @@ import {
   LOADMORE_REPORT_SUCCESS,
   EXPORT_REQUEST,
   EXPORT_SUCCESS,
-  EXPORT_FAIL
+  EXPORT_FAIL,
+  RESET_DATE_POINTER
 } from './reducer';
 
 
@@ -66,5 +67,9 @@ export const exportReport = ({ type, filter }) => {
     }
   }
 }
+
+const resetDatePointer = () => ({ type: RESET_DATE_POINTER });
+
+export { resetDatePointer }
 
 export default getReport;

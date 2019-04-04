@@ -1,5 +1,4 @@
 import get from 'lodash.get';
-import moment from 'moment';
 import buildColumns from '../buildColumns';
 import buildRows from '../buildRows';
 
@@ -15,6 +14,8 @@ export const GET_REPORTS_FAIL = 'GET_REPORTS_FAIL';
 export const EXPORT_REQUEST = 'EXPORT_REQUEST';
 export const EXPORT_SUCCESS = 'EXPORT_SUCCESS';
 export const EXPORT_FAIL = 'EXPORT_FAIL';
+
+export const RESET_DATE_POINTER = 'RESET_DATE_POINTER';
 
 const initState = {
   FilterTypes: [],
@@ -76,6 +77,12 @@ const report = (state = initState, action = {}) => {
       return {
         ...initState,
         Reports: state.Reports
+      }
+    }
+    case RESET_DATE_POINTER: {
+      return {
+        ...state,
+        NextPageDatePointer: ''
       }
     }
     default:

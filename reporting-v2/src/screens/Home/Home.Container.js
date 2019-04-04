@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { Button } from 'reactstrap';
 import isEmpty from 'lodash.isempty';
 import moment from 'moment';
-import getReport, { getReports, exportReport } from './redux/action';
+import getReport, { getReports, exportReport, resetDatePointer } from './redux/action';
 import Table from './components/Table';
 import BottomView from './components/BottomView';
 import SubView from './components/SubView';
@@ -87,7 +87,7 @@ class Container extends Component {
       filter: {
         ...filter,
         FilterName: column,
-        FilterValue: value
+        FilterValue: value,
       }
     }, () => {
       this.loadData();
@@ -115,7 +115,8 @@ class Container extends Component {
         FromDateTime: moment().subtract(1, 'days'),
         ToDateTime: moment(),
         FilterName: '',
-        FilterValue: ''
+        FilterValue: '',
+        PageDateTime: ''
       }
     }, () => {
       this.loadData();
@@ -125,11 +126,14 @@ class Container extends Component {
   _changeDate = ({ start, end }) => {
     if (start && end) {
       const { filter } = this.state;
+      const { dispatch } = this.props;
+      dispatch(resetDatePointer());
       this.setState({
         filter: {
           ...filter,
           FromDateTime: start,
-          ToDateTime: end
+          ToDateTime: end,
+          PageDateTime: ''
         }
       }, () => {
         this.loadData();
