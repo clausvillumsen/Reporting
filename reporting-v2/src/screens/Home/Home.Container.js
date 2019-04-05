@@ -111,9 +111,6 @@ class Container extends Component {
       filter: {
         ...filter,
         ReportId: key,
-        // reset other filter
-        FromDateTime: moment().subtract(1, 'days'),
-        ToDateTime: moment(),
         FilterName: '',
         FilterValue: '',
         PageDateTime: ''
@@ -142,7 +139,7 @@ class Container extends Component {
   }
 
   render() {
-    const { ReportName, filter: { FromDateTime, ToDateTime } } = this.state;
+    const { ReportName, filter, filter: { FromDateTime, ToDateTime } } = this.state;
     const { NextPageDatePointer } = this.props;
     return (
       <div id="s-home" style={{ paddingTop: 84 }}>
@@ -163,7 +160,7 @@ class Container extends Component {
                 <ParentFilter updateFilter={this.filterColumn} />
               </div>
               <div className="ml-auto pl-4">
-                <ExportButtons onExport={this.handleExport} />
+                <ExportButtons onExport={this.handleExport} filter={filter} />
               </div>
             </div>
           </div>
