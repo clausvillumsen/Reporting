@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import {
-  Button, Popover, PopoverBody,
+  Button,
+  Popover,
+  PopoverBody,
   Input,
   FormGroup,
   CustomInput
@@ -17,14 +19,15 @@ class ParentFilter extends Component {
     updateFilter: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired,
     value: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
+    name: PropTypes.string,
     column: PropTypes.string.isRequired,
     popoverOpen: PropTypes.bool.isRequired
   }
 
   static defaultProps = {
-    FilterTypes: []
-  }
+    FilterTypes: [],
+    name: ''
+  };
 
   changeColumn = (e) => {
     const { value, dataset: { name } } = e.currentTarget;
@@ -32,7 +35,7 @@ class ParentFilter extends Component {
     dispatch(updateFilterColumn({ column: value, name }))
   }
 
-  changeValue = (e) => {
+  changeValue = e => {
     const { value } = e.currentTarget;
     const { dispatch } = this.props;
     dispatch(updateFilterColumn({ value }))
@@ -60,13 +63,12 @@ class ParentFilter extends Component {
         popoverOpen: false
       }))
     }
-  }
+  };
 
   toggle = () => {
     const { dispatch, popoverOpen } = this.props;
     dispatch(updateFilterColumn({ popoverOpen: !popoverOpen }))
   }
-
 
   render() {
     const {
@@ -79,32 +81,43 @@ class ParentFilter extends Component {
     if (isEmpty(FilterTypes)) {
       return (
         <div className="c-parent-filter">
-          <LabelHeader title="SEARCH FOR USER ATTRIBUTES">BRUGER ATTRIBUTER</LabelHeader>
+          <LabelHeader title="SEARCH FOR USER ATTRIBUTES">
+            BRUGER ATTRIBUTER
+          </LabelHeader>
           <Button id="Popover2" color="link" title="Choose...">
-            {(column && value) ? (
+            {column && value ? (
               <span>{`${name} = ${value}`}</span>
             ) : (
               <span title="Choose...">Vælg...</span>
             )}
-            <i className="caret"/>
+            <i className="caret" />
           </Button>
         </div>
-      )
+      );
     }
     return (
       <div className="c-parent-filter">
-        <LabelHeader title="SEARCH FOR USER ATTRIBUTES">BRUGER ATTRIBUTER</LabelHeader>
-        <Button id="Popover2" color="link" onClick={this.toggle} title="Choose...">
-          {(column && value) ? (
+        <LabelHeader title="SEARCH FOR USER ATTRIBUTES">
+          BRUGER ATTRIBUTER
+        </LabelHeader>
+        <Button
+          id="Popover2"
+          color="link"
+          onClick={this.toggle}
+          title="Choose..."
+        >
+          {column && value ? (
             <span>{`${name} = ${value}`}</span>
           ) : (
             <span title="Choose...">Vælg...</span>
           )}
-          <i className="caret"/>
+          <i className="caret" />
         </Button>
         <Popover placement="bottom" isOpen={popoverOpen} target="Popover2" toggle={this.toggle}>
           <PopoverBody>
-            <LabelHeader title="SELECT USER ATTRIBUTES">VÆLG BRUGER ATTRIBUTER</LabelHeader>
+            <LabelHeader title="SELECT USER ATTRIBUTES">
+              VÆLG BRUGER ATTRIBUTER
+            </LabelHeader>
             <FormGroup tag="fieldset">
               {FilterTypes.map((item, index) => (
                 <FormGroup check key={index} style={{ paddingLeft: 0 }}>
@@ -114,25 +127,46 @@ class ParentFilter extends Component {
                     name="customRadio"
                     label={item.Name}
                     value={item.Filter}
-                    data-name={item.Name}
-                    checked={(item.Filter === column)}
+                    checked={item.Filter === column}
                     onChange={this.changeColumn}
                   />
                 </FormGroup>
               ))}
             </FormGroup>
-            <LabelHeader title="SEARCH FOR USER ATTRIBUTES">SØG PÅ BRUGER ATTRIBUTER</LabelHeader>
+            <LabelHeader title="SEARCH FOR USER ATTRIBUTES">
+              SØG PÅ BRUGER ATTRIBUTER (forskel på store og små bogstaver)
+            </LabelHeader>
             <div className="form-group">
-              <Input className="no-border" required value={value} onChange={this.changeValue} />
+              <Input
+                className="no-border"
+                required
+                value={value}
+                onChange={this.changeValue}
+              />
             </div>
             <div className="d-flex justify-content-between">
-              <Button onClick={this.resetFilter} title="Reset Filter" color="link" size="sm" className="mr-2">Ryd filter</Button>
-              <Button title="Add" color="primary" className="common__btn-size" onClick={this.updateFilter}>Tilføj</Button>
+              <Button
+                onClick={this.resetFilter}
+                title="Reset Filter"
+                color="link"
+                size="sm"
+                className="mr-2"
+              >
+                Ryd filter
+              </Button>
+              <Button
+                title="Add"
+                color="primary"
+                className="common__btn-size"
+                onClick={this.updateFilter}
+              >
+                Tilføj
+              </Button>
             </div>
           </PopoverBody>
         </Popover>
       </div>
-    )
+    );
   }
 }
 
