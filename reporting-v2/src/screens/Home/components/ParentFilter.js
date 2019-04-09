@@ -28,13 +28,15 @@ class ParentFilter extends Component {
       popoverOpen: false,
       column: '',
       value: '',
+      name: ''
     };
   }
 
   changeColumn = (e) => {
-    const { value } = e.currentTarget;
+    const { value, dataset: { name } } = e.currentTarget;
     this.setState({
-      column: value
+      column: value,
+      name
     })
   }
 
@@ -73,14 +75,14 @@ class ParentFilter extends Component {
 
   render() {
     const { FilterTypes } = this.props;
-    const { column, value } = this.state;
+    const { column, value, name } = this.state;
     if (isEmpty(FilterTypes)) {
       return (
         <div className="c-parent-filter">
           <LabelHeader title="SEARCH FOR USER ATTRIBUTES">BRUGER ATTRIBUTER</LabelHeader>
           <Button id="Popover2" color="link" title="Choose...">
             {(column && value) ? (
-              <span>{`${column} = ${value}`}</span>
+              <span>{`${name} = ${value}`}</span>
             ) : (
               <span title="Choose...">Vælg...</span>
             )}
@@ -94,7 +96,7 @@ class ParentFilter extends Component {
         <LabelHeader title="SEARCH FOR USER ATTRIBUTES">BRUGER ATTRIBUTER</LabelHeader>
         <Button id="Popover2" color="link" onClick={this.toggle} title="Choose...">
           {(column && value) ? (
-            <span>{`${column} = ${value}`}</span>
+            <span>{`${name} = ${value}`}</span>
           ) : (
             <span title="Choose...">Vælg...</span>
           )}
@@ -110,9 +112,10 @@ class ParentFilter extends Component {
                     type="radio"
                     id={`customRadio${index}`}
                     name="customRadio"
-                    label={item}
-                    value={item}
-                    checked={(item === column)}
+                    label={item.Name}
+                    value={item.Filter}
+                    data-name={item.Name}
+                    checked={(item.Filter === column)}
                     onChange={this.changeColumn}
                   />
                 </FormGroup>

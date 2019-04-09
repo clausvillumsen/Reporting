@@ -46,7 +46,7 @@ const report = (state = initState, action = {}) => {
         NextPageDatePointer: newNextPageDatePointer,
         Rows: buildRows(data.Rows, data.Columns),
         Columns: buildColumns(data.Columns),
-        FilterTypes: data.Columns.map(item => (item.Name))
+        FilterTypes: [...data.Columns]
       }
     }
     case LOADMORE_REPORT_SUCCESS: {
@@ -64,7 +64,7 @@ const report = (state = initState, action = {}) => {
           ...buildRows(data.Rows, data.Columns)
         ],
         Columns: buildColumns(data.Columns),
-        FilterTypes: data.Columns.map(item => (item.Name))
+        FilterTypes: [...data.Columns]
       }
     }
     case GET_REPORTS_SUCCESS: {
