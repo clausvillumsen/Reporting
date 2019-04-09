@@ -128,6 +128,7 @@ class ParentFilter extends Component {
                     label={item.Name}
                     value={item.Filter}
                     checked={item.Filter === column}
+                    data-name={item.Name}
                     onChange={this.changeColumn}
                   />
                 </FormGroup>

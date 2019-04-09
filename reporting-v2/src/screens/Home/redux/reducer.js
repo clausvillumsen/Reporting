@@ -55,11 +55,12 @@ const report = (state = initState, action = {}) => {
         NextPageDatePointer: newNextPageDatePointer,
         Rows: buildRows(data.Rows, data.Columns),
         Columns: buildColumns(data.Columns),
-        FilterTypes: data.Columns.map(item => (item.Name))
+        FilterTypes: [...data.Columns]
       }
     }
     case UPDATE_FILTER_COLUMN: {
       const newState = cloneDeep(state);
+      console.log(action.payload);
       newState.parentFilter = {
         ...newState.parentFilter,
         ...action.payload
@@ -81,7 +82,7 @@ const report = (state = initState, action = {}) => {
           ...buildRows(data.Rows, data.Columns)
         ],
         Columns: buildColumns(data.Columns),
-        FilterTypes: data.Columns.map(item => (item.Name))
+        FilterTypes: [...data.Columns]
       }
     }
     case GET_REPORTS_SUCCESS: {

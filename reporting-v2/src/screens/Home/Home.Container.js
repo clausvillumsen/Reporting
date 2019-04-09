@@ -63,26 +63,28 @@ class Container extends Component {
   }
 
   loadData = () => {
-    const { dispatch, NextPageDatePointer } = this.props;
+    const { dispatch } = this.props;
     const { filter } = this.state;
     const { FromDateTime, ToDateTime } = filter;
     dispatch(getReport({
       ...filter,
-      FromDateTime: NextPageDatePointer || FromDateTime.toISOString(),
+      FromDateTime: FromDateTime.toISOString(),
       ToDateTime: moment(ToDateTime).toISOString()
     }))
   }
 
   loadMore = () => {
     const { filter } = this.state;
-    const { NextPageDatePointer } = this.props;
+    const { NextPageDatePointer, dispatch } = this.props;
+    dispatch(getReport({
+      ...filter,
+      PageDateTime: NextPageDatePointer
+    }));
     this.setState({
       filter: {
         ...filter,
         PageDateTime: NextPageDatePointer
       }
-    }, () => {
-      this.loadData();
     })
   }
 
