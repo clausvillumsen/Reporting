@@ -9,73 +9,73 @@ import {
 } from 'reactstrap';
 import isEmpty from 'lodash.isempty';
 import LabelHeader from '../../../components/LabelHeader';
+import { updateFilterColumn } from '../redux/action';
 
 class ParentFilter extends Component {
   static propTypes = {
     FilterTypes: PropTypes.array,
-    updateFilter: PropTypes.func.isRequired
+    updateFilter: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    value: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    column: PropTypes.string.isRequired,
+    popoverOpen: PropTypes.bool.isRequired
   }
 
   static defaultProps = {
     FilterTypes: []
   }
 
-  constructor(props) {
-    super(props);
-
-    this.toggle = this.toggle.bind(this);
-    this.state = {
-      popoverOpen: false,
-      column: '',
-      value: '',
-      name: ''
-    };
-  }
-
   changeColumn = (e) => {
     const { value, dataset: { name } } = e.currentTarget;
-    this.setState({
-      column: value,
-      name
-    })
+    const { dispatch } = this.props;
+    dispatch(updateFilterColumn({ column: value, name }))
   }
 
   changeValue = (e) => {
     const { value } = e.currentTarget;
-    this.setState({
-      value
-    })
+    const { dispatch } = this.props;
+    dispatch(updateFilterColumn({ value }))
   }
 
   resetFilter = () => {
-    this.setState({
+    const { dispatch } = this.props;
+    dispatch(updateFilterColumn({
       value: '',
       column: '',
       popoverOpen: false
-    })
+    }))
   }
 
   updateFilter = () => {
-    const { column, value } = this.state;
-    const { updateFilter } = this.props;
+    const {
+      updateFilter,
+      column,
+      value,
+      dispatch
+    } = this.props;
     if (value && column) {
       updateFilter(column, value);
-      this.setState({
+      dispatch(updateFilterColumn({
         popoverOpen: false
-      })
+      }))
     }
   }
 
-  toggle() {
-    this.setState({
-      popoverOpen: !this.state.popoverOpen
-    });
+  toggle = () => {
+    const { dispatch, popoverOpen } = this.props;
+    dispatch(updateFilterColumn({ popoverOpen: !popoverOpen }))
   }
 
 
   render() {
-    const { FilterTypes } = this.props;
-    const { column, value, name } = this.state;
+    const {
+      FilterTypes,
+      column,
+      value,
+      name,
+      popoverOpen
+    } = this.props;
     if (isEmpty(FilterTypes)) {
       return (
         <div className="c-parent-filter">
@@ -102,7 +102,7 @@ class ParentFilter extends Component {
           )}
           <i className="caret"/>
         </Button>
-        <Popover placement="bottom" isOpen={this.state.popoverOpen} target="Popover2" toggle={this.toggle}>
+        <Popover placement="bottom" isOpen={popoverOpen} target="Popover2" toggle={this.toggle}>
           <PopoverBody>
             <LabelHeader title="SELECT USER ATTRIBUTES">VÆLG BRUGER ATTRIBUTER</LabelHeader>
             <FormGroup tag="fieldset">
@@ -137,5 +137,10 @@ class ParentFilter extends Component {
 }
 
 export default connect(state => ({
-  FilterTypes: state.report.FilterTypes
+  FilterTypes: state.report.FilterTypes,
+  parentFilter: state.report.parentFilter,
+  column: state.report.parentFilter.column,
+  value: state.report.parentFilter.value,
+  name: state.report.parentFilter.name,
+  popoverOpen: state.report.parentFilter.popoverOpen,
 }))(ParentFilter);

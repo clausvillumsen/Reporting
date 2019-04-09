@@ -5,7 +5,12 @@ import styled from 'styled-components';
 import { Button } from 'reactstrap';
 import isEmpty from 'lodash.isempty';
 import moment from 'moment';
-import getReport, { getReports, exportReport, resetDatePointer } from './redux/action';
+import getReport, {
+  getReports,
+  exportReport,
+  resetDatePointer,
+  updateFilterColumn
+} from './redux/action';
 import Table from './components/Table';
 import BottomView from './components/BottomView';
 import SubView from './components/SubView';
@@ -103,6 +108,12 @@ class Container extends Component {
   _changeType = (e) => {
     const { key, name } = e.target.dataset;
     const { filter } = this.state;
+    const { dispatch } = this.props;
+    dispatch(updateFilterColumn({
+      value: '',
+      column: '',
+      popoverOpen: false
+    }))
     this.setState({
       ReportName: name,
       filter: {

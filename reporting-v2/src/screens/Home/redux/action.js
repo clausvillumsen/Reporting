@@ -11,7 +11,8 @@ import {
   EXPORT_REQUEST,
   EXPORT_SUCCESS,
   EXPORT_FAIL,
-  RESET_DATE_POINTER
+  RESET_DATE_POINTER,
+  UPDATE_FILTER_COLUMN
 } from './reducer';
 
 
@@ -88,5 +89,7 @@ export const exportReport = ({ type, filter }) => {
 const resetDatePointer = () => ({ type: RESET_DATE_POINTER });
 
 export { resetDatePointer }
+
+export const updateFilterColumn = (payload) => ({ type: UPDATE_FILTER_COLUMN, payload });
 
 export default getReport;

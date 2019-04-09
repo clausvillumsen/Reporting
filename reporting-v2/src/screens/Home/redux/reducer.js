@@ -1,4 +1,5 @@
 import get from 'lodash.get';
+import cloneDeep from 'lodash.clonedeep';
 import buildColumns from '../buildColumns';
 import buildRows from '../buildRows';
 
@@ -17,6 +18,8 @@ export const EXPORT_FAIL = 'EXPORT_FAIL';
 
 export const RESET_DATE_POINTER = 'RESET_DATE_POINTER';
 
+export const UPDATE_FILTER_COLUMN = 'UPDATE_FILTER_COLUMN';
+
 const initState = {
   FilterTypes: [],
   Reports: [],
@@ -30,6 +33,12 @@ const initState = {
   RequestCharge: 0,
   RequestExecutionTime: 0,
   SubViews: [],
+  parentFilter: {
+    popoverOpen: false,
+    column: '',
+    value: '',
+    name: ''
+  }
 };
 
 const report = (state = initState, action = {}) => {
@@ -48,6 +57,14 @@ const report = (state = initState, action = {}) => {
         Columns: buildColumns(data.Columns),
         FilterTypes: [...data.Columns]
       }
+    }
+    case UPDATE_FILTER_COLUMN: {
+      const newState = cloneDeep(state);
+      newState.parentFilter = {
+        ...newState.parentFilter,
+        ...action.payload
+      };
+      return newState;
     }
     case LOADMORE_REPORT_SUCCESS: {
       const data = get(action, 'payload.data');
